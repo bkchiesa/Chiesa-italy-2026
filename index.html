@@ -56,10 +56,22 @@ nav::-webkit-scrollbar { display: none; }
 .today-hero::before { content: attr(data-city); position: absolute; right: -10px; top: -10px; font-family: ‘Playfair Display’, serif; font-size: 80px; color: rgba(255,255,255,0.06); font-style: italic; pointer-events: none; }
 .today-day { color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
 .countdown-hero {
-background: url(‘https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp’) center center / cover;
+background-color: #1a1209;
+background-image: url(‘https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp’);
+background-position: center center;
+background-size: cover;
 border-radius: 16px; padding: 24px 20px; margin-bottom: 14px;
 text-align: center; border: 1px solid rgba(212,168,67,0.3);
 position: relative; overflow: hidden;
+isolation: isolate;
+}
+.countdown-hero::before {
+content: ‘’;
+position: absolute; inset: 0;
+background: linear-gradient(180deg, rgba(10,6,2,0.6) 0%, rgba(10,6,2,0.78) 100%);
+border-radius: 16px;
+pointer-events: none;
+z-index: 0;
 }
 .countdown-hero::after {
 content: ‘’;
@@ -1047,7 +1059,15 @@ function renderToday() {
 }
 
 function buildCountdownHero(days) {
-  return '<div class="countdown-hero">' +
+  // Try to force-load pantheon image, set dark bg as fallback
+  const heroImg = new Image();
+  heroImg.onload = function() {
+    const el = document.querySelector('.countdown-hero');
+    if (el) el.style.backgroundImage = "url('" + heroImg.src + "')";
+  };
+  heroImg.src = 'https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp';
+
+  return '<div class="countdown-hero" style="background-color:#1a1209;">' +
     '<div class="countdown-hero-num">' + days + '</div>' +
     '<div class="countdown-hero-label">Days Until Italia</div>' +
     '<div class="countdown-hero-date">✈️ Departing June 18, 2026</div>' +
