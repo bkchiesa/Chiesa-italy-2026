@@ -11,6 +11,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/app-icon.png">
+<link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/app-icon.png">
+<link rel="manifest" href="data:application/json,{%22name%22:%22Chiesa%20Italia%202026%22,%22short_name%22:%22Chiesa%20Italia%22,%22display%22:%22standalone%22,%22background_color%22:%22%231A1209%22,%22theme_color%22:%22%231A1209%22,%22icons%22:[{%22src%22:%22https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/app-icon.png%22,%22sizes%22:%22512x512%22,%22type%22:%22image/png%22}]}">
 <style>
   :root {
     --terracotta: #C8502A; --gold: #D4A843; --cream: #F5EDD8;
@@ -81,12 +84,12 @@ border-radius: 16px;
 pointer-events: none;
 }
 .countdown-hero > * { position: relative; z-index: 1; }
-.countdown-hero-num { font-family: ‘Playfair Display’, serif; font-size: 80px; color: var(–gold); line-height: 1; font-weight: 400; }
-.countdown-hero-label { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; }
-.countdown-hero-date { font-size: 14px; color: var(–cream); margin-top: 10px; font-weight: 500; }
+.countdown-hero-num { font-family: ‘Playfair Display’, serif; font-size: 80px; color: var(–gold); line-height: 1; font-weight: 700; text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(212,168,67,0.4); }
+.countdown-hero-label { font-size: 13px; color: white; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1); }
+.countdown-hero-date { font-size: 14px; color: white; margin-top: 10px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1); }
 .notif-btn { background: var(–gold); color: var(–dark); border: none; border-radius: 10px; padding: 10px 20px; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 14px; display: inline-flex; align-items: center; gap: 7px; }
 .notif-btn.enabled { background: var(–olive); color: white; }
-.notif-status { font-size: 11px; color: var(–stone); margin-top: 8px; }
+.notif-status { font-size: 11px; color: rgba(255,255,255,0.85); margin-top: 8px; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.95); }
 .today-date { font-family: ‘Playfair Display’, serif; color: white; font-size: 28px; margin-top: 4px; }
 .today-city { color: var(–gold); font-size: 13px; font-weight: 500; margin-top: 3px; }
 .today-weather { position: absolute; top: 24px; right: 20px; text-align: right; }
