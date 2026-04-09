@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Chiesa Italy">
+<title>🇮🇹 The Chiesa Family's Italian Holiday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terracotta: #C8502A; --gold: #D4A843; --cream: #F5EDD8;
+    --dark: #1A1209; --olive: #4A5C2F; --sky: #3B7EC8;
+    --stone: #8C7B6B; --light-stone: #EAE0D0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; overflow-x: hidden; }
+
+/* SPLASH */
+#splash { position: fixed; inset: 0; z-index: 9999; background: var(–dark); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease; }
+#splash.hidden { opacity: 0; pointer-events: none; }
+.splash-flag { font-size: 72px; animation: pulse 2s ease-in-out infinite; }
+.splash-title { font-family: ‘Playfair Display’, serif; font-size: 32px; color: var(–cream); letter-spacing: 1px; margin-top: 16px; text-align: center; padding: 0 20px; }
+.splash-sub { color: var(–stone); font-size: 13px; margin-top: 8px; letter-spacing: 3px; }
+.splash-bar { width: 200px; height: 2px; background: #333; margin-top: 40px; border-radius: 2px; overflow: hidden; }
+.splash-fill { height: 100%; background: var(–gold); animation: load 1.8s ease forwards; }
+@keyframes load { from { width: 0 } to { width: 100% } }
+@keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.08) } }
+
+/* HEADER */
+header { background: var(–dark); padding: 14px 16px 10px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; }
+.header-title { font-family: ‘Playfair Display’, serif; color: var(–cream); font-size: 19px; line-height: 1.2; }
+.header-title span { color: var(–gold); }
+.countdown-badge { background: var(–terracotta); color: white; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
+
+/* NAV */
+nav { background: var(–dark); display: flex; overflow-x: auto; border-top: 1px solid #2A2010; scrollbar-width: none; }
+nav::-webkit-scrollbar { display: none; }
+.nav-btn { flex: 0 0 auto; padding: 10px 14px; background: none; border: none; color: var(–stone); font-family: ‘DM Sans’, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: color 0.2s; white-space: nowrap; }
+.nav-btn .icon { font-size: 17px; }
+.nav-btn.active { color: var(–gold); }
+.section { display: none; }
+.section.active { display: block; }
+.section-band { height: 4px; background: linear-gradient(90deg, var(–terracotta), var(–gold), var(–olive)); }
+
+/* TODAY HERO */
+.today-hero { background: linear-gradient(135deg, var(–terracotta) 0%, #8B2A10 100%); padding: 24px 20px; position: relative; overflow: hidden; }
+.today-hero::before { content: attr(data-city); position: absolute; right: -10px; top: -10px; font-family: ‘Playfair Display’, serif; font-size: 80px; color: rgba(255,255,255,0.06); font-style: italic; pointer-events: none; }
+.today-day { color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.today-date { font-family: ‘Playfair Display’, serif; color: white; font-size: 28px; margin-top: 4px; }
+.today-city { color: var(–gold); font-size: 13px; font-weight: 500; margin-top: 3px; }
+.today-weather { position: absolute; top: 24px; right: 20px; text-align: right; }
+.weather-temp { color: white; font-size: 26px; font-weight: 300; }
+.weather-desc { color: rgba(255,255,255,0.6); font-size: 12px; }
+
+/* CARDS */
+.section-content { padding: 14px; }
+.card { background: white; border-radius: 16px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(26,18,9,0.08); }
+.card-header { padding: 13px 15px 9px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(–light-stone); }
+.card-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
+.icon-terracotta { background: rgba(200,80,42,0.12); }
+.icon-gold { background: rgba(212,168,67,0.15); }
+.icon-olive { background: rgba(74,92,47,0.12); }
+.icon-sky { background: rgba(59,126,200,0.12); }
+.card-title { font-weight: 600; font-size: 14px; }
+.card-subtitle { font-size: 11px; color: var(–stone); margin-top: 1px; }
+
+/* TIMELINE */
+.timeline { padding: 10px 14px; }
+.timeline-item { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(–light-stone); }
+.timeline-item:last-child { border-bottom: none; }
+.timeline-time { font-size: 11px; color: var(–stone); font-weight: 500; min-width: 52px; padding-top: 2px; }
+.timeline-dot { width: 9px; height: 9px; border-radius: 50%; background: var(–terracotta); margin-top: 4px; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(200,80,42,0.15); }
+.timeline-dot.gold { background: var(–gold); box-shadow: 0 0 0 3px rgba(212,168,67,0.2); }
+.timeline-dot.olive { background: var(–olive); box-shadow: 0 0 0 3px rgba(74,92,47,0.2); }
+.timeline-dot.sky { background: var(–sky); box-shadow: 0 0 0 3px rgba(59,126,200,0.2); }
+.timeline-body { flex: 1; }
+.timeline-title { font-weight: 500; font-size: 13px; }
+.timeline-desc { font-size: 12px; color: var(–stone); margin-top: 2px; line-height: 1.5; }
+.timeline-tag { display: inline-block; background: var(–light-stone); color: var(–stone); font-size: 10px; padding: 2px 7px; border-radius: 10px; margin-top: 4px; font-weight: 500; }
+.timeline-tag.booked { background: rgba(74,92,47,0.12); color: var(–olive); }
+.timeline-tag.flight { background: rgba(59,126,200,0.12); color: var(–sky); }
+.timeline-tag.alert { background: rgba(200,80,42,0.12); color: var(–terracotta); }
+
+/* CITY PILLS */
+.city-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 2px; scrollbar-width: none; }
+.city-scroll::-webkit-scrollbar { display: none; }
+.city-pill { flex: 0 0 auto; padding: 9px 14px; border-radius: 50px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+.city-pill.active-city { background: var(–terracotta); color: white; }
+.city-pill:not(.active-city) { background: white; color: var(–dark); border-color: var(–light-stone); }
+
+/* MAP */
+.map-container { width: 100%; height: 300px; border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(26,18,9,0.1); }
+.map-container iframe { width: 100%; height: 100%; border: none; }
+
+/* RESTAURANTS */
+.rest-grid { padding: 10px 14px; display: flex; flex-direction: column; gap: 9px; }
+.rest-item { background: var(–light-stone); border-radius: 12px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
+.rest-emoji { font-size: 26px; }
+.rest-info { flex: 1; }
+.rest-name { font-weight: 600; font-size: 14px; }
+.rest-meta { font-size: 11px; color: var(–stone); margin-top: 2px; }
+.rest-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
+.rest-tag { background: white; color: var(–dark); font-size: 10px; padding: 2px 7px; border-radius: 10px; }
+.rest-price { font-weight: 600; color: var(–terracotta); }
+.stars { color: var(–gold); font-size: 11px; }
+
+/* ITINERARY DAY SELECTOR */
+.day-selector { display: flex; gap: 5px; overflow-x: auto; padding: 4px 0; scrollbar-width: none; margin-bottom: 12px; }
+.day-selector::-webkit-scrollbar { display: none; }
+.day-btn { flex: 0 0 auto; width: 48px; height: 56px; border-radius: 10px; border: 2px solid var(–light-stone); background: white; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; transition: all 0.2s; }
+.day-btn.active-day { background: var(–terracotta); border-color: var(–terracotta); }
+.day-btn .day-num { font-size: 17px; font-weight: 700; color: var(–dark); }
+.day-btn .day-label { font-size: 9px; color: var(–stone); letter-spacing: 0.3px; }
+.day-btn.active-day .day-num, .day-btn.active-day .day-label { color: white; }
+
+/* UTILITIES */
+.util-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.util-card { background: var(–dark); border-radius: 14px; padding: 18px 14px; text-align: center; cursor: pointer; text-decoration: none; display: block; transition: transform 0.15s; }
+.util-card:active { transform: scale(0.97); }
+.util-icon { font-size: 30px; margin-bottom: 7px; }
+.util-name { color: var(–cream); font-size: 12px; font-weight: 600; }
+.util-desc { color: var(–stone); font-size: 10px; margin-top: 2px; }
+
+/* CURRENCY */
+.calc-card { background: white; border-radius: 16px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(26,18,9,0.08); }
+.calc-title { font-family: ‘Playfair Display’, serif; font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.calc-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
+.calc-input-wrap { flex: 1; position: relative; }
+.calc-currency { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(–stone); font-size: 15px; }
+.calc-input { width: 100%; padding: 12px 12px 12px 28px; border: 2px solid var(–light-stone); border-radius: 11px; font-size: 20px; font-family: ‘DM Sans’, sans-serif; color: var(–dark); background: var(–cream); outline: none; transition: border-color 0.2s; }
+.calc-input:focus { border-color: var(–terracotta); }
+.calc-arrow { font-size: 20px; color: var(–stone); }
+.calc-rate { font-size: 11px; color: var(–stone); text-align: right; }
+.rate-live { display: inline-block; width: 6px; height: 6px; background: #4CAF50; border-radius: 50%; margin-right: 4px; animation: blink 2s infinite; }
+@keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0.3 } }
+
+/* PHRASES */
+.phrase-card { background: white; border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(26,18,9,0.08); }
+.phrase-header { background: var(–olive); padding: 13px 15px; }
+.phrase-header-title { color: white; font-weight: 600; font-size: 14px; }
+.phrase-header-sub { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 2px; }
+.phrase-item { padding: 11px 15px; border-bottom: 1px solid var(–light-stone); display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.phrase-item:last-child { border-bottom: none; }
+.phrase-en { font-size: 12px; color: var(–stone); }
+.phrase-it { font-weight: 600; font-size: 14px; color: var(–dark); }
+.phrase-speak { background: none; border: none; font-size: 17px; cursor: pointer; opacity: 0.6; }
+
+/* EMERGENCY */
+.emergency-card { background: #FFF3F0; border: 2px solid rgba(200,80,42,0.2); border-radius: 16px; padding: 14px; margin-bottom: 12px; }
+.emergency-title { color: var(–terracotta); font-weight: 700; font-size: 13px; margin-bottom: 9px; display: flex; align-items: center; gap: 5px; }
+.emerg-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(200,80,42,0.1); }
+.emerg-item:last-child { border-bottom: none; }
+.emerg-label { font-size: 12px; color: var(–stone); }
+.emerg-num { font-size: 12px; font-weight: 600; color: var(–terracotta); }
+
+/* FAMILY */
+.family-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 12px; }
+.family-card { background: white; border-radius: 13px; padding: 14px 10px; text-align: center; box-shadow: 0 2px 8px rgba(26,18,9,0.06); }
+.family-avatar { font-size: 32px; margin-bottom: 5px; }
+.family-name { font-weight: 600; font-size: 12px; }
+.family-status { font-size: 10px; color: var(–stone); margin-top: 2px; }
+.findmy-banner { background: var(–dark); color: var(–cream); border-radius: 13px; padding: 14px; display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.findmy-icon { font-size: 32px; flex-shrink: 0; }
+.findmy-text { flex: 1; }
+.findmy-title { font-weight: 600; font-size: 13px; }
+.findmy-desc { font-size: 11px; color: var(–stone); margin-top: 2px; line-height: 1.4; }
+.findmy-btn { background: var(–gold); color: var(–dark); border: none; border-radius: 8px; padding: 7px 12px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: ‘DM Sans’, sans-serif; white-space: nowrap; flex-shrink: 0; }
+
+/* SECTION TITLE */
+.sec-title { font-family: ‘Playfair Display’, serif; font-size: 20px; padding: 18px 14px 4px; display: flex; align-items: baseline; gap: 8px; }
+.sec-title-sub { font-size: 12px; color: var(–stone); font-family: ‘DM Sans’, sans-serif; font-weight: 400; }
+
+/* TIPS */
+.tip-scroll { display: flex; gap: 9px; overflow-x: auto; padding: 4px 14px 14px; scrollbar-width: none; }
+.tip-scroll::-webkit-scrollbar { display: none; }
+.tip-card { flex: 0 0 200px; background: white; border-radius: 13px; padding: 14px; box-shadow: 0 2px 8px rgba(26,18,9,0.07); }
+.tip-icon { font-size: 22px; margin-bottom: 7px; }
+.tip-title { font-weight: 600; font-size: 12px; margin-bottom: 4px; }
+.tip-text { font-size: 11px; color: var(–stone); line-height: 1.5; }
+
+/* PACKING */
+.pack-section { padding: 0 14px 14px; }
+.pack-category { font-weight: 600; font-size: 11px; color: var(–stone); letter-spacing: 1px; text-transform: uppercase; margin: 12px 0 7px; }
+.pack-item { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(–light-stone); cursor: pointer; }
+.pack-check { width: 20px; height: 20px; border-radius: 5px; border: 2px solid var(–light-stone); display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s; }
+.pack-item.checked .pack-check { background: var(–olive); border-color: var(–olive); }
+.pack-item.checked .pack-check::after { content: ‘✓’; color: white; font-size: 12px; }
+.pack-label { font-size: 13px; }
+.pack-item.checked .pack-label { color: var(–stone); text-decoration: line-through; }
+
+/* NOTES */
+.notes-area { background: white; border-radius: 14px; padding: 14px; margin: 0 14px 14px; box-shadow: 0 2px 8px rgba(26,18,9,0.08); }
+.notes-area textarea { width: 100%; min-height: 100px; border: none; outline: none; font-family: ‘DM Sans’, sans-serif; font-size: 13px; color: var(–dark); resize: none; background: transparent; line-height: 1.6; }
+.notes-label { font-size: 10px; color: var(–stone); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 7px; }
+
+/* PINS */
+.pins-list { padding: 10px 14px; }
+.pin-item { display: flex; align-items: center; gap: 11px; padding: 9px 0; border-bottom: 1px solid var(–light-stone); }
+.pin-item:last-child { border-bottom: none; }
+.pin-emoji { font-size: 20px; }
+.pin-info { flex: 1; }
+.pin-name { font-weight: 500; font-size: 13px; }
+.pin-address { font-size: 11px; color: var(–stone); margin-top: 1px; }
+.pin-action { background: var(–light-stone); border: none; border-radius: 7px; padding: 5px 10px; font-size: 11px; color: var(–dark); cursor: pointer; font-family: ‘DM Sans’, sans-serif; }
+
+/* SPECIAL BOXES */
+.info-box { border-radius: 13px; padding: 14px; margin-bottom: 12px; display: flex; gap: 11px; align-items: flex-start; }
+.info-box.olive { background: var(–olive); }
+.info-box.sky { background: rgba(59,126,200,0.1); border: 1px solid rgba(59,126,200,0.2); }
+.info-box.gold { background: rgba(212,168,67,0.12); border: 1px solid rgba(212,168,67,0.25); }
+.info-box-icon { font-size: 22px; }
+.info-box-title { font-weight: 600; font-size: 12px; margin-bottom: 3px; }
+.info-box.olive .info-box-title, .info-box.olive .info-box-text { color: white; }
+.info-box.olive .info-box-text { opacity: 0.85; }
+.info-box-text { font-size: 12px; line-height: 1.5; color: var(–dark); }
+.info-box-title.sky { color: var(–sky); }
+
+/* FLIGHT CARD */
+.flight-card { background: white; border-radius: 14px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(26,18,9,0.07); border-left: 4px solid var(–sky); }
+.flight-num { font-size: 11px; color: var(–sky); font-weight: 600; letter-spacing: 1px; }
+.flight-route { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+.flight-airport { font-weight: 700; font-size: 18px; }
+.flight-arrow { color: var(–stone); font-size: 14px; flex: 1; text-align: center; }
+.flight-time { font-size: 12px; color: var(–stone); }
+.flight-meta { font-size: 11px; color: var(–stone); margin-top: 4px; }
+
+/* WEATHER TAB */
+.weather-section-title { font-family: ‘Playfair Display’, serif; font-size: 20px; padding: 18px 14px 4px; }
+.weather-city-pill-wrap { display: flex; gap: 8px; overflow-x: auto; padding: 4px 14px 10px; scrollbar-width: none; }
+.weather-city-pill-wrap::-webkit-scrollbar { display: none; }
+.wx-pill { flex: 0 0 auto; padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: 2px solid var(–light-stone); background: white; color: var(–dark); }
+.wx-pill.active { background: var(–sky); border-color: var(–sky); color: white; }
+.wx-forecast-wrap { padding: 0 14px 16px; }
+.wx-city-name { font-family: ‘Playfair Display’, serif; font-size: 18px; margin-bottom: 12px; color: var(–dark); }
+.wx-current-card { background: linear-gradient(135deg, var(–sky) 0%, #1a5fa8 100%); border-radius: 16px; padding: 20px; margin-bottom: 12px; color: white; display: flex; justify-content: space-between; align-items: center; }
+.wx-current-temp { font-size: 52px; font-weight: 200; line-height: 1; }
+.wx-current-desc { font-size: 14px; opacity: 0.9; margin-top: 4px; }
+.wx-current-meta { font-size: 12px; opacity: 0.7; margin-top: 8px; }
+.wx-current-icon { font-size: 56px; }
+.wx-week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 12px; }
+.wx-day-card { background: white; border-radius: 11px; padding: 10px 4px; text-align: center; box-shadow: 0 2px 8px rgba(26,18,9,0.07); }
+.wx-day-name { font-size: 10px; color: var(–stone); font-weight: 600; letter-spacing: 0.3px; }
+.wx-day-icon { font-size: 20px; margin: 5px 0; }
+.wx-day-hi { font-size: 13px; font-weight: 700; color: var(–dark); }
+.wx-day-lo { font-size: 11px; color: var(–stone); margin-top: 1px; }
+.wx-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+.wx-stat { background: white; border-radius: 11px; padding: 12px 10px; text-align: center; box-shadow: 0 2px 8px rgba(26,18,9,0.07); }
+.wx-stat-icon { font-size: 20px; margin-bottom: 4px; }
+.wx-stat-val { font-size: 14px; font-weight: 700; color: var(–dark); }
+.wx-stat-lbl { font-size: 10px; color: var(–stone); margin-top: 2px; }
+.wx-loading { text-align: center; padding: 40px 20px; color: var(–stone); font-size: 14px; }
+.wx-error { background: #FFF3F0; border-radius: 12px; padding: 16px; margin-bottom: 12px; font-size: 13px; color: var(–terracotta); }
+.wx-source { font-size: 10px; color: var(–stone); text-align: center; padding-bottom: 8px; }
+
+a.link-btn { display: inline-block; background: var(–dark); color: var(–cream); text-decoration: none; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: 500; margin-top: 6px; }
+</style>
+
+</head>
+<body>
+
+<!-- SPLASH -->
+
+<div id="splash">
+  <div class="splash-flag">🇮🇹</div>
+  <div class="splash-title">The Chiesa Family's<br>Italian Holiday</div>
+  <div class="splash-sub">JUNE – JULY 2026 · 7 TRAVELERS</div>
+  <div class="splash-bar"><div class="splash-fill"></div></div>
+</div>
+
+<!-- HEADER -->
+
+<header>
+  <div class="header-title">🇮🇹 <span>Chiesa</span> Italia '26</div>
+  <div class="countdown-badge" id="countdown-badge">Loading...</div>
+</header>
+
+<!-- NAV -->
+
+<nav>
+  <button class="nav-btn active" onclick="showSection('today',this)"><span class="icon">📅</span>Today</button>
+  <button class="nav-btn" onclick="showSection('itinerary',this)"><span class="icon">🗺️</span>Itinerary</button>
+  <button class="nav-btn" onclick="showSection('map',this)"><span class="icon">📍</span>Map</button>
+  <button class="nav-btn" onclick="showSection('eat',this)"><span class="icon">🍝</span>Eat</button>
+  <button class="nav-btn" onclick="showSection('family',this)"><span class="icon">👨‍👩‍👧‍👦</span>Family</button>
+  <button class="nav-btn" onclick="showSection('tools',this)"><span class="icon">🛠️</span>Tools</button>
+  <button class="nav-btn" onclick="showSection('weather',this)"><span class="icon">⛅</span>Weather</button>
+  <button class="nav-btn" onclick="showSection('info',this)"><span class="icon">ℹ️</span>Info</button>
+</nav>
+<div class="section-band"></div>
+
+<!-- ══════════════ TODAY ══════════════ -->
+
+<div id="section-today" class="section active">
+  <div class="today-hero" id="today-hero" data-city="ROME">
+    <div class="today-day" id="today-day-label">TRIP DAY 1</div>
+    <div class="today-date" id="today-date-display">June 19, Friday</div>
+    <div class="today-city" id="today-city-display">📍 Rome, Italy</div>
+    <div class="today-weather">
+      <div class="weather-temp" id="hero-temp">82°F</div>
+      <div class="weather-desc">☀️ Sunny</div>
+    </div>
+  </div>
+  <div class="section-content" id="today-content"></div>
+</div>
+
+<!-- ══════════════ ITINERARY ══════════════ -->
+
+<div id="section-itinerary" class="section">
+  <div class="sec-title">Full Itinerary <span class="sec-title-sub">16 Days</span></div>
+  <div style="padding: 0 14px 6px;">
+    <div class="day-selector" id="day-selector"></div>
+  </div>
+  <div class="section-content" id="itinerary-content"></div>
+</div>
+
+<!-- ══════════════ MAP ══════════════ -->
+
+<div id="section-map" class="section">
+  <div class="sec-title">Our Locations</div>
+  <div style="padding: 0 14px;">
+    <div class="city-scroll" id="map-city-scroll">
+      <div class="city-pill active-city" onclick="switchMapCity(this,'rome')">🏛️ Rome</div>
+      <div class="city-pill" onclick="switchMapCity(this,'florence')">🌺 Florence</div>
+      <div class="city-pill" onclick="switchMapCity(this,'parma')">🧀 Parma</div>
+      <div class="city-pill" onclick="switchMapCity(this,'garda')">🏔️ Lake Garda</div>
+      <div class="city-pill" onclick="switchMapCity(this,'venice')">🚤 Venice</div>
+    </div>
+  </div>
+  <div style="padding: 10px 14px 0;">
+    <div class="map-container">
+      <iframe id="map-iframe" src="https://maps.google.com/maps?q=Pantheon,Rome,Italy&output=embed&z=15" allowfullscreen loading="lazy"></iframe>
+    </div>
+    <a id="open-in-maps" href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="display:block;background:var(--dark);color:var(--cream);text-align:center;padding:11px;border-radius:11px;text-decoration:none;font-size:13px;font-weight:500;margin-bottom:12px;">Open in Google Maps ↗</a>
+  </div>
+  <div class="section-content" style="padding-top:0;">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-terracotta">🏠</div>
+        <div><div class="card-title">Accommodations</div><div class="card-subtitle">Tap Map to navigate</div></div>
+      </div>
+      <div class="pins-list">
+        <div class="pin-item">
+          <div class="pin-emoji">🏛️</div>
+          <div class="pin-info"><div class="pin-name">Rome -- Airbnb next to Pantheon</div><div class="pin-address">Jun 19–23 · HMBAJ4K352 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMBAJ4K352" target="_blank" style="color:var(--gold)">🏠 Airbnb</a></div></div>
+          <button class="pin-action" onclick="openMapAddr('Pantheon Rome Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">🌺</div>
+          <div class="pin-info"><div class="pin-name">Florence -- Solo Experience Hotel</div><div class="pin-address">Jun 23–24 · <a href="https://www.soloexperiencehotel.com" target="_blank" style="color:var(--gold)">🏨 Hotel Site</a> · <a href="https://maps.google.com/?q=Solo+Experience+Hotel+Florence+Italy" target="_blank" style="color:var(--sky)">📍 Map</a></div></div>
+          <button class="pin-action" onclick="openMapAddr('Solo Experience Hotel Florence Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">🧀</div>
+          <div class="pin-info"><div class="pin-name">Parma -- Borgo Sant'Antonio, 8</div><div class="pin-address">Ultimo piano · Jun 24–28 · HMPS9NTX85 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMPS9NTX85" target="_blank" style="color:var(--gold)">🏠 Airbnb</a></div></div>
+          <button class="pin-action" onclick="openMapAddr('Borgo SantAntonio 8 Parma Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">🏔️</div>
+          <div class="pin-info"><div class="pin-name">Lake Garda -- Torri del Benaco Airbnb</div><div class="pin-address">Jun 28–Jul 3 · HMKHFXXT8F · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMKHFXXT8F" target="_blank" style="color:var(--gold)">🏠 Airbnb</a></div></div>
+          <button class="pin-action" onclick="openMapAddr('Torri del Benaco Lake Garda Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">🏨</div>
+          <div class="pin-info"><div class="pin-name">Chicago -- SpringHill Suites O'Hare</div><div class="pin-address">8101 W Higgins Rd · Jul 3 night · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.marriott.com/hotels/travel/ordsh-springhill-suites-chicago-ohare" target="_blank" style="color:var(--gold)">🏨 Marriott</a></div></div>
+          <button class="pin-action" onclick="openMapAddr('SpringHill Suites 8101 West Higgins Rd Chicago IL')">Map</button>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-gold">📍</div>
+        <div><div class="card-title">Key Locations</div><div class="card-subtitle">Saved spots</div></div>
+      </div>
+      <div class="pins-list">
+        <div class="pin-item">
+          <div class="pin-emoji">🏛️</div>
+          <div class="pin-info"><div class="pin-name">Pantheon</div><div class="pin-address">Rome · Near your Airbnb</div></div>
+          <button class="pin-action" onclick="openMapAddr('Pantheon Rome Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">🏺</div>
+          <div class="pin-info"><div class="pin-name">Largo Argentina</div><div class="pin-address">Rome · Where Caesar was assassinated + cat sanctuary</div></div>
+          <button class="pin-action" onclick="openMapAddr('Largo Argentina Rome Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">👜</div>
+          <div class="pin-info"><div class="pin-name">Made in Tuscany Firenze (Dimitri)</div><div class="pin-address">Via degli Alfani 129r, Florence · Leather craftsman, ex-Gucci</div></div>
+          <button class="pin-action" onclick="openMapAddr('Via degli Alfani 129r Florence Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">🚲</div>
+          <div class="pin-info"><div class="pin-name">Bike Food Stories (Parmigiano Tour)</div><div class="pin-address">Str. Giuseppe Garibaldi 29, Parma · Inner courtyard · ☎ +39 349 783 8492</div></div>
+          <button class="pin-action" onclick="openMapAddr('Str Giuseppe Garibaldi 29 Parma Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">⛪</div>
+          <div class="pin-info"><div class="pin-name">Valmozzola -- Ancestral Village</div><div class="pin-address">Giuseppe Chiesa: Strada San Siro 10 · Maria Ferretti: San Martino 6</div></div>
+          <button class="pin-action" onclick="openMapAddr('Valmozzola Parma Italy')">Map</button>
+        </div>
+        <div class="pin-item">
+          <div class="pin-emoji">🚗</div>
+          <div class="pin-info"><div class="pin-name">Sixt Car Rental -- Parma</div><div class="pin-address">Via Trento 3D, Parma · Pickup Jun 27 at 9:30am</div></div>
+          <button class="pin-action" onclick="openMapAddr('Via Trento 3D Parma Italy')">Map</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ EAT ══════════════ -->
+
+<div id="section-eat" class="section">
+  <div class="sec-title">Where to Eat</div>
+  <div style="padding: 0 14px 8px;">
+    <div class="city-scroll">
+      <div class="city-pill active-city" onclick="switchRestCity(this,'rome-rests')">🏛️ Rome</div>
+      <div class="city-pill" onclick="switchRestCity(this,'florence-rests')">🌺 Florence</div>
+      <div class="city-pill" onclick="switchRestCity(this,'parma-rests')">🧀 Parma</div>
+      <div class="city-pill" onclick="switchRestCity(this,'garda-rests')">🏔️ Garda</div>
+    </div>
+  </div>
+
+  <div id="rome-rests" class="rest-group">
+    <div class="rest-grid">
+      <div class="rest-item"><div class="rest-emoji">☕</div><div class="rest-info"><div class="rest-name">Tazza d'Oro</div><div class="rest-meta">Near Pantheon · Best espresso in Rome · <a href='https://maps.google.com/?q=Tazza+d+Oro+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Coffee</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">☕</div><div class="rest-info"><div class="rest-name">Sant'Eustachio Caffè</div><div class="rest-meta">Near Pantheon · Legendary since 1938 · <a href='https://maps.google.com/?q=Caffe+Sant+Eustachio+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Coffee</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🏛️</div><div class="rest-info"><div class="rest-name">Antico Caffè Greco</div><div class="rest-meta">Via Condotti · <a href='https://maps.google.com/?q=Antico+Caffe+Greco+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Historic cafe</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Brucio</div><div class="rest-meta">Roman pizza · Brandon's pick</div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🥪</div><div class="rest-info"><div class="rest-name">All'Antico Vinaio</div><div class="rest-meta">Takeaway sandwiches · <a href='https://maps.google.com/?q=All+Antico+Vinaio+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Sandwiches</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria da Gino al Parlamento</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Trattoria+da+Gino+al+Parlamento+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍷</div><div class="rest-info"><div class="rest-name">Pietro Valentini</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Pietro+Valentini+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item" style="border: 2px solid rgba(212,168,67,0.4);"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Il Vero Alfredo ⭐ BOOKED</div><div class="rest-meta">Jun 21 · 7:30pm · Ref: BV4ML76Q · <a href='https://maps.google.com/?q=Il+Vero+Alfredo+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag booked" style="background:rgba(74,92,47,0.12);color:var(--olive);">✓ Confirmed</span><span class="rest-tag rest-price">€€€</span></div></div></div>
+    </div>
+    <div style="padding: 0 14px 12px;"><div class="info-box olive"><div class="info-box-icon">📱</div><div><div class="info-box-title">Too Good To Go App</div><div class="info-box-text">Grab discounted food bags at the end of each day from local restaurants. Great for a cheap late snack!</div></div></div></div>
+  </div>
+
+  <div id="florence-rests" class="rest-group" style="display:none">
+    <div class="rest-grid">
+      <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria Sergio Gozzi</div><div class="rest-meta">Piazza San Lorenzo · Cash only · <a href='https://maps.google.com/?q=Trattoria+Sergio+Gozzi+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local institution</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Mercato Centrale</div><div class="rest-meta">Via dell'Ariento · <a href='https://maps.google.com/?q=Mercato+Centrale+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Food hall</span><span class="rest-tag rest-price">€</span></div></div></div>
+    </div>
+    <div style="padding: 0 14px 12px;"><div class="info-box sky"><div class="info-box-icon">👜</div><div><div class="info-box-title info-box-title sky">Don't miss: Dimitri's leather shop</div><div class="info-box-text">Made in Tuscany Firenze · Via degli Alfani 129r · Bring cash for a discount! Ex-Gucci craftsman, seen on YouTube. Custom belts cut to size.</div></div></div></div>
+  </div>
+
+  <div id="parma-rests" class="rest-group" style="display:none">
+    <div class="rest-grid">
+      <div class="rest-item"><div class="rest-emoji">🧀</div><div class="rest-info"><div class="rest-name">Osteria Miriam</div><div class="rest-meta">Via del Conservatorio · <a href='https://maps.google.com/?q=Osteria+Miriam+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local specialties</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍖</div><div class="rest-info"><div class="rest-name">Trattoria Corrieri</div><div class="rest-meta">Via Conservatorio · <a href='https://maps.google.com/?q=Trattoria+Corrieri+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div>
+    </div>
+    <div style="padding: 0 14px 12px;"><div class="info-box gold"><div class="info-box-icon">🧀</div><div><div class="info-box-title">Parma specialties to order</div><div class="info-box-text">Prosciutto di Parma, Parmigiano-Reggiano, Tortellini in brodo, Culatello. These are the best in the world here -- order them everywhere!</div></div></div></div>
+  </div>
+
+  <div id="garda-rests" class="rest-group" style="display:none">
+    <div class="rest-grid">
+      <div class="rest-item"><div class="rest-emoji">🐟</div><div class="rest-info"><div class="rest-name">Ristorante Grifone</div><div class="rest-meta">Sirmione · On the water · <a href='https://maps.google.com/?q=Ristorante+Grifone+Sirmione+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Seafood</span><span class="rest-tag rest-price">€€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Pizzeria Lugana</div><div class="rest-meta">Sirmione · <a href='https://maps.google.com/?q=Pizzeria+Lugana+Sirmione+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza & pasta</span><span class="rest-tag rest-price">€€</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ FAMILY ══════════════ -->
+
+<div id="section-family" class="section">
+  <div class="sec-title">Family</div>
+  <div class="section-content" style="padding-top:0;">
+    <div class="findmy-banner">
+      <div class="findmy-icon">📍</div>
+      <div class="findmy-text">
+        <div class="findmy-title">Live Locations via Find My</div>
+        <div class="findmy-desc">Everyone share location in Apple Find My. Works offline with iPhone-to-iPhone Bluetooth.</div>
+      </div>
+      <button class="findmy-btn" onclick="window.location='https://findmy.apple.com'">Open →</button>
+    </div>
+    <div class="family-grid">
+      <div class="family-card"><div class="family-avatar">👨🏻‍🦱</div><div class="family-name">Brandon</div><div class="family-status">Trip Organizer</div></div>
+      <div class="family-card"><div class="family-avatar">👩🏻‍🦰</div><div class="family-name">Holly</div><div class="family-status">Co-organizer</div></div>
+      <div class="family-card"><div class="family-avatar">👧🏻</div><div class="family-name">Virginia</div><div class="family-status">Full trip</div></div>
+      <div class="family-card"><div class="family-avatar">👧</div><div class="family-name">Adelle</div><div class="family-status">Full trip</div></div>
+      <div class="family-card"><div class="family-avatar">👧🏼</div><div class="family-name">Pearl</div><div class="family-status">Full trip</div></div>
+      <div class="family-card"><div class="family-avatar">👴🏻</div><div class="family-name">Big Daddy</div><div class="family-status">Rome → Venice</div></div>
+      <div class="family-card"><div class="family-avatar">👵</div><div class="family-name">Nannie</div><div class="family-status">Rome → Venice</div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-sky">✈️</div><div><div class="card-title">Nannie & Big Daddy Note</div><div class="card-subtitle">Join Jun 20 · Split Jun 24 · Depart Jun 27</div></div></div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-time">Jun 20</div><div class="timeline-dot sky"></div><div class="timeline-body"><div class="timeline-title">Arrive Rome</div><div class="timeline-desc">AA flight 720 from CLT · Arrives 10:30am Rome time</div><span class="timeline-tag flight">AA720</span></div></div>
+        <div class="timeline-item"><div class="timeline-time">Jun 24</div><div class="timeline-dot gold"></div><div class="timeline-body"><div class="timeline-title">Split from main group</div><div class="timeline-desc">Nannie & Big Daddy head to Venice independently while main group goes to Parma</div></div></div>
+        <div class="timeline-item"><div class="timeline-time">Jun 27</div><div class="timeline-dot"></div><div class="timeline-body"><div class="timeline-title">Depart Italy from Venice</div><div class="timeline-desc">Aer Lingus flight 8074 at 11pm from VCE</div><span class="timeline-tag flight">EI8074</span></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-terracotta">🆘</div><div><div class="card-title">Meeting Points</div><div class="card-subtitle">If separated -- no signal needed</div></div></div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-time">Rome</div><div class="timeline-dot"></div><div class="timeline-body"><div class="timeline-title">Trevi Fountain -- top center steps</div><div class="timeline-desc">Every hour on the hour</div></div></div>
+        <div class="timeline-item"><div class="timeline-time">Florence</div><div class="timeline-dot gold"></div><div class="timeline-body"><div class="timeline-title">Piazza della Signoria</div><div class="timeline-desc">Base of the David replica statue</div></div></div>
+        <div class="timeline-item"><div class="timeline-time">Parma</div><div class="timeline-dot olive"></div><div class="timeline-body"><div class="timeline-title">Piazza Garibaldi -- central fountain</div><div class="timeline-desc">Every hour on the hour</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TOOLS ══════════════ -->
+
+<div id="section-tools" class="section">
+  <div class="sec-title">Tools</div>
+  <div class="section-content" style="padding-top:0;">
+    <div class="calc-card">
+      <div class="calc-title">💶 EUR ↔ USD</div>
+      <div class="calc-row">
+        <div class="calc-input-wrap"><span class="calc-currency">€</span><input class="calc-input" type="number" id="eur-input" placeholder="0" oninput="calcEurToUsd()" inputmode="decimal"></div>
+        <div class="calc-arrow">→</div>
+        <div class="calc-input-wrap"><span class="calc-currency">$</span><input class="calc-input" type="number" id="usd-from-eur" placeholder="0" readonly style="color:var(--stone)"></div>
+      </div>
+      <div class="calc-row">
+        <div class="calc-input-wrap"><span class="calc-currency">$</span><input class="calc-input" type="number" id="usd-input" placeholder="0" oninput="calcUsdToEur()" inputmode="decimal"></div>
+        <div class="calc-arrow">→</div>
+        <div class="calc-input-wrap"><span class="calc-currency">€</span><input class="calc-input" type="number" id="eur-from-usd" placeholder="0" readonly style="color:var(--stone)"></div>
+      </div>
+      <div class="calc-rate"><span class="rate-live"></span>Rate: 1 EUR = <span id="rate-display">1.09</span> USD · Updates on load</div>
+    </div>
+    <div class="util-grid">
+      <a href="https://translate.google.com/?sl=it&tl=en&op=translate" target="_blank" class="util-card"><div class="util-icon">🌐</div><div class="util-name">Translate</div><div class="util-desc">Italian ↔ English</div></a>
+      <a href="https://maps.google.com" target="_blank" class="util-card"><div class="util-icon">🗺️</div><div class="util-name">Google Maps</div><div class="util-desc">Full navigation</div></a>
+      <a href="https://www.thetrainline.com" target="_blank" class="util-card"><div class="util-icon">🚄</div><div class="util-name">Trains</div><div class="util-desc">Trenitalia / Italo</div></a>
+      <a href="https://toogoodtogo.com" target="_blank" class="util-card"><div class="util-icon">🛍️</div><div class="util-name">Too Good To Go</div><div class="util-desc">Daily food deals</div></a>
+      <a href="https://www.airbnb.com/trips" target="_blank" class="util-card"><div class="util-icon">🏠</div><div class="util-name">Airbnb Trips</div><div class="util-desc">All reservations</div></a>
+      <a href="https://weather.com/weather/tenday/l/Rome+Italy" target="_blank" class="util-card"><div class="util-icon">⛅</div><div class="util-name">Weather</div><div class="util-desc">10-day forecast</div></a>
+    </div>
+    <div class="emergency-card">
+      <div class="emergency-title">🚨 Emergency Numbers -- Italy</div>
+      <div class="emerg-item"><span class="emerg-label">General Emergency</span><span class="emerg-num">112</span></div>
+      <div class="emerg-item"><span class="emerg-label">Ambulance</span><span class="emerg-num">118</span></div>
+      <div class="emerg-item"><span class="emerg-label">Police</span><span class="emerg-num">113</span></div>
+      <div class="emerg-item"><span class="emerg-label">Fire Brigade</span><span class="emerg-num">115</span></div>
+      <div class="emerg-item"><span class="emerg-label">US Embassy Rome</span><span class="emerg-num">+39 06 46741</span></div>
+      <div class="emerg-item"><span class="emerg-label">Sixt Rental Confirmation</span><span class="emerg-num">#9730023172</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div class="card-icon icon-olive">🧳</div><div><div class="card-title">Packing Checklist</div><div class="card-subtitle">Tap to check off</div></div></div>
+      <div class="pack-section">
+        <div class="pack-category">Documents</div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Passports (valid 6+ months)</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Flight confirmations printed</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Airbnb reservation codes</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Driver's license (for Sixt rental)</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Travel insurance cards</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Notify bank of travel dates</div></div>
+        <div class="pack-category">Tech</div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">EU plug adapter (Type F/L)</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Portable power bank</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">eSIM for Italy (try Airalo app)</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Google Maps offline -- download all cities</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Download Too Good To Go app</div></div>
+        <div class="pack-category">Clothing</div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Modest clothing for Vatican & churches</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Comfortable walking shoes (cobblestones!)</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Light jacket / layer (evenings cool)</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Swimsuit (Lake Garda)</div></div>
+        <div class="pack-category">Health</div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Prescription medications</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Sunscreen SPF 50+ (hot June sun)</div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-check"></div><div class="pack-label">Motion sickness tabs (curvy Parma roads)</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ INFO ══════════════ -->
+
+<div id="section-info" class="section">
+  <div class="sec-title">Good to Know</div>
+  <div class="tip-scroll">
+    <div class="tip-card"><div class="tip-icon">🏛️</div><div class="tip-title">Near Your Rome Airbnb</div><div class="tip-text">You're right next to the Pantheon! Santa Maria Sopra Minerva is steps away -- free entry, stunning interior, and Michelangelo's Christ Carrying the Cross.</div></div>
+    <div class="tip-card"><div class="tip-icon">🚗</div><div class="tip-title">ZTL Zones</div><div class="tip-text">Rome and Florence historic centers have restricted traffic zones. Never drive in -- fines come in the mail months later. Use taxis or walk.</div></div>
+    <div class="tip-card"><div class="tip-icon">⛪</div><div class="tip-title">Campo de' Fiori</div><div class="tip-text">Walk through on the way to Trastevere. Site of public executions -- the statue is of Giordano Bruno, burned alive as a heretic. Morning market there too.</div></div>
+    <div class="tip-card"><div class="tip-icon">💧</div><div class="tip-title">Free Water -- Rome</div><div class="tip-text">Nasoni fountains throughout Rome give free clean drinking water. Refill your bottles -- it's cold and delicious. Better than anything bottled.</div></div>
+    <div class="tip-card"><div class="tip-icon">🏰</div><div class="tip-title">Valmozzola</div><div class="tip-text">The ancestral Chiesa village! Visit Giuseppe Chiesa's home (Strada San Siro 10) and Maria Ferretti's (San Martino 6). A truly special day for your family.</div></div>
+    <div class="tip-card"><div class="tip-icon">🛒</div><div class="tip-title">Fidenza Village</div><div class="tip-text">On the drive from Parma to Lake Garda -- designer outlet shopping. Good stop if the group wants it, especially after all that cheese money spent.</div></div>
+    <div class="tip-card"><div class="tip-icon">🎟️</div><div class="tip-title">Buy Tickets Online</div><div class="tip-text">Largo Argentina cat sanctuary, Vicus Caprarius, and Colosseum are much cheaper online. Walk-up prices can be double in June.</div></div>
+    <div class="tip-card"><div class="tip-icon">🍝</div><div class="tip-title">Meal Times</div><div class="tip-text">Italians eat dinner 8–10pm. Restaurants before 7pm are mostly for tourists. Embrace the rhythm -- afternoon gelato tides you over.</div></div>
+  </div>
+  <div style="padding: 0 14px;">
+    <div class="phrase-card">
+      <div class="phrase-header"><div class="phrase-header-title">🗣️ Essential Italian</div><div class="phrase-header-sub">Tap 🔊 to hear pronunciation</div></div>
+      <div class="phrase-item"><div><div class="phrase-en">Good morning / Goodbye</div><div class="phrase-it">Buongiorno / Arrivederci</div></div><button class="phrase-speak" onclick="speak('Buongiorno')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">Please / Thank you</div><div class="phrase-it">Per favore / Grazie</div></div><button class="phrase-speak" onclick="speak('Per favore. Grazie')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">The bill, please</div><div class="phrase-it">Il conto, per favore</div></div><button class="phrase-speak" onclick="speak('Il conto per favore')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">Where is...?</div><div class="phrase-it">Dov'è...?</div></div><button class="phrase-speak" onclick="speak('Dove è')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">Do you speak English?</div><div class="phrase-it">Parla inglese?</div></div><button class="phrase-speak" onclick="speak('Parla inglese')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">I'm allergic to...</div><div class="phrase-it">Sono allergico a...</div></div><button class="phrase-speak" onclick="speak('Sono allergico a')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">A table for [4], please</div><div class="phrase-it">Un tavolo per quattro</div></div><button class="phrase-speak" onclick="speak('Un tavolo per quattro per favore')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">Two scoops of gelato</div><div class="phrase-it">Due gusti, per favore</div></div><button class="phrase-speak" onclick="speak('Due gusti per favore')">🔊</button></div>
+      <div class="phrase-item"><div><div class="phrase-en">Help!</div><div class="phrase-it">Aiuto!</div></div><button class="phrase-speak" onclick="speak('Aiuto')">🔊</button></div>
+    </div>
+    <div style="margin: 8px 0 6px;"><div class="sec-title" style="padding: 10px 0 4px; font-size: 18px;">📝 Trip Notes</div></div>
+    <div class="notes-area"><div class="notes-label">Your notes (saves on this device)</div><textarea id="trip-notes" placeholder="Add confirmations, Airbnb addresses, notes from the trip..."></textarea></div>
+  </div>
+</div>
+
+<!-- ══════════════ WEATHER ══════════════ -->
+
+<div id="section-weather" class="section">
+  <div class="weather-section-title">⛅ 7-Day Forecast</div>
+  <div class="weather-city-pill-wrap" id="wx-city-pills">
+    <div class="wx-pill active" onclick="switchWxCity(this,'rome')">🏛️ Rome</div>
+    <div class="wx-pill" onclick="switchWxCity(this,'florence')">🌺 Florence</div>
+    <div class="wx-pill" onclick="switchWxCity(this,'parma')">🧀 Parma</div>
+    <div class="wx-pill" onclick="switchWxCity(this,'garda')">🏔️ Torri del Benaco</div>
+    <div class="wx-pill" onclick="switchWxCity(this,'venice')">🚤 Venice</div>
+  </div>
+  <div class="wx-forecast-wrap">
+    <div id="wx-content"><div class="wx-loading">⛅ Loading weather...</div></div>
+    <div class="wx-source">Weather data via Open-Meteo · Updates on each load · °F</div>
+  </div>
+</div>
+
+<script>
+// ── TRIP DATA ──
+const TRIP_START = new Date('2026-06-19');
+const TRIP_END   = new Date('2026-07-04');
+
+const DAYS = [
+  { day:1, date:'Jun 19', city:'Rome', label:'Arrival Day', cityCode:'ROME', events:[
+    {time:'3:05 PM', title:'✈️ Land at FCO -- Rome Fiumicino', desc:'Final leg: Munich → Rome (UA9212 / Lufthansa). Collect bags.', dot:'sky', tag:'Flight', tagClass:'flight'},
+    {time:'~4:30 PM', title:'🚕 Taxi to Airbnb next to Pantheon', desc:'Use Uber, Free Now app, or official taxi (fixed rate ~€48 from airport). Reservation HMBAJ4K352', dot:'', tag:'Book taxi'},
+    {time:'Evening', title:'⛪ Quick walk -- Santa Maria Sopra Minerva', desc:"Right behind the Pantheon -- Michelangelo's Christ Carrying the Cross + elephant obelisk. Free entry.", dot:'olive', tag:'Free'},
+    {time:'7:00 PM', title:'🍷 Dinner in Trastevere', desc:'Trendy neighborhood across the river. Note: may be far for Nannie & Big Daddy. Uber back.', dot:'gold', tag:'Suggestion'},
+  ]},
+  { day:2, date:'Jun 20', city:'Rome', label:'Monuments & Parks', cityCode:'ROME', events:[
+    {time:'10:30 AM', title:'👴👵 Nannie & Big Daddy Arrive', desc:'AA flight 720 from CLT arrives Rome 10:30am', dot:'sky', tag:'AA720', tagClass:'flight'},
+    {time:'Morning', title:'☕ Breakfast near Pantheon', desc:"Tazza d'Oro or Sant'Eustachio Caffè -- two of Rome's best espresso bars, both steps away", dot:'gold', tag:'Coffee'},
+    {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online -- cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
+    {time:'1:00 PM', title:'🍕 Lunch', desc:'All\'Antico Vinaio (sandwiches) or Brucio (pizza) -- both Brandon picks', dot:'gold', tag:'Food'},
+    {time:'2:30 PM', title:'⛲ Trevi Fountain', desc:'Go mid-afternoon, early morning for fewer crowds. Toss a coin! <a href="https://maps.google.com/?q=Trevi+Fountain,Rome,Italy" target="_blank" style="color:var(--sky)">📍 Map</a>', dot:'', tag:'Free'},
+    {time:'4:00 PM', title:'🏡 Spanish Steps', desc:'Walk up for the panoramic view over Rome. <a href="https://maps.google.com/?q=Spanish+Steps,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
+    {time:'5:00 PM', title:'🌳 Villa Borghese Park', desc:'Large park with villas, zoo, and beautiful gardens -- great for a stroll', dot:'olive', tag:'Free'},
+    {time:'8:00 PM', title:'🍽️ Dinner -- Campo de\'Fiori → Trastevere', desc:'Walk through Campo de\'Fiori (site of executions, statue of Bruno the heretic) en route to dinner', dot:'gold', tag:'Evening'},
+  ]},
+  { day:3, date:'Jun 21', city:'Rome', label:'Golf Cart Tour + Alfredo', cityCode:'ROME', events:[
+    {time:'8:30 AM', title:'🏎️ Golf Cart Tour of Rome', desc:'Private Rome Golf Cart Tour · 3 hours · Ends 11:30am · <a href="https://livtours.com/tours/private-rome-golf-cart-tour/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a>', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'12:00 PM', title:'🏺 Largo Argentina', desc:'Where Julius Caesar was assassinated + cat sanctuary. Buy online -- much cheaper! <a href="https://maps.google.com/?q=Largo+di+Torre+Argentina,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a> · <a href="https://www.romanoimpero.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'olive', tag:'Book online'},
+    {time:'2:00 PM', title:'🌊 Vicus Caprarius -- Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
+    {time:'3:30 PM', title:'☕ Antico Caffè Greco', desc:'One of the oldest cafes in Rome -- historic stop near Spanish Steps', dot:'gold', tag:'Must do'},
+    {time:'7:30 PM', title:'🍝 Il Vero Alfredo -- BOOKED', desc:'Booking Reference: BV4ML76Q · The original Fettuccine Alfredo restaurant', dot:'', tag:'✓ Confirmed', tagClass:'booked'},
+  ]},
+  { day:4, date:'Jun 22', city:'Rome', label:'Vatican Day', cityCode:'ROME', events:[
+    {time:'7:45 AM', title:'🎨 VIP Vatican Breakfast Tour', desc:'Private Vatican tour with breakfast · 3.5 hours · <a href="https://livtours.com/tours/private-vatican-breakfast-tour-vip/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a> · <a href="https://maps.google.com/?q=Vatican+Museums,Vatican+City" target="_blank" style="color:var(--sky)">📍 Map</a>', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'12:00 PM', title:'🍽️ Lunch near Vatican', desc:'Pietro Valentini or explore Prati neighborhood (locals\' area near Vatican)', dot:'gold', tag:'Suggestion'},
+    {time:'Afternoon', title:'🗺️ Free afternoon in Rome', desc:'Revisit favorites, souvenir shopping, or relax near Pantheon', dot:'olive', tag:'Free'},
+    {time:'Evening', title:'🌙 Last night in Rome', desc:'Evening passeggiata -- the Italian tradition of the evening stroll', dot:'gold', tag:'Evening'},
+  ]},
+  { day:5, date:'Jun 23', city:'Florence', label:'Rome → Florence', cityCode:'FLORENCE', events:[
+    {time:'Morning', title:'🚄 Train Rome → Florence', desc:'Frecciarossa high-speed train from Roma Termini → Firenze Santa Maria Novella. ~1.5 hrs. Book on Trenitalia or Italo app -- buy in advance!', dot:'sky', tag:'Train'},
+    {time:'Afternoon', title:'🏨 Check in -- Solo Experience Hotel', desc:'2 rooms with breakfast included · soloexperiencehotel.com', dot:'', tag:'Hotel', tagClass:'booked'},
+    {time:'2:00 PM', title:'👜 Made in Tuscany Firenze -- Dimitri', desc:'Via degli Alfani 129r · Ex-Gucci craftsman · Cash for discount! Custom belts. Open 9am–7:30pm. <a href="https://maps.google.com/?q=Via+degli+Alfani+129r,+Florence,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Must visit'},
+    {time:'4:00 PM', title:'🌸 Ponte Vecchio & Oltrarno stroll', desc:'Famous jewelers bridge, then explore the artisan neighborhood south of the river. <a href="https://maps.google.com/?q=Ponte+Vecchio,+Florence,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
+    {time:'7:30 PM', title:'🍝 Dinner -- Trattoria Sergio Gozzi', desc:'Piazza San Lorenzo · Cash only, arrive early, local institution', dot:'gold', tag:'Recommendation'},
+  ]},
+  { day:6, date:'Jun 24', city:'Florence → Parma', label:'Art + Split Day', cityCode:'FLORENCE', events:[
+    {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance -- Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--sky)'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--sky)'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
+    {time:'1:00 PM', title:'🍝 Lunch -- Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
+    {time:'Afternoon', title:'👴👵 Nannie & Big Daddy head to Venice', desc:'They split off independently from Florence to Venice', dot:'sky', tag:'Split'},
+    {time:'Late PM', title:'🚄 Train Florence → Parma', desc:'From Firenze Santa Maria Novella. ~1.5 hrs, may require change in Bologna. Book on Trenitalia or Italo app.', dot:'', tag:'Train'},
+    {time:'Evening', title:'🏠 Check in -- Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
+  ]},
+  { day:7, date:'Jun 25', city:'Parma', label:'Parmigiano Bike Tour', cityCode:'PARMA', events:[
+    {time:'Morning', title:'☕ Explore Parma city center', desc:'Cathedral, Baptistery, Piazza Garibaldi -- beautiful and uncrowded Italian city', dot:'olive', tag:'Free'},
+    {time:'12:00 PM', title:'🍽️ Lunch', desc:'Order everything with Prosciutto di Parma and Parmigiano -- you\'re in the source!', dot:'gold', tag:'Food'},
+    {time:'3:00 PM', title:'🚲 Parmigiano Factory Bike Tour (4 hours)', desc:'Bike Food Stories · Str. Giuseppe Garibaldi 29 · ☎ +39 349 783 8492 · <a href="https://maps.google.com/?q=Str.+Giuseppe+Garibaldi+29,+Parma,+Italy" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.tripadvisor.com/AttractionProductReview-g187804-d15304065" target="_blank" style="color:var(--gold)">⭐ TripAdvisor</a>', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'7:00 PM', title:'🍷 Dinner after the tour', desc:'You\'ll be full of cheese and happy. Light dinner -- wine and charcuterie.', dot:'gold', tag:'Evening'},
+  ]},
+  { day:8, date:'Jun 26', city:'Parma', label:'Free Day in Parma', cityCode:'PARMA', events:[
+    {time:'Morning', title:'🏛️ Parma Duomo & Baptistery', desc:'Stunning frescoes by Correggio in the cathedral dome -- one of Italy\'s hidden gems', dot:'olive', tag:'Free'},
+    {time:'Afternoon', title:'🛍️ Shopping & wandering', desc:'Parma is Italy\'s food capital -- prosciutto shops, cheese counters, local markets', dot:'gold', tag:'Free'},
+    {time:'Evening', title:'🍝 Last full dinner in Parma', desc:'Osteria Miriam or Trattoria Corrieri -- order the local pasta', dot:'gold', tag:'Suggestion'},
+  ]},
+  { day:9, date:'Jun 27', city:'Parma', label:'Valmozzola -- Ancestral Village', cityCode:'PARMA', events:[
+    {time:'9:30 AM', title:'🚗 Pick up Sixt Rental Car', desc:'Via Trento 3D, Parma · Reservation #9730023172 · <a href="https://maps.google.com/?q=Via+Trento+3D,+Parma,+Italy" target="_blank" style="color:var(--sky)">📍 Map</a>', dot:'sky', tag:'Car rental'},
+    {time:'~11:00 AM', title:'🏘️ Drive to Valmozzola', desc:'~1 hour south of Parma into the Apennine mountains. Stunning scenic drive. <a href="https://maps.google.com/?q=Valmozzola,+PR,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Special'},
+    {time:'11:30 AM', title:'⛪ Visit Giuseppe Chiesa\'s birthplace', desc:'Strada San Siro 10, 43050 Valmozzola PR · Your family\'s ancestral home · <a href="https://maps.google.com/?q=Strada+San+Siro+10,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'', tag:'Ancestral', tagClass:'booked'},
+    {time:'12:00 PM', title:'⛪ Visit Maria Ferretti\'s birthplace', desc:'San Martino 6, 43050 Valmozzola PR · Explore the village, photograph everything · <a href="https://maps.google.com/?q=San+Martino+6,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Ancestral'},
+    {time:'2:00 PM', title:'🛒 Optional: Fidenza Village outlet stop', desc:'Designer outlet shopping on the way back north -- on the route to Lake Garda', dot:'olive', tag:'Optional'},
+    {time:'Late PM', title:'👴👵 Nannie & Big Daddy depart Venice', desc:'Aer Lingus EI8074 at 11pm from VCE -- safe travels!', dot:'sky', tag:'EI8074', tagClass:'flight'},
+  ]},
+  { day:10, date:'Jun 28', city:'Lake Garda', label:'Parma → Lake Garda', cityCode:'GARDA', events:[
+    {time:'Morning', title:'🚗 Drive Parma → Lake Garda', desc:'~1.5 hrs via A22. Optional stop at Fidenza Village outlet if not done yesterday.', dot:'sky', tag:'Drive'},
+    {time:'~12:00 PM', title:'🏠 Check in -- Torri del Benaco Airbnb', desc:'Beautiful medieval village on eastern shore of Lake Garda · Reservation HMKHFXXT8F', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'Afternoon', title:'🏖️ Afternoon at the lake', desc:'Swimming, kayaking, just sitting and looking at the Alps reflecting in the water', dot:'olive', tag:'Relax'},
+    {time:'7:00 PM', title:'🐟 Lakeside dinner', desc:'Fresh lake fish at Ristorante Grifone in Sirmione -- on the water, spectacular', dot:'gold', tag:'Suggestion'},
+  ]},
+  { day:11, date:'Jun 29', city:'Lake Garda', label:'Lake Day', cityCode:'GARDA', events:[
+    {time:'Morning', title:'⛵ Boat trip on the lake', desc:'Ferry between towns (Malcesine, Sirmione, Gardone) or rent a small private boat', dot:'sky', tag:'Optional'},
+    {time:'Afternoon', title:'🏰 Sirmione -- Scaligero Castle', desc:"Medieval castle jutting into the lake -- one of Italy's most dramatic locations. <a href='https://maps.google.com/?q=Castello+Scaligero+Sirmione+Italy' target='_blank' style='color:var(--olive)'>📍 Map</a>", dot:'olive', tag:'Must see'},
+    {time:'Evening', title:'🌅 Lake Garda sunset', desc:'Watch the sun set over the lake with a glass of local Lugana wine', dot:'', tag:'Evening'},
+  ]},
+  { day:12, date:'Jun 30', city:'Venice Day Trip', label:"St. Mark's & Doge's Palace", cityCode:'GARDA', events:[
+    {time:'Morning', title:'🚗 Drive to Verona train station', desc:'~45 mins from Torri del Benaco. Park at Verona Porta Nuova station.', dot:'sky', tag:'Drive'},
+    {time:'~10:00 AM', title:'🚄 Train Verona → Venice', desc:'Fast regional train ~1.5 hrs. Buy on Trenitalia app. No cruise ships in port today -- best day to visit!', dot:'sky', tag:'Train'},
+    {time:'2:30 PM', title:"🏛️ St. Mark's & Doge's Palace Tour -- BOOKED", desc:"Semi-private tour · <a href='https://livtours.com/tours/semi-private-st-marks-doges-palace-tour/' target='_blank' style='color:var(--gold)'>🔗 livtours.com</a> · <a href='https://maps.google.com/?q=St+Marks+Basilica,Venice,Italy' target='_blank' style='color:var(--sky)'>📍 Map</a>", dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'Evening', title:'🌙 Venice at night', desc:'Stay after dark -- magical canals, lit bridges, quiet calli with no crowds', dot:'gold', tag:'Must do'},
+    {time:'Late', title:'🚄 Train back to Verona', desc:'Check last train time (typically ~11pm). Drive back to Torri del Benaco.', dot:'sky', tag:'Return'},
+  ]},
+  { day:13, date:'Jul 1', city:'Riva del Garda', label:'Northern Lake Adventure', cityCode:'GARDA', events:[
+    {time:'Morning', title:'🚗 Drive north to Riva del Garda', desc:'~45 mins up the western shore -- stunning alpine scenery', dot:'sky', tag:'Drive'},
+    {time:'10:00 AM', title:'💧 Varone Cave Waterfalls', desc:"Spectacular waterfall inside a narrow gorge -- cool and misty, bring a layer! <a href='https://maps.google.com/?q=Cascata+del+Varone,+Riva+del+Garda,+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a>", dot:'sky', tag:'Must see'},
+    {time:'12:00 PM', title:'🏔️ Canyon Adventures', desc:'Via ferrata, canyoning, or kayaking available near Riva del Garda', dot:'olive', tag:'Adventure'},
+    {time:'2:00 PM', title:'🏘️ Canale di Tenno', desc:"Medieval mountain village above Riva -- tiny, ancient, completely unchanged. <a href='https://maps.google.com/?q=Canale+di+Tenno,+Trento,+Italy' target='_blank' style='color:var(--gold)'>📍 Map</a>", dot:'gold', tag:'Unique'},
+    {time:'4:00 PM', title:'🍋 Optional: Limone sul Garda', desc:'Charming lemon-grove village on western shore -- beautiful for a stroll and gelato', dot:'olive', tag:'Optional'},
+    {time:'Evening', title:'🌅 Return to Torri del Benaco', desc:'Last full day on the lake -- one more sunset dinner by the water', dot:'gold', tag:'Evening'},
+  ]},
+  { day:14, date:'Jul 2', city:'Lake Garda', label:'Last Day in Italy', cityCode:'GARDA', events:[
+    {time:'Morning', title:'☀️ Slow morning at the lake', desc:'Last morning in Italy -- swim, coffee, soak it all in', dot:'gold', tag:'Relax'},
+    {time:'Afternoon', title:'🛍️ Final souvenir shopping', desc:'Torri del Benaco village -- olive oil, wine, ceramics, limoncello', dot:'olive', tag:'Shopping'},
+    {time:'Evening', title:'🍷 Farewell dinner', desc:'Make it special -- toast to the Chiesa family Italian adventure!', dot:'', tag:'Last night'},
+    {time:'Night', title:'🧳 Pack up for early departure', desc:'Sixt drop-off is 10am in Verona tomorrow -- pack tonight, set alarms', dot:'sky', tag:'Logistics'},
+  ]},
+  { day:15, date:'Jul 3', city:'Homeward Bound', label:'Verona → Milan → Chicago', cityCode:'GARDA', events:[
+    {time:'9:00 AM', title:'🚗 Drive to Verona Porta Nuova', desc:'~45 mins from Torri del Benaco. Allow extra time for the return!', dot:'sky', tag:'Drive'},
+    {time:'10:00 AM', title:'🚗 Drop Sixt rental car', desc:'Verona Porta Nuova, level -1, in front of train station. Park in SIXT-marked bays, return key to SIXT branch.', dot:'', tag:'Car return', tagClass:'alert'},
+    {time:'~11:00 AM', title:'🚄 Train Verona → Milan Malpensa (MXP)', desc:'Allow 2+ hrs before flight. Malpensa Express or direct regional trains.', dot:'sky', tag:'Train'},
+    {time:'3:20 PM', title:'✈️ Depart Milan MXP → Chicago ORD', desc:'UA415 · United Economy · Arrives Chicago 6:10pm same day', dot:'sky', tag:'UA415', tagClass:'flight'},
+    {time:'6:10 PM', title:'🛬 Arrive Chicago O\'Hare', desc:'Clear customs & immigration.', dot:'', tag:'Chicago'},
+    {time:'Evening', title:'🏨 SpringHill Suites Chicago O\'Hare', desc:'8101 West Higgins Rd, Chicago, IL · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.marriott.com/hotels/travel/ordsh-springhill-suites-chicago-ohare" target="_blank" style="color:var(--gold)">🏨 Hotel site</a>', dot:'gold', tag:'Hotel'},
+  ]},
+  { day:16, date:'Jul 4', city:'Home!', label:'Chicago → Charlottesville', cityCode:'GARDA', events:[
+    {time:'7:15 AM', title:'✈️ Depart Chicago ORD → Charlottesville CHO', desc:'UA5532 · United Economy · Independence Day flight home! 🎆', dot:'sky', tag:'UA5532', tagClass:'flight'},
+    {time:'10:11 AM', title:'🛬 Arrive Charlottesville', desc:'Home by noon. Welcome back, Chiesa family!', dot:'gold', tag:'Home!'},
+    {time:'~12:00 PM', title:'🏠 Home sweet home', desc:'Unpack, share photos, relive every moment. Benvenuti a casa! 🇮🇹', dot:'olive', tag:'🇮🇹'},
+  ]},
+];
+
+const MAP_CITIES = {
+  rome:     { q:'Pantheon,Rome,Italy',               url:'https://maps.google.com/?q=Pantheon,Rome,Italy' },
+  florence: { q:'Florence,Italy',                    url:'https://maps.google.com/?q=Florence,Italy' },
+  parma:    { q:'Piazza+Garibaldi,Parma,Italy',      url:'https://maps.google.com/?q=Piazza+Garibaldi,Parma,Italy' },
+  garda:    { q:'Torri+del+Benaco,Lake+Garda,Italy', url:'https://maps.google.com/?q=Torri+del+Benaco,Lake+Garda,Italy' },
+  venice:   { q:'St+Marks+Basilica,Venice,Italy',      url:'https://maps.google.com/?q=Saint+Marks+Basilica,Venice,Italy' },
+};
+
+// ── INIT ──
+window.addEventListener('load', () => {
+  setTimeout(() => document.getElementById('splash').classList.add('hidden'), 2200);
+  updateCountdown();
+  buildDaySelector();
+  renderDay(0);
+  renderToday();
+  loadNotes();
+  fetchExchangeRate();
+  setInterval(updateCountdown, 60000);
+});
+
+// ── WEATHER ──
+const WX_CITIES = {
+  rome:     { name:'Rome',             lat:41.8902, lon:12.4923, emoji:'🏛️' },
+  florence: { name:'Florence',         lat:43.7696, lon:11.2558, emoji:'🌺' },
+  parma:    { name:'Parma',            lat:44.8015, lon:10.3279, emoji:'🧀' },
+  garda:    { name:'Torri del Benaco', lat:45.6101, lon:10.6870, emoji:'🏔️' },
+  venice:   { name:'Venice',           lat:45.4408, lon:12.3155, emoji:'🚤' },
+};
+
+const WX_ICONS = {
+  0:'☀️', 1:'🌤️', 2:'⛅', 3:'☁️',
+  45:'🌫️', 48:'🌫️',
+  51:'🌦️', 53:'🌦️', 55:'🌧️',
+  61:'🌧️', 63:'🌧️', 65:'🌧️',
+  71:'❄️', 73:'❄️', 75:'❄️',
+  80:'🌦️', 81:'🌦️', 82:'🌧️',
+  95:'⛈️', 96:'⛈️', 99:'⛈️',
+};
+
+const WX_DESC = {
+  0:'Clear sky', 1:'Mainly clear', 2:'Partly cloudy', 3:'Overcast',
+  45:'Foggy', 48:'Foggy',
+  51:'Light drizzle', 53:'Drizzle', 55:'Heavy drizzle',
+  61:'Light rain', 63:'Rain', 65:'Heavy rain',
+  71:'Light snow', 73:'Snow', 75:'Heavy snow',
+  80:'Showers', 81:'Showers', 82:'Heavy showers',
+  95:'Thunderstorm', 96:'Thunderstorm', 99:'Thunderstorm',
+};
+
+const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+let wxCache = {};
+let currentWxCity = 'rome';
+
+async function loadWeather(cityKey) {
+  const city = WX_CITIES[cityKey];
+  if (wxCache[cityKey]) { renderWeather(cityKey, wxCache[cityKey]); return; }
+  document.getElementById('wx-content').innerHTML = '<div class="wx-loading">⛅ Loading ' + city.name + ' weather...</div>';
+  try {
+    const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + city.lat +
+      '&longitude=' + city.lon +
+      '&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,precipitation_probability_max' +
+      '&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=Europe%2FRome&forecast_days=7';
+    const res = await fetch(url);
+    const data = await res.json();
+    wxCache[cityKey] = data;
+    renderWeather(cityKey, data);
+    // Update hero temp if Rome and on today tab
+    if (cityKey === 'rome') {
+      const heroTemp = document.getElementById('hero-temp');
+      if (heroTemp && data.current_weather) {
+        heroTemp.textContent = Math.round(data.current_weather.temperature) + '°F';
+      }
+    }
+  } catch(e) {
+    document.getElementById('wx-content').innerHTML =
+      '<div class="wx-error">⚠️ Could not load weather. Check your connection and try again.</div>';
+  }
+}
+
+function cToF(c) { return Math.round(c); } // already Fahrenheit from API
+
+function renderWeather(cityKey, data) {
+  const city = WX_CITIES[cityKey];
+  const cur = data.current_weather;
+  const daily = data.daily;
+  const today = new Date();
+
+  // Current conditions
+  const curCode = cur ? cur.weathercode : daily.weathercode[0];
+  const curTemp = cur ? Math.round(cur.temperature) : Math.round(daily.temperature_2m_max[0]);
+  const curIcon = WX_ICONS[curCode] || '⛅';
+  const curDesc = WX_DESC[curCode] || 'Variable';
+  const curWind = cur ? Math.round(cur.windspeed) : 0;
+
+  // 7-day grid
+  let daysHtml = '';
+  for (let i = 0; i < 7; i++) {
+    const dt = new Date(daily.time[i]);
+    const dayName = i === 0 ? 'Today' : DAY_NAMES[dt.getDay()];
+    const icon = WX_ICONS[daily.weathercode[i]] || '⛅';
+    const hi = Math.round(daily.temperature_2m_max[i]);
+    const lo = Math.round(daily.temperature_2m_min[i]);
+    daysHtml += '<div class="wx-day-card">' +
+      '<div class="wx-day-name">' + dayName + '</div>' +
+      '<div class="wx-day-icon">' + icon + '</div>' +
+      '<div class="wx-day-hi">' + hi + '°</div>' +
+      '<div class="wx-day-lo">' + lo + '°</div>' +
+      '</div>';
+  }
+
+  // Stats for today
+  const rainChance = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : '--';
+  const wind = daily.windspeed_10m_max ? Math.round(daily.windspeed_10m_max[0]) : '--';
+  const rain = daily.precipitation_sum ? daily.precipitation_sum[0].toFixed(1) : '0.0';
+
+  document.getElementById('wx-content').innerHTML =
+    '<div class="wx-city-name">' + city.emoji + ' ' + city.name + '</div>' +
+    '<div class="wx-current-card">' +
+      '<div>' +
+        '<div class="wx-current-temp">' + curTemp + '°F</div>' +
+        '<div class="wx-current-desc">' + curDesc + '</div>' +
+        '<div class="wx-current-meta">Wind: ' + curWind + ' mph</div>' +
+      '</div>' +
+      '<div class="wx-current-icon">' + curIcon + '</div>' +
+    '</div>' +
+    '<div class="wx-week-grid">' + daysHtml + '</div>' +
+    '<div class="wx-stats-row">' +
+      '<div class="wx-stat"><div class="wx-stat-icon">🌧️</div><div class="wx-stat-val">' + rainChance + '%</div><div class="wx-stat-lbl">Rain chance</div></div>' +
+      '<div class="wx-stat"><div class="wx-stat-icon">💨</div><div class="wx-stat-val">' + wind + ' mph</div><div class="wx-stat-lbl">Max wind</div></div>' +
+      '<div class="wx-stat"><div class="wx-stat-icon">☔</div><div class="wx-stat-val">' + rain + ' in</div><div class="wx-stat-lbl">Precipitation</div></div>' +
+    '</div>';
+}
+
+function switchWxCity(el, cityKey) {
+  document.querySelectorAll('.wx-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  currentWxCity = cityKey;
+  loadWeather(cityKey);
+}
+
+// Auto-load Rome weather on startup (for hero temp)
+window.addEventListener('load', () => { setTimeout(() => loadWeather('rome'), 500); });
+
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = TRIP_START - now;
+  const badge = document.getElementById('countdown-badge');
+  if (diff > 0) {
+    const days = Math.floor(diff / 86400000);
+    badge.textContent = days === 0 ? '🇮🇹 Tomorrow!' : `${days}d to Italy!`;
+  } else if (now <= TRIP_END) {
+    const tripDay = Math.floor((now - TRIP_START) / 86400000) + 1;
+    badge.textContent = `Day ${tripDay} of 16`;
+    badge.style.background = '#2E7D32';
+  } else {
+    badge.textContent = 'Che viaggio! 🇮🇹';
+    badge.style.background = 'var(--stone)';
+  }
+}
+
+function renderToday() {
+  const now = new Date();
+  const diff = TRIP_START - now;
+  let d, label;
+  if (diff > 0) {
+    d = DAYS[0];
+    const days = Math.floor(diff / 86400000);
+    label = `${days} DAYS UNTIL DEPARTURE`;
+  } else {
+    const idx = Math.min(Math.floor((now - TRIP_START) / 86400000), DAYS.length - 1);
+    d = DAYS[idx];
+    label = `TRIP DAY ${d.day}`;
+  }
+  document.getElementById('today-day-label').textContent = label;
+  document.getElementById('today-date-display').textContent = d.date + ', 2026';
+  document.getElementById('today-city-display').textContent = `📍 ${d.city}, Italy`;
+  document.getElementById('today-hero').setAttribute('data-city', d.cityCode);
+  document.getElementById('today-content').innerHTML = buildDayHTML(d);
+}
+
+// ── SECTIONS ──
+function showSection(name, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('section-' + name).classList.add('active');
+  if (btn) btn.classList.add('active');
+  window.scrollTo(0, 0);
+  if (name === 'weather') loadWeather(currentWxCity);
+}
+
+// ── ITINERARY ──
+function buildDaySelector() {
+  const sel = document.getElementById('day-selector');
+  DAYS.forEach((d, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'day-btn' + (i === 0 ? ' active-day' : '');
+    btn.innerHTML = `<div class="day-num">${d.day}</div><div class="day-label">${d.city.substring(0,3).toUpperCase()}</div>`;
+    btn.onclick = () => {
+      document.querySelectorAll('.day-btn').forEach((b,j) => b.classList.toggle('active-day', j===i));
+      renderDay(i);
+    };
+    sel.appendChild(btn);
+  });
+}
+
+function buildDayHTML(d) {
+  const dotColors = { sky:'sky', gold:'gold', olive:'olive', '':'' };
+  return `
+    <div style="background:linear-gradient(135deg,var(--terracotta),#8B2A10);border-radius:13px;padding:14px;margin-bottom:12px;color:white;">
+      <div style="font-size:11px;opacity:0.7;letter-spacing:2px;text-transform:uppercase;">Day ${d.day} · ${d.date}</div>
+      <div style="font-family:'Playfair Display',serif;font-size:22px;margin-top:3px;">${d.city}</div>
+      <div style="font-size:12px;opacity:0.8;margin-top:2px;">${d.label}</div>
+    </div>
+    <div class="card">
+      <div class="timeline">
+        ${d.events.map(e=>`
+          <div class="timeline-item">
+            <div class="timeline-time">${e.time}</div>
+            <div class="timeline-dot ${e.dot||''}"></div>
+            <div class="timeline-body">
+              <div class="timeline-title">${e.title}</div>
+              <div class="timeline-desc">${e.desc}</div>
+              <span class="timeline-tag ${e.tagClass||''}">${e.tag}</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+}
+
+function renderDay(i) {
+  document.getElementById('itinerary-content').innerHTML = buildDayHTML(DAYS[i]);
+}
+
+// ── MAP ──
+function switchMapCity(el, city) {
+  document.querySelectorAll('#map-city-scroll .city-pill').forEach(p => p.classList.remove('active-city'));
+  el.classList.add('active-city');
+  const c = MAP_CITIES[city];
+  document.getElementById('map-iframe').src = `https://maps.google.com/maps?q=${c.q}&output=embed&z=14`;
+  document.getElementById('open-in-maps').href = c.url;
+}
+function openMapAddr(addr) {
+  window.open('https://maps.google.com/?q=' + encodeURIComponent(addr), '_blank');
+}
+
+// ── RESTAURANTS ──
+function switchRestCity(el, groupId) {
+  document.querySelectorAll('.rest-group').forEach(g => g.style.display = 'none');
+  document.querySelectorAll('.city-pill').forEach(p => p.classList.remove('active-city'));
+  document.getElementById(groupId).style.display = 'block';
+  el.classList.add('active-city');
+}
+
+// ── CURRENCY ──
+let exchangeRate = 1.09;
+async function fetchExchangeRate() {
+  try {
+    const res = await fetch('https://api.frankfurter.app/latest?from=EUR&to=USD');
+    const data = await res.json();
+    if (data.rates && data.rates.USD) {
+      exchangeRate = data.rates.USD;
+      document.getElementById('rate-display').textContent = exchangeRate.toFixed(4);
+    }
+  } catch(e) {}
+}
+function calcEurToUsd() {
+  const v = parseFloat(document.getElementById('eur-input').value) || 0;
+  document.getElementById('usd-from-eur').value = (v * exchangeRate).toFixed(2);
+}
+function calcUsdToEur() {
+  const v = parseFloat(document.getElementById('usd-input').value) || 0;
+  document.getElementById('eur-from-usd').value = (v / exchangeRate).toFixed(2);
+}
+
+// ── PHRASES ──
+function speak(text) {
+  if (!window.speechSynthesis) return;
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'it-IT'; u.rate = 0.85;
+  speechSynthesis.speak(u);
+}
+
+// ── PACKING ──
+function togglePack(el) {
+  el.classList.toggle('checked');
+  const items = [...document.querySelectorAll('.pack-item')].map(e => e.classList.contains('checked'));
+  localStorage.setItem('pack', JSON.stringify(items));
+}
+function loadPacking() {
+  const saved = JSON.parse(localStorage.getItem('pack') || '[]');
+  document.querySelectorAll('.pack-item').forEach((el,i) => { if (saved[i]) el.classList.add('checked'); });
+}
+
+// ── NOTES ──
+function loadNotes() {
+  const saved = localStorage.getItem('tripnotes');
+  if (saved) document.getElementById('trip-notes').value = saved;
+  document.getElementById('trip-notes').addEventListener('input', e => localStorage.setItem('tripnotes', e.target.value));
+}
+
+document.addEventListener('DOMContentLoaded', loadPacking);
+</script>
+
+</body>
+</html>
