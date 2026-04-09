@@ -35,7 +35,7 @@
 header { background: var(–dark); padding: 14px 16px 10px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; }
 .header-title { font-family: ‘Playfair Display’, serif; color: var(–cream); font-size: 19px; line-height: 1.2; }
 .header-title span { color: var(–gold); }
-.countdown-badge { background: var(–terracotta); color: white; font-size: 11px; font-weight: 500; padding: 4px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
+.countdown-badge { background: var(–gold); color: var(–dark); font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-left: 8px; box-shadow: 0 2px 8px rgba(212,168,67,0.5); letter-spacing: 0.3px; }
 
 /* NAV */
 nav { background: var(–dark); display: flex; overflow-x: auto; border-top: 1px solid #2A2010; scrollbar-width: none; }
@@ -51,6 +51,13 @@ nav::-webkit-scrollbar { display: none; }
 .today-hero { background: linear-gradient(135deg, var(–terracotta) 0%, #8B2A10 100%); padding: 24px 20px; position: relative; overflow: hidden; }
 .today-hero::before { content: attr(data-city); position: absolute; right: -10px; top: -10px; font-family: ‘Playfair Display’, serif; font-size: 80px; color: rgba(255,255,255,0.06); font-style: italic; pointer-events: none; }
 .today-day { color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.countdown-hero { background: linear-gradient(135deg, #1A1209 0%, #2a1f10 100%); border-radius: 16px; padding: 24px 20px; margin-bottom: 14px; text-align: center; border: 1px solid rgba(212,168,67,0.3); }
+.countdown-hero-num { font-family: ‘Playfair Display’, serif; font-size: 80px; color: var(–gold); line-height: 1; font-weight: 400; }
+.countdown-hero-label { font-size: 13px; color: rgba(255,255,255,0.6); letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; }
+.countdown-hero-date { font-size: 14px; color: var(–cream); margin-top: 10px; font-weight: 500; }
+.notif-btn { background: var(–gold); color: var(–dark); border: none; border-radius: 10px; padding: 10px 20px; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 14px; display: inline-flex; align-items: center; gap: 7px; }
+.notif-btn.enabled { background: var(–olive); color: white; }
+.notif-status { font-size: 11px; color: var(–stone); margin-top: 8px; }
 .today-date { font-family: ‘Playfair Display’, serif; color: white; font-size: 28px; margin-top: 4px; }
 .today-city { color: var(–gold); font-size: 13px; font-weight: 500; margin-top: 3px; }
 .today-weather { position: absolute; top: 24px; right: 20px; text-align: right; }
@@ -105,7 +112,7 @@ nav::-webkit-scrollbar { display: none; }
 .rest-name { font-weight: 600; font-size: 14px; }
 .rest-meta { font-size: 11px; color: var(–stone); margin-top: 2px; }
 .rest-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
-.rest-tag { background: white; color: var(–dark); font-size: 10px; padding: 2px 7px; border-radius: 10px; }
+.rest-tag { background: var(–light-stone); color: var(–dark); font-size: 10px; padding: 2px 7px; border-radius: 10px; border: 1px solid rgba(26,18,9,0.08); }
 .rest-price { font-weight: 600; color: var(–terracotta); }
 .stars { color: var(–gold); font-size: 11px; }
 
@@ -206,7 +213,7 @@ nav::-webkit-scrollbar { display: none; }
 .pin-info { flex: 1; }
 .pin-name { font-weight: 500; font-size: 13px; }
 .pin-address { font-size: 11px; color: var(–stone); margin-top: 1px; }
-.pin-action { background: var(–light-stone); border: none; border-radius: 7px; padding: 5px 10px; font-size: 11px; color: var(–dark); cursor: pointer; font-family: ‘DM Sans’, sans-serif; }
+.pin-action { background: var(–dark); border: none; border-radius: 7px; padding: 5px 10px; font-size: 11px; color: var(–cream); cursor: pointer; font-family: ‘DM Sans’, sans-serif; font-weight: 500; }
 
 /* SPECIAL BOXES */
 .info-box { border-radius: 13px; padding: 14px; margin-bottom: 12px; display: flex; gap: 11px; align-items: flex-start; }
@@ -245,8 +252,9 @@ nav::-webkit-scrollbar { display: none; }
 .wx-week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 12px; }
 .wx-day-card { background: white; border-radius: 11px; padding: 10px 4px; text-align: center; box-shadow: 0 2px 8px rgba(26,18,9,0.07); }
 .wx-day-name { font-size: 10px; color: var(–stone); font-weight: 600; letter-spacing: 0.3px; }
+.wx-day-date { font-size: 9px; color: var(–stone); opacity: 0.7; margin-top: 1px; }
 .wx-day-icon { font-size: 20px; margin: 5px 0; }
-.wx-day-hi { font-size: 13px; font-weight: 700; color: var(–dark); }
+.wx-day-hi { font-size: 13px; font-weight: 700; color: var(–terracotta); }
 .wx-day-lo { font-size: 11px; color: var(–stone); margin-top: 1px; }
 .wx-stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
 .wx-stat { background: white; border-radius: 11px; padding: 12px 10px; text-align: center; box-shadow: 0 2px 8px rgba(26,18,9,0.07); }
@@ -434,6 +442,7 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
       <div class="rest-item"><div class="rest-emoji">🥪</div><div class="rest-info"><div class="rest-name">All'Antico Vinaio</div><div class="rest-meta">Takeaway sandwiches · <a href='https://maps.google.com/?q=All+Antico+Vinaio+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Sandwiches</span><span class="rest-tag rest-price">€</span></div></div></div>
       <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria da Gino al Parlamento</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Trattoria+da+Gino+al+Parlamento+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
       <div class="rest-item"><div class="rest-emoji">🍷</div><div class="rest-info"><div class="rest-name">Pietro Valentini</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Pietro+Valentini+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
+<div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Armando al Pantheon</div><div class="rest-meta">Salita de' Crescenzi · Steps from your Airbnb · Reserve ahead · <a href='https://maps.google.com/?q=Armando+al+Pantheon+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Roman classics</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Forno Campo de Fiori</div><div class="rest-meta">Campo de' Fiori · Amazing pizza bianca · Open mornings · <a href='https://maps.google.com/?q=Forno+Campo+de+Fiori+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Pizza bianca</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Ristorante Il Sorpasso</div><div class="rest-meta">Via Properzio · Trastevere adjacent · Creative Roman dishes · <a href='https://maps.google.com/?q=Il+Sorpasso+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Checchino dal 1887</div><div class="rest-meta">Via di Monte Testaccio · Testaccio · Roman since 1887 · <a href='https://maps.google.com/?q=Checchino+dal+1887+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Classic Roman</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria del Teatro</div><div class="rest-meta">Via dei Coronari · Artisanal flavors near Navona · <a href='https://maps.google.com/?q=Gelateria+del+Teatro+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div>
       <div class="rest-item" style="border: 2px solid rgba(212,168,67,0.4);"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Il Vero Alfredo ⭐ BOOKED</div><div class="rest-meta">Jun 21 · 7:30pm · Ref: BV4ML76Q · <a href='https://maps.google.com/?q=Il+Vero+Alfredo+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag booked" style="background:rgba(74,92,47,0.12);color:var(--olive);">✓ Confirmed</span><span class="rest-tag rest-price">€€€</span></div></div></div>
     </div>
     <div style="padding: 0 14px 12px;"><div class="info-box olive"><div class="info-box-icon">📱</div><div><div class="info-box-title">Too Good To Go App</div><div class="info-box-text">Grab discounted food bags at the end of each day from local restaurants. Great for a cheap late snack!</div></div></div></div>
@@ -443,6 +452,7 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
     <div class="rest-grid">
       <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria Sergio Gozzi</div><div class="rest-meta">Piazza San Lorenzo · Cash only · <a href='https://maps.google.com/?q=Trattoria+Sergio+Gozzi+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local institution</span><span class="rest-tag rest-price">€€</span></div></div></div>
       <div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Mercato Centrale</div><div class="rest-meta">Via dell'Ariento · <a href='https://maps.google.com/?q=Mercato+Centrale+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Food hall</span><span class="rest-tag rest-price">€</span></div></div></div>
+<div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Buca Mario</div><div class="rest-meta">Piazza degli Ottaviani · Florence's oldest restaurant · Bistecca · <a href='https://maps.google.com/?q=Buca+Mario+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Historic</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Osteria dell'Enoteca</div><div class="rest-meta">Via Romana · Oltrarno · Refined Tuscan cuisine · <a href='https://maps.google.com/?q=Osteria+dell+Enoteca+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Tuscan</span><span class="rest-tag rest-price">€€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria dei Neri</div><div class="rest-meta">Via dei Neri · Santa Croce · Best gelato in Florence · <a href='https://maps.google.com/?q=Gelateria+dei+Neri+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🥪</div><div class="rest-info"><div class="rest-name">Semel</div><div class="rest-meta">Piazza Lorenzo Ghiberti · Stuffed focaccia sandwiches · <a href='https://maps.google.com/?q=Semel+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sandwiches</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Gusta Pizza</div><div class="rest-meta">Via Maggio · Neapolitan style · Locals favorite · <a href='https://maps.google.com/?q=Gusta+Pizza+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€</span></div></div></div>
     </div>
     <div style="padding: 0 14px 12px;"><div class="info-box sky"><div class="info-box-icon">👜</div><div><div class="info-box-title info-box-title sky">Don't miss: Dimitri's leather shop</div><div class="info-box-text">Made in Tuscany Firenze · Via degli Alfani 129r · Bring cash for a discount! Ex-Gucci craftsman, seen on YouTube. Custom belts cut to size.</div></div></div></div>
   </div>
@@ -451,6 +461,7 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
     <div class="rest-grid">
       <div class="rest-item"><div class="rest-emoji">🧀</div><div class="rest-info"><div class="rest-name">Osteria Miriam</div><div class="rest-meta">Via del Conservatorio · <a href='https://maps.google.com/?q=Osteria+Miriam+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local specialties</span><span class="rest-tag rest-price">€€</span></div></div></div>
       <div class="rest-item"><div class="rest-emoji">🍖</div><div class="rest-info"><div class="rest-name">Trattoria Corrieri</div><div class="rest-meta">Via Conservatorio · <a href='https://maps.google.com/?q=Trattoria+Corrieri+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div>
+<div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria dei Corrieri</div><div class="rest-meta">Via Conservatorio 1 · Classic Parma pastas · Very local · <a href='https://maps.google.com/?q=Trattoria+dei+Corrieri+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🧀</div><div class="rest-info"><div class="rest-name">Salumeria Garibaldi</div><div class="rest-meta">Str. Giuseppe Garibaldi · Best charcuterie counter in Parma · <a href='https://maps.google.com/?q=Salumeria+Garibaldi+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Deli/Takeaway</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍷</div><div class="rest-info"><div class="rest-name">Ristorante Cocchi</div><div class="rest-meta">Via Gramsci 16 · Near station · Parma institution since 1925 · <a href='https://maps.google.com/?q=Ristorante+Cocchi+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">La Greppia</div><div class="rest-meta">Via Garibaldi 39 · Beloved local spot · Great lunch · <a href='https://maps.google.com/?q=La+Greppia+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Tuscan-style</span><span class="rest-tag rest-price">€€</span></div></div></div>
     </div>
     <div style="padding: 0 14px 12px;"><div class="info-box gold"><div class="info-box-icon">🧀</div><div><div class="info-box-title">Parma specialties to order</div><div class="info-box-text">Prosciutto di Parma, Parmigiano-Reggiano, Tortellini in brodo, Culatello. These are the best in the world here -- order them everywhere!</div></div></div></div>
   </div>
@@ -459,7 +470,15 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
     <div class="rest-grid">
       <div class="rest-item"><div class="rest-emoji">🐟</div><div class="rest-info"><div class="rest-name">Ristorante Grifone</div><div class="rest-meta">Sirmione · On the water · <a href='https://maps.google.com/?q=Ristorante+Grifone+Sirmione+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Seafood</span><span class="rest-tag rest-price">€€€</span></div></div></div>
       <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Pizzeria Lugana</div><div class="rest-meta">Sirmione · <a href='https://maps.google.com/?q=Pizzeria+Lugana+Sirmione+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza & pasta</span><span class="rest-tag rest-price">€€</span></div></div></div>
-    </div>
+
+```
+  <div class="rest-item"><div class="rest-emoji">🐟</div><div class="rest-info"><div class="rest-name">Osteria al Bacio</div><div class="rest-meta">Torri del Benaco village · Your town! Fresh lake trout · <a href='https://maps.google.com/?q=Osteria+al+Bacio+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Lake fish</span><span class="rest-tag rest-price">€€</span></div></div></div>
+  <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Ristorante Alla Campagnola</div><div class="rest-meta">Torri del Benaco · Garden seating · Homemade pasta · <a href='https://maps.google.com/?q=Ristorante+Alla+Campagnola+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Lakeside</span><span class="rest-tag rest-price">€€</span></div></div></div>
+  <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Pizzeria Benacus</div><div class="rest-meta">Torri del Benaco · Waterfront · Great wood-fired pizza · <a href='https://maps.google.com/?q=Pizzeria+Benacus+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€</span></div></div></div>
+  <div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria del Benaco</div><div class="rest-meta">Torri del Benaco village · Try lake lemon flavor · <a href='https://maps.google.com/?q=Gelateria+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div>
+</div>
+```
+
   </div>
 </div>
 
@@ -625,6 +644,14 @@ const TRIP_START = new Date('2026-06-19');
 const TRIP_END   = new Date('2026-07-04');
 
 const DAYS = [
+  { day:0, date:'Jun 18', city:'Charlottesville → Chicago → Munich', label:'Departure Day 🇺🇸', cityCode:'ROME', events:[
+    {time:'All day', title:'🧳 Final packing & prep', desc:'Check passports, print confirmations, charge all devices, download offline Google Maps for all cities.', dot:'gold', tag:'Prep'},
+    {time:'2:00 PM', title:'🚗 Drive to CHO Airport', desc:'Charlottesville Albemarle Airport · Allow extra time -- small airport, but confirm parking in advance.', dot:'olive', tag:'Depart'},
+    {time:'3:00 PM', title:'✈️ Flight 1: CHO → IAD', desc:'UA4328 operated by CommutAir/United Express · 45 min flight · Arrives Washington Dulles 3:45pm', dot:'sky', tag:'UA4328', tagClass:'flight'},
+    {time:'3:45 PM', title:'🛬 Arrive Washington Dulles (IAD)', desc:'Layover ~6.5 hours · Time to eat, relax, charge everything. United Club or explore terminals.', dot:'', tag:'Layover'},
+    {time:'10:20 PM', title:'✈️ Flight 2: IAD → Munich (MUC)', desc:'UA8784 operated by Lufthansa · Check in at LUFTHANSA counter · Overnight transatlantic flight · Arrives Munich 12:30pm next day', dot:'sky', tag:'UA8784', tagClass:'flight'},
+    {time:'Night', title:'😴 Try to sleep on the plane', desc:'Munich arrives at noon -- rest helps you skip jet lag. Neck pillow, eye mask, set watch to Rome time now.', dot:'gold', tag:'Tip'},
+  ]},
   { day:1, date:'Jun 19', city:'Rome', label:'Arrival Day', cityCode:'ROME', events:[
     {time:'3:05 PM', title:'✈️ Land at FCO -- Rome Fiumicino', desc:'Final leg: Munich → Rome (UA9212 / Lufthansa). Collect bags.', dot:'sky', tag:'Flight', tagClass:'flight'},
     {time:'~4:30 PM', title:'🚕 Taxi to Airbnb next to Pantheon', desc:'Use Uber, Free Now app, or official taxi (fixed rate ~€48 from airport). Reservation HMBAJ4K352', dot:'', tag:'Book taxi'},
@@ -833,11 +860,14 @@ function renderWeather(cityKey, data) {
   for (let i = 0; i < 7; i++) {
     const dt = new Date(daily.time[i]);
     const dayName = i === 0 ? 'Today' : DAY_NAMES[dt.getDay()];
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const dateLabel = (dt.getMonth()+1) + '/' + dt.getDate();
     const icon = WX_ICONS[daily.weathercode[i]] || '⛅';
     const hi = Math.round(daily.temperature_2m_max[i]);
     const lo = Math.round(daily.temperature_2m_min[i]);
     daysHtml += '<div class="wx-day-card">' +
       '<div class="wx-day-name">' + dayName + '</div>' +
+      '<div class="wx-day-date">' + dateLabel + '</div>' +
       '<div class="wx-day-icon">' + icon + '</div>' +
       '<div class="wx-day-hi">' + hi + '°</div>' +
       '<div class="wx-day-lo">' + lo + '°</div>' +
@@ -884,35 +914,127 @@ function updateCountdown() {
   const badge = document.getElementById('countdown-badge');
   if (diff > 0) {
     const days = Math.floor(diff / 86400000);
-    badge.textContent = days === 0 ? '🇮🇹 Tomorrow!' : `${days}d to Italy!`;
+    if (days === 0) {
+      badge.textContent = '🇮🇹 Tomorrow!';
+    } else if (days === 1) {
+      badge.textContent = '✈️ Fly Tomorrow!';
+    } else {
+      badge.textContent = days + ' Days to Italia!';
+    }
+    badge.style.background = 'var(--gold)';
+    badge.style.color = 'var(--dark)';
   } else if (now <= TRIP_END) {
     const tripDay = Math.floor((now - TRIP_START) / 86400000) + 1;
-    badge.textContent = `Day ${tripDay} of 16`;
+    badge.textContent = 'Day ' + tripDay + ' of 16 🇮🇹';
     badge.style.background = '#2E7D32';
+    badge.style.color = 'white';
   } else {
     badge.textContent = 'Che viaggio! 🇮🇹';
     badge.style.background = 'var(--stone)';
+    badge.style.color = 'white';
   }
 }
 
+// ── PUSH NOTIFICATIONS ──
+const NOTIF_MILESTONES = [60, 50, 40, 30, 20, 15, 10, 7, 3];
+
+async function requestNotifications() {
+  if (!('Notification' in window)) {
+    document.getElementById('notif-status').textContent = '⚠️ Notifications not supported on this browser. Try Safari on iPhone after adding to Home Screen.';
+    return;
+  }
+  const btn = document.getElementById('notif-btn');
+  const status = document.getElementById('notif-status');
+  const permission = await Notification.requestPermission();
+  if (permission === 'granted') {
+    scheduleCountdownNotifications();
+    btn.textContent = '✅ Notifications On!';
+    btn.classList.add('enabled');
+    localStorage.setItem('notificationsEnabled', 'true');
+    status.textContent = 'You will be notified at: 60, 50, 40, 30, 20, 15, 10, 7 & 3 days out!';
+  } else {
+    status.textContent = '❌ Permission denied. Enable notifications for this site in Settings → Safari.';
+  }
+}
+
+function scheduleCountdownNotifications() {
+  const departure = new Date('2026-06-18T10:00:00');
+  const now = new Date();
+  NOTIF_MILESTONES.forEach(days => {
+    const notifDate = new Date(departure.getTime() - days * 86400000);
+    const delay = notifDate - now;
+    if (delay > 0) {
+      setTimeout(() => {
+        new Notification('🇮🇹 Italia in ' + days + ' Days!', {
+          body: days <= 7
+            ? 'Almost time! Start final packing for the Chiesa family adventure!'
+            : 'The Chiesa Family Italian Holiday is ' + days + ' days away. Andiamo!',
+          icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🇮🇹</text></svg>'
+        });
+      }, delay);
+    }
+  });
+}
+
+// Check notification state on load
+window.addEventListener('load', () => {
+  if (localStorage.getItem('notificationsEnabled') === 'true' && Notification.permission === 'granted') {
+    const btn = document.getElementById('notif-btn');
+    const status = document.getElementById('notif-status');
+    if (btn) {
+      btn.textContent = '✅ Notifications On!';
+      btn.classList.add('enabled');
+    }
+    if (status) status.textContent = 'You will be notified at: 60, 50, 40, 30, 20, 15, 10, 7 & 3 days out!';
+    scheduleCountdownNotifications();
+  }
+});
+
 function renderToday() {
   const now = new Date();
-  const diff = TRIP_START - now;
+  const tripStart = TRIP_START;
+  const departure = new Date('2026-06-18'); // Day 0
+  const diff = tripStart - now;
+  const deptDiff = departure - now;
   let d, label;
-  if (diff > 0) {
-    d = DAYS[0];
+  if (diff > 0 && deptDiff <= 0) {
+    // It's departure day (Jun 18)
+    d = DAYS[0]; // Day 0
+    label = 'DEPARTURE DAY ✈️';
+    document.getElementById('today-city-display').textContent = '📍 Charlottesville → Italia';
+  } else if (diff > 0) {
+    d = DAYS[1]; // Show day 1 as preview
     const days = Math.floor(diff / 86400000);
     label = `${days} DAYS UNTIL DEPARTURE`;
+    document.getElementById('today-city-display').textContent = '📍 Charlottesville, VA';
+    // Show countdown hero
+    const contentEl = document.getElementById('today-content');
+    contentEl.innerHTML = buildCountdownHero(days);
+    document.getElementById('today-day-label').textContent = label;
+    document.getElementById('today-date-display').textContent = 'Jun 18, 2026 -- Departure';
+    document.getElementById('today-hero').setAttribute('data-city', 'ROME');
+    return;
   } else {
-    const idx = Math.min(Math.floor((now - TRIP_START) / 86400000), DAYS.length - 1);
+    const idx = Math.min(Math.floor((now - tripStart) / 86400000) + 1, DAYS.length - 1);
     d = DAYS[idx];
     label = `TRIP DAY ${d.day}`;
+    document.getElementById('today-city-display').textContent = `📍 ${d.city}, Italy`;
   }
   document.getElementById('today-day-label').textContent = label;
   document.getElementById('today-date-display').textContent = d.date + ', 2026';
-  document.getElementById('today-city-display').textContent = `📍 ${d.city}, Italy`;
   document.getElementById('today-hero').setAttribute('data-city', d.cityCode);
   document.getElementById('today-content').innerHTML = buildDayHTML(d);
+}
+
+function buildCountdownHero(days) {
+  return '<div class="countdown-hero">' +
+    '<div class="countdown-hero-num">' + days + '</div>' +
+    '<div class="countdown-hero-label">Days Until Italia</div>' +
+    '<div class="countdown-hero-date">✈️ Departing June 18, 2026</div>' +
+    '<button class="notif-btn" id="notif-btn" onclick="requestNotifications()">🔔 Notify Me at Milestones</button>' +
+    '<div class="notif-status" id="notif-status">Get reminders at 60, 50, 40, 30, 20, 15, 10, 7 &amp; 3 days out</div>' +
+    '</div>' +
+    buildDayHTML(DAYS[1]);
 }
 
 // ── SECTIONS ──
