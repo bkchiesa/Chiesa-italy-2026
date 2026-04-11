@@ -57,7 +57,7 @@ nav::-webkit-scrollbar { display: none; }
 /* TODAY HERO */
 .today-hero { background: linear-gradient(135deg, var(–terracotta) 0%, #8B2A10 100%); padding: 24px 20px; position: relative; overflow: hidden; }
 .today-hero::before { content: attr(data-city); position: absolute; right: -10px; top: -10px; font-family: ‘Playfair Display’, serif; font-size: 80px; color: rgba(255,255,255,0.06); font-style: italic; pointer-events: none; }
-.today-day { color: rgba(255,255,255,0.7); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; }
+.today-day { color: rgba(255,255,255,0.95); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-shadow: 0 1px 6px rgba(0,0,0,0.95), 0 2px 12px rgba(0,0,0,0.8); }
 .countdown-hero {
 background-color: #1a1209;
 background-image: url(‘https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp’);
@@ -87,15 +87,13 @@ pointer-events: none;
 .countdown-hero-num { font-family: ‘Playfair Display’, serif; font-size: 80px; color: var(–gold); line-height: 1; font-weight: 700; text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 4px 24px rgba(0,0,0,0.7), 0 0 40px rgba(212,168,67,0.4); }
 .countdown-hero-label { font-size: 13px; color: white; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; margin-top: 6px; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1); }
 .countdown-hero-date { font-size: 14px; color: white; margin-top: 10px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1); }
-.notif-btn { background: var(–gold); color: var(–dark); border: none; border-radius: 10px; padding: 10px 20px; font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 14px; display: inline-flex; align-items: center; gap: 7px; }
-.notif-btn.enabled { background: var(–olive); color: white; }
-.notif-status { font-size: 11px; color: rgba(255,255,255,0.85); margin-top: 8px; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.95); }
-.today-date { font-family: ‘Playfair Display’, serif; color: white; font-size: 28px; margin-top: 4px; }
-.today-city { color: var(–gold); font-size: 13px; font-weight: 500; margin-top: 3px; }
+.notif-btn { display: none; }
+.notif-status { display: none; }
+.today-date { font-family: ‘Playfair Display’, serif; color: white; font-size: 28px; margin-top: 4px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 4px 16px rgba(0,0,0,0.8); }
+.today-city { color: var(–gold); font-size: 13px; font-weight: 700; margin-top: 3px; text-shadow: 0 1px 6px rgba(0,0,0,0.95), 0 2px 10px rgba(0,0,0,0.9); }
 .today-weather { position: absolute; top: 24px; right: 20px; text-align: right; }
-.weather-temp { color: white; font-size: 26px; font-weight: 300; }
-.weather-desc { color: rgba(255,255,255,0.6); font-size: 12px; }
-
+.weather-temp { color: white; font-size: 26px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 4px 16px rgba(0,0,0,0.8); }
+.weather-desc { color: white; font-size: 12px; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.95); }
 
 /* CARDS */
 .section-content { padding: 14px; }
@@ -160,7 +158,7 @@ pointer-events: none;
 
 /* UTILITIES */
 .util-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-.util-card { background: var(–dark); border-radius: 14px; padding: 18px 14px; text-align: center; cursor: pointer; text-decoration: none; display: block; transition: transform 0.15s; }
+.util-card { background: rgba(26,18,9,0.92); border-radius: 14px; padding: 18px 14px; text-align: center; cursor: pointer; text-decoration: none; display: block; transition: transform 0.15s; border: 1px solid rgba(212,168,67,0.3); box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
 .util-card:active { transform: scale(0.97); }
 .util-icon { font-size: 30px; margin-bottom: 7px; }
 .util-name { color: var(–cream); font-size: 12px; font-weight: 600; }
@@ -281,7 +279,7 @@ pointer-events: none;
 .wx-current-card { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
 .wx-city-name { font-family: ‘Playfair Display’, serif; font-size: 18px; margin-bottom: 12px; color: var(–dark); }
 .wx-current-card { background: linear-gradient(135deg, var(–sky) 0%, #1a5fa8 100%); border-radius: 16px; padding: 20px; margin-bottom: 12px; color: white; display: flex; justify-content: space-between; align-items: center; }
-.wx-current-temp { font-size: 52px; font-weight: 200; line-height: 1; }
+.wx-current-temp { font-size: 52px; font-weight: 700; line-height: 1; text-shadow: 0 2px 8px rgba(0,0,0,0.4); }
 .wx-current-desc { font-size: 14px; opacity: 0.9; margin-top: 4px; }
 .wx-current-meta { font-size: 12px; opacity: 0.7; margin-top: 8px; }
 .wx-current-icon { font-size: 56px; }
@@ -718,7 +716,7 @@ const DAYS = [
     {time:'Evening', title:'🌙 Last night in Rome', desc:'Evening passeggiata -- the Italian tradition of the evening stroll', dot:'gold', tag:'Evening'},
   ]},
   { day:5, date:'Jun 23', city:'Florence', label:'Rome → Florence', cityCode:'FLORENCE', events:[
-    {time:'Morning', title:'🚄 Train Rome → Florence', desc:'Frecciarossa high-speed train from Roma Termini → Firenze Santa Maria Novella. ~1.5 hrs. Book on Trenitalia or Italo app -- buy in advance!', dot:'sky', tag:'Train'},
+    {time:'11:55 AM', title:'🚄 Italo Train -- Roma → Firenze SMN', desc:'Train 8914 · Coach 2 · Seats 14–20 · Arrives 13:31 · Ticket code: EE8MQZ · Prima Business class · Roma Termini → Firenze Santa Maria Novella', dot:'sky', tag:'✓ Booked', tagClass:'booked'},
     {time:'Afternoon', title:'🏨 Check in -- Solo Experience Hotel', desc:'2 rooms with breakfast included · soloexperiencehotel.com', dot:'', tag:'Hotel', tagClass:'booked'},
     {time:'2:00 PM', title:'👜 Made in Tuscany Firenze -- Dimitri', desc:'Via degli Alfani 129r · Ex-Gucci craftsman · Cash for discount! Custom belts. Open 9am–7:30pm. <a href="https://maps.google.com/?q=Via+degli+Alfani+129r,+Florence,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Must visit'},
     {time:'4:00 PM', title:'🌸 Ponte Vecchio & Oltrarno stroll', desc:'Famous jewelers bridge, then explore the artisan neighborhood south of the river. <a href="https://maps.google.com/?q=Ponte+Vecchio,+Florence,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
@@ -727,8 +725,9 @@ const DAYS = [
   { day:6, date:'Jun 24', city:'Florence → Parma', label:'Art + Split Day', cityCode:'FLORENCE', events:[
     {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance -- Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--sky)'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--sky)'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
     {time:'1:00 PM', title:'🍝 Lunch -- Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
-    {time:'Afternoon', title:'👴👵 Nannie & Big Daddy head to Venice', desc:'They split off independently from Florence to Venice', dot:'sky', tag:'Split'},
-    {time:'Late PM', title:'🚄 Train Florence → Parma', desc:'From Firenze Santa Maria Novella. ~1.5 hrs, may require change in Bologna. Book on Trenitalia or Italo app.', dot:'', tag:'Train'},
+    {time:'1:39 PM', title:'🚄 Italo -- Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Ticket code: EE8MQZ -- all aboard same train heading toward Bologna', dot:'sky', tag:'✓ Booked', tagClass:'booked'},
+    {time:'~2:40 PM', title:'🔀 Split at Bologna Centrale', desc:'Nannie & Big Daddy stay on Train 8914 to Venezia (arrives 15:55 · Coach 3 · Seats 37 & 36 · TBHQMV). Brandon + kids swap platforms to regional train to Parma.', dot:'gold', tag:'Split here'},
+    {time:'2:50 PM', title:'🚄 Brandon + kids: Bologna → Parma', desc:'Regionale TTPER 17416 · Bologna Centrale 14:50 → Parma 16:01 · Ticket: 2799971845 · €8.50 · 2nd class regional', dot:'sky', tag:'✓ Booked', tagClass:'booked'},
     {time:'Evening', title:'🏠 Check in -- Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
   ]},
   { day:7, date:'Jun 25', city:'Parma', label:'Parmigiano Bike Tour', cityCode:'PARMA', events:[
@@ -800,7 +799,7 @@ const DAYS = [
 const MAP_CITIES = {
   rome:     { q:'Pantheon,Rome,Italy',               url:'https://maps.google.com/?q=Pantheon,Rome,Italy' },
   florence: { q:'Florence,Italy',                    url:'https://maps.google.com/?q=Florence,Italy' },
-  parma:    { q:'Piazza+Garibaldi,Parma,Italy',      url:'https://maps.google.com/?q=Piazza+Garibaldi,Parma,Italy' },
+  parma:    { q:'Parma,Italy',                        url:'https://maps.google.com/?q=Parma,Italy' },
   garda:    { q:'Torri+del+Benaco,Lake+Garda,Italy', url:'https://maps.google.com/?q=Torri+del+Benaco,Lake+Garda,Italy' },
   venice:   { q:'St+Marks+Basilica,Venice,Italy',      url:'https://maps.google.com/?q=Saint+Marks+Basilica,Venice,Italy' },
 };
@@ -1063,20 +1062,16 @@ function renderToday() {
 }
 
 function buildCountdownHero(days) {
-  // Try to force-load pantheon image, set dark bg as fallback
   const heroImg = new Image();
   heroImg.onload = function() {
     const el = document.querySelector('.countdown-hero');
     if (el) el.style.backgroundImage = "url('" + heroImg.src + "')";
   };
   heroImg.src = 'https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp';
-
   return '<div class="countdown-hero" style="background-color:#1a1209;">' +
     '<div class="countdown-hero-num">' + days + '</div>' +
     '<div class="countdown-hero-label">Days Until Italia</div>' +
     '<div class="countdown-hero-date">✈️ Departing June 18, 2026</div>' +
-    '<button class="notif-btn" id="notif-btn" onclick="requestNotifications()">🔔 Notify Me at Milestones</button>' +
-    '<div class="notif-status" id="notif-status">Get reminders at 60, 50, 40, 30, 20, 15, 10, 7 &amp; 3 days out</div>' +
     '</div>' +
     buildDayHTML(DAYS[1]);
 }
