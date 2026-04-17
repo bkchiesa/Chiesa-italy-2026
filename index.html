@@ -21,11 +21,7 @@
     --stone: #8C7B6B; --light-stone: #EAE0D0;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: url('https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/cobblestone.webp') center center / cover fixed;
-    color: var(--dark); min-height: 100vh; overflow-x: hidden;
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--dark); min-height: 100vh; overflow-x: hidden; }
 
 /* SPLASH */
 #splash { position: fixed; inset: 0; z-index: 9999; background: var(–dark); display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.8s ease; }
@@ -39,16 +35,16 @@
 @keyframes pulse { 0%,100% { transform: scale(1) } 50% { transform: scale(1.08) } }
 
 /* HEADER */
-header { background: rgba(26,18,9,0.97); padding: 14px 16px 10px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(8px); box-shadow: 0 2px 12px rgba(0,0,0,0.4); }
+header { background: var(–dark); padding: 14px 16px 10px; position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
 .header-title { font-family: ‘Playfair Display’, serif; color: var(–cream); font-size: 19px; line-height: 1.2; }
 .header-title span { color: var(–gold); }
 .countdown-badge { background: var(–gold); color: var(–dark); font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-left: 8px; box-shadow: 0 2px 8px rgba(212,168,67,0.5); letter-spacing: 0.3px; }
 
 /* NAV */
-nav { background: rgba(26,18,9,0.96); display: flex; overflow-x: auto; border-top: 1px solid #2A2010; scrollbar-width: none; backdrop-filter: blur(8px); }
+nav { background: var(–dark); display: flex; overflow-x: auto; border-top: 1px solid #2A2010; scrollbar-width: none; }
 nav::-webkit-scrollbar { display: none; }
-.nav-btn { flex: 0 0 auto; padding: 10px 14px; background: none; border: none; color: var(–stone); font-family: ‘DM Sans’, sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; transition: color 0.2s; white-space: nowrap; }
-.nav-btn .icon { font-size: 17px; }
+.nav-btn { flex: 0 0 auto; padding: 12px 16px; background: none; border: none; color: var(–stone); font-family: ‘DM Sans’, sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 0.3px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 4px; transition: color 0.2s; white-space: nowrap; }
+.nav-btn .icon { font-size: 22px; }
 .nav-btn.active { color: var(–gold); }
 .section { display: none; }
 .section.active { display: block; }
@@ -57,7 +53,7 @@ nav::-webkit-scrollbar { display: none; }
 /* TODAY HERO */
 .today-hero { background: linear-gradient(135deg, var(–terracotta) 0%, #8B2A10 100%); padding: 24px 20px; position: relative; overflow: hidden; }
 .today-hero::before { content: attr(data-city); position: absolute; right: -10px; top: -10px; font-family: ‘Playfair Display’, serif; font-size: 80px; color: rgba(255,255,255,0.06); font-style: italic; pointer-events: none; }
-.today-day { color: rgba(255,255,255,0.95); font-size: 12px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-shadow: 0 1px 6px rgba(0,0,0,0.95), 0 2px 12px rgba(0,0,0,0.8); }
+.today-day { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
 .countdown-hero {
 background-color: #1a1209;
 background-image: url(‘https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp’);
@@ -97,39 +93,39 @@ pointer-events: none;
 
 /* CARDS */
 .section-content { padding: 14px; }
-.card { background: rgba(255,252,245,0.97); border-radius: 16px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.25); }
+.card { background: white; border-radius: 16px; margin-bottom: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(26,18,9,0.08); }
 .card-header { padding: 13px 15px 9px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(–light-stone); }
 .card-icon { width: 34px; height: 34px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 17px; flex-shrink: 0; }
 .icon-terracotta { background: rgba(200,80,42,0.12); }
 .icon-gold { background: rgba(212,168,67,0.15); }
 .icon-olive { background: rgba(74,92,47,0.12); }
 .icon-sky { background: rgba(59,126,200,0.12); }
-.card-title { font-weight: 600; font-size: 14px; }
-.card-subtitle { font-size: 11px; color: var(–stone); margin-top: 1px; }
+.card-title { font-weight: 700; font-size: 16px; color: var(–dark); }
+.card-subtitle { font-size: 13px; color: var(–stone); margin-top: 2px; }
 
 /* TIMELINE */
 .timeline { padding: 10px 14px; }
 .timeline-item { display: flex; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(–light-stone); }
 .timeline-item:last-child { border-bottom: none; }
-.timeline-time { font-size: 11px; color: var(–stone); font-weight: 500; min-width: 52px; padding-top: 2px; }
+.timeline-time { font-size: 12px; color: var(–dark); font-weight: 700; min-width: 56px; padding-top: 2px; }
 .timeline-dot { width: 9px; height: 9px; border-radius: 50%; background: var(–terracotta); margin-top: 4px; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(200,80,42,0.15); }
 .timeline-dot.gold { background: var(–gold); box-shadow: 0 0 0 3px rgba(212,168,67,0.2); }
 .timeline-dot.olive { background: var(–olive); box-shadow: 0 0 0 3px rgba(74,92,47,0.2); }
 .timeline-dot.sky { background: var(–sky); box-shadow: 0 0 0 3px rgba(59,126,200,0.2); }
 .timeline-body { flex: 1; }
-.timeline-title { font-weight: 500; font-size: 13px; }
-.timeline-desc { font-size: 12px; color: var(–stone); margin-top: 2px; line-height: 1.5; }
+.timeline-title { font-weight: 700; font-size: 15px; color: var(–dark); }
+.timeline-desc { font-size: 13px; color: #4a4035; margin-top: 3px; line-height: 1.6; }
 .timeline-tag { display: inline-block; background: var(–light-stone); color: var(–stone); font-size: 10px; padding: 2px 7px; border-radius: 10px; margin-top: 4px; font-weight: 500; }
 .timeline-tag.booked { background: rgba(74,92,47,0.12); color: var(–olive); }
-.timeline-tag.flight { background: rgba(59,126,200,0.12); color: var(–sky); }
+.timeline-tag.flight { background: rgba(59,126,200,0.1); color: #1a5fa8; font-weight: 700; }
 .timeline-tag.alert { background: rgba(200,80,42,0.12); color: var(–terracotta); }
 
 /* CITY PILLS */
 .city-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 2px; scrollbar-width: none; }
 .city-scroll::-webkit-scrollbar { display: none; }
-.city-pill { flex: 0 0 auto; padding: 9px 14px; border-radius: 50px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
+.city-pill { flex: 0 0 auto; padding: 10px 18px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: 2px solid transparent; }
 .city-pill.active-city { background: var(–terracotta); color: white; }
-.city-pill:not(.active-city) { background: rgba(255,252,245,0.95); color: var(–dark); border-color: var(–light-stone); box-shadow: 0 2px 6px rgba(0,0,0,0.15); }
+.city-pill:not(.active-city) { background: white; color: var(–dark); border-color: var(–light-stone); }
 
 /* MAP */
 .map-container { width: 100%; height: 300px; border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(26,18,9,0.1); }
@@ -137,11 +133,11 @@ pointer-events: none;
 
 /* RESTAURANTS */
 .rest-grid { padding: 10px 14px; display: flex; flex-direction: column; gap: 9px; }
-.rest-item { background: rgba(240,232,215,0.97); border-radius: 12px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+.rest-item { background: var(–light-stone); border-radius: 12px; padding: 12px; display: flex; gap: 10px; align-items: flex-start; }
 .rest-emoji { font-size: 26px; }
 .rest-info { flex: 1; }
-.rest-name { font-weight: 600; font-size: 14px; }
-.rest-meta { font-size: 11px; color: var(–stone); margin-top: 2px; }
+.rest-name { font-weight: 700; font-size: 16px; color: var(–dark); }
+.rest-meta { font-size: 13px; color: #4a4035; margin-top: 3px; }
 .rest-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
 .rest-tag { background: var(–light-stone); color: var(–dark); font-size: 10px; padding: 2px 7px; border-radius: 10px; border: 1px solid rgba(26,18,9,0.08); }
 .rest-price { font-weight: 600; color: var(–terracotta); }
@@ -150,22 +146,22 @@ pointer-events: none;
 /* ITINERARY DAY SELECTOR */
 .day-selector { display: flex; gap: 5px; overflow-x: auto; padding: 4px 0; scrollbar-width: none; margin-bottom: 12px; }
 .day-selector::-webkit-scrollbar { display: none; }
-.day-btn { flex: 0 0 auto; width: 48px; height: 56px; border-radius: 10px; border: 2px solid var(–light-stone); background: rgba(255,252,245,0.95); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; transition: all 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+.day-btn { flex: 0 0 auto; width: 56px; height: 64px; border-radius: 12px; border: 2px solid var(–light-stone); background: white; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; transition: all 0.2s; box-shadow: 0 2px 6px rgba(26,18,9,0.08); }
 .day-btn.active-day { background: var(–terracotta); border-color: var(–terracotta); }
-.day-btn .day-num { font-size: 17px; font-weight: 700; color: var(–dark); }
-.day-btn .day-label { font-size: 9px; color: var(–stone); letter-spacing: 0.3px; }
+.day-btn .day-num { font-size: 20px; font-weight: 800; color: var(–dark); }
+.day-btn .day-label { font-size: 10px; color: var(–stone); font-weight: 600; letter-spacing: 0.3px; }
 .day-btn.active-day .day-num, .day-btn.active-day .day-label { color: white; }
 
 /* UTILITIES */
 .util-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
 .util-card { background: rgba(26,18,9,0.92); border-radius: 14px; padding: 18px 14px; text-align: center; cursor: pointer; text-decoration: none; display: block; transition: transform 0.15s; border: 1px solid rgba(212,168,67,0.3); box-shadow: 0 4px 16px rgba(0,0,0,0.4); }
 .util-card:active { transform: scale(0.97); }
-.util-icon { font-size: 30px; margin-bottom: 7px; }
-.util-name { color: var(–cream); font-size: 12px; font-weight: 600; }
-.util-desc { color: var(–stone); font-size: 10px; margin-top: 2px; }
+.util-icon { font-size: 36px; margin-bottom: 8px; }
+.util-name { color: var(–cream); font-size: 15px; font-weight: 700; }
+.util-desc { color: rgba(255,255,255,0.7); font-size: 12px; margin-top: 3px; }
 
 /* CURRENCY */
-.calc-card { background: rgba(255,252,245,0.97); border-radius: 16px; padding: 18px; margin-bottom: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.22); }
+.calc-card { background: white; border-radius: 16px; padding: 18px; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(26,18,9,0.08); }
 .calc-title { font-family: ‘Playfair Display’, serif; font-size: 17px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
 .calc-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
 .calc-input-wrap { flex: 1; position: relative; }
@@ -178,7 +174,7 @@ pointer-events: none;
 @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0.3 } }
 
 /* PHRASES */
-.phrase-card { background: rgba(255,252,245,0.97); border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 4px 18px rgba(0,0,0,0.22); }
+.phrase-card { background: white; border-radius: 16px; overflow: hidden; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(26,18,9,0.08); }
 .phrase-header { background: var(–olive); padding: 13px 15px; }
 .phrase-header-title { color: white; font-weight: 600; font-size: 14px; }
 .phrase-header-sub { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 2px; }
@@ -198,7 +194,7 @@ pointer-events: none;
 
 /* FAMILY */
 .family-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin-bottom: 12px; }
-.family-card { background: rgba(255,252,245,0.97); border-radius: 13px; padding: 14px 10px; text-align: center; box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+.family-card { background: white; border-radius: 13px; padding: 14px 10px; text-align: center; box-shadow: 0 2px 8px rgba(26,18,9,0.06); }
 .family-avatar { font-size: 32px; margin-bottom: 5px; }
 .family-name { font-weight: 600; font-size: 12px; }
 .family-status { font-size: 10px; color: var(–stone); margin-top: 2px; }
@@ -210,13 +206,13 @@ pointer-events: none;
 .findmy-btn { background: var(–gold); color: var(–dark); border: none; border-radius: 8px; padding: 7px 12px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: ‘DM Sans’, sans-serif; white-space: nowrap; flex-shrink: 0; }
 
 /* SECTION TITLE */
-.sec-title { font-family: ‘Playfair Display’, serif; font-size: 20px; padding: 18px 14px 4px; display: flex; align-items: baseline; gap: 8px; color: var(–cream); text-shadow: 0 2px 8px rgba(0,0,0,0.8), 0 1px 3px rgba(0,0,0,0.9); }
+.sec-title { font-family: ‘Playfair Display’, serif; font-size: 22px; padding: 18px 14px 6px; display: flex; align-items: baseline; gap: 8px; color: var(–dark); }
 .sec-title-sub { font-size: 12px; color: var(–stone); font-family: ‘DM Sans’, sans-serif; font-weight: 400; }
 
 /* TIPS */
 .tip-scroll { display: flex; gap: 9px; overflow-x: auto; padding: 4px 14px 14px; scrollbar-width: none; }
 .tip-scroll::-webkit-scrollbar { display: none; }
-.tip-card { flex: 0 0 200px; background: rgba(255,252,245,0.97); border-radius: 13px; padding: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
+.tip-card { flex: 0 0 200px; background: white; border-radius: 13px; padding: 14px; box-shadow: 0 2px 8px rgba(26,18,9,0.07); }
 .tip-icon { font-size: 22px; margin-bottom: 7px; }
 .tip-title { font-weight: 600; font-size: 12px; margin-bottom: 4px; }
 .tip-text { font-size: 11px; color: var(–stone); line-height: 1.5; }
@@ -232,7 +228,7 @@ pointer-events: none;
 .pack-item.checked .pack-label { color: var(–stone); text-decoration: line-through; }
 
 /* NOTES */
-.notes-area { background: rgba(255,252,245,0.97); border-radius: 14px; padding: 14px; margin: 0 14px 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.22); }
+.notes-area { background: white; border-radius: 14px; padding: 14px; margin: 0 14px 14px; box-shadow: 0 2px 8px rgba(26,18,9,0.08); }
 .notes-area textarea { width: 100%; min-height: 100px; border: none; outline: none; font-family: ‘DM Sans’, sans-serif; font-size: 13px; color: var(–dark); resize: none; background: transparent; line-height: 1.6; }
 .notes-label { font-size: 10px; color: var(–stone); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 7px; }
 
@@ -244,7 +240,7 @@ pointer-events: none;
 .pin-info { flex: 1; }
 .pin-name { font-weight: 500; font-size: 13px; }
 .pin-address { font-size: 11px; color: var(–stone); margin-top: 1px; }
-.pin-action { background: var(–dark); border: none; border-radius: 7px; padding: 5px 10px; font-size: 11px; color: var(–cream); cursor: pointer; font-family: ‘DM Sans’, sans-serif; font-weight: 500; }
+.pin-action { background: var(–dark); border: none; border-radius: 9px; padding: 8px 14px; font-size: 13px; color: var(–cream); cursor: pointer; font-family: ‘DM Sans’, sans-serif; font-weight: 600; }
 
 /* SPECIAL BOXES */
 .info-box { border-radius: 13px; padding: 14px; margin-bottom: 12px; display: flex; gap: 11px; align-items: flex-start; }
@@ -260,7 +256,7 @@ pointer-events: none;
 
 /* FLIGHT CARD */
 .flight-card { background: white; border-radius: 14px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(26,18,9,0.07); border-left: 4px solid var(–sky); }
-.flight-num { font-size: 11px; color: var(–sky); font-weight: 600; letter-spacing: 1px; }
+.flight-num { font-size: 12px; color: var(–terracotta); font-weight: 700; letter-spacing: 1px; }
 .flight-route { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
 .flight-airport { font-weight: 700; font-size: 18px; }
 .flight-arrow { color: var(–stone); font-size: 14px; flex: 1; text-align: center; }
@@ -268,7 +264,7 @@ pointer-events: none;
 .flight-meta { font-size: 11px; color: var(–stone); margin-top: 4px; }
 
 /* WEATHER TAB */
-.weather-section-title { font-family: ‘Playfair Display’, serif; font-size: 20px; padding: 18px 14px 4px; color: var(–cream); text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+.weather-section-title { font-family: ‘Playfair Display’, serif; font-size: 22px; padding: 18px 14px 6px; color: var(–dark); }
 .weather-city-pill-wrap { display: flex; gap: 8px; overflow-x: auto; padding: 4px 14px 10px; scrollbar-width: none; }
 .weather-city-pill-wrap::-webkit-scrollbar { display: none; }
 .wx-pill { flex: 0 0 auto; padding: 8px 14px; border-radius: 50px; font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s; border: 2px solid var(–light-stone); background: white; color: var(–dark); }
@@ -393,7 +389,7 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
         </div>
         <div class="pin-item">
           <div class="pin-emoji">🌺</div>
-          <div class="pin-info"><div class="pin-name">Florence -- Solo Experience Hotel</div><div class="pin-address">Jun 23–24 · <a href="https://www.soloexperiencehotel.com" target="_blank" style="color:var(--gold)">🏨 Hotel Site</a> · <a href="https://maps.google.com/?q=Solo+Experience+Hotel+Florence+Italy" target="_blank" style="color:var(--sky)">📍 Map</a></div></div>
+          <div class="pin-info"><div class="pin-name">Florence -- Solo Experience Hotel</div><div class="pin-address">Jun 23–24 · <a href="https://www.soloexperiencehotel.com" target="_blank" style="color:var(--gold)">🏨 Hotel Site</a> · <a href="https://maps.google.com/?q=Solo+Experience+Hotel+Florence+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a></div></div>
           <button class="pin-action" onclick="openMapAddr('Solo Experience Hotel Florence Italy')">Map</button>
         </div>
         <div class="pin-item">
@@ -408,7 +404,7 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
         </div>
         <div class="pin-item">
           <div class="pin-emoji">🏨</div>
-          <div class="pin-info"><div class="pin-name">Chicago -- SpringHill Suites O'Hare</div><div class="pin-address">8101 W Higgins Rd · Jul 3 night · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.marriott.com/hotels/travel/ordsh-springhill-suites-chicago-ohare" target="_blank" style="color:var(--gold)">🏨 Marriott</a></div></div>
+          <div class="pin-info"><div class="pin-name">Chicago -- SpringHill Suites O'Hare</div><div class="pin-address">8101 W Higgins Rd · Jul 3 night · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.marriott.com/hotels/travel/ordsh-springhill-suites-chicago-ohare" target="_blank" style="color:var(--gold)">🏨 Marriott</a></div></div>
           <button class="pin-action" onclick="openMapAddr('SpringHill Suites 8101 West Higgins Rd Chicago IL')">Map</button>
         </div>
       </div>
@@ -469,47 +465,47 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
 
   <div id="rome-rests" class="rest-group">
     <div class="rest-grid">
-      <div class="rest-item"><div class="rest-emoji">☕</div><div class="rest-info"><div class="rest-name">Tazza d'Oro</div><div class="rest-meta">Near Pantheon · Best espresso in Rome · <a href='https://maps.google.com/?q=Tazza+d+Oro+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Coffee</span><span class="rest-tag rest-price">€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">☕</div><div class="rest-info"><div class="rest-name">Sant'Eustachio Caffè</div><div class="rest-meta">Near Pantheon · Legendary since 1938 · <a href='https://maps.google.com/?q=Caffe+Sant+Eustachio+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Coffee</span><span class="rest-tag rest-price">€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">🏛️</div><div class="rest-info"><div class="rest-name">Antico Caffè Greco</div><div class="rest-meta">Via Condotti · <a href='https://maps.google.com/?q=Antico+Caffe+Greco+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Historic cafe</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">☕</div><div class="rest-info"><div class="rest-name">Tazza d'Oro</div><div class="rest-meta">Near Pantheon · Best espresso in Rome · <a href='https://maps.google.com/?q=Tazza+d+Oro+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Coffee</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">☕</div><div class="rest-info"><div class="rest-name">Sant'Eustachio Caffè</div><div class="rest-meta">Near Pantheon · Legendary since 1938 · <a href='https://maps.google.com/?q=Caffe+Sant+Eustachio+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Coffee</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🏛️</div><div class="rest-info"><div class="rest-name">Antico Caffè Greco</div><div class="rest-meta">Via Condotti · <a href='https://maps.google.com/?q=Antico+Caffe+Greco+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Historic cafe</span><span class="rest-tag rest-price">€€</span></div></div></div>
       <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Brucio</div><div class="rest-meta">Roman pizza · Brandon's pick</div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">🥪</div><div class="rest-info"><div class="rest-name">All'Antico Vinaio</div><div class="rest-meta">Takeaway sandwiches · <a href='https://maps.google.com/?q=All+Antico+Vinaio+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Sandwiches</span><span class="rest-tag rest-price">€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria da Gino al Parlamento</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Trattoria+da+Gino+al+Parlamento+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">🍷</div><div class="rest-info"><div class="rest-name">Pietro Valentini</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Pietro+Valentini+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
-<div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Armando al Pantheon</div><div class="rest-meta">Salita de' Crescenzi · Steps from your Airbnb · Reserve ahead · <a href='https://maps.google.com/?q=Armando+al+Pantheon+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Roman classics</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Forno Campo de Fiori</div><div class="rest-meta">Campo de' Fiori · Amazing pizza bianca · Open mornings · <a href='https://maps.google.com/?q=Forno+Campo+de+Fiori+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Pizza bianca</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Ristorante Il Sorpasso</div><div class="rest-meta">Via Properzio · Trastevere adjacent · Creative Roman dishes · <a href='https://maps.google.com/?q=Il+Sorpasso+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Checchino dal 1887</div><div class="rest-meta">Via di Monte Testaccio · Testaccio · Roman since 1887 · <a href='https://maps.google.com/?q=Checchino+dal+1887+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Classic Roman</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria del Teatro</div><div class="rest-meta">Via dei Coronari · Artisanal flavors near Navona · <a href='https://maps.google.com/?q=Gelateria+del+Teatro+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div>
-      <div class="rest-item" style="border: 2px solid rgba(212,168,67,0.4);"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Il Vero Alfredo ⭐ BOOKED</div><div class="rest-meta">Jun 21 · 7:30pm · Ref: BV4ML76Q · <a href='https://maps.google.com/?q=Il+Vero+Alfredo+Rome+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag booked" style="background:rgba(74,92,47,0.12);color:var(--olive);">✓ Confirmed</span><span class="rest-tag rest-price">€€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🥪</div><div class="rest-info"><div class="rest-name">All'Antico Vinaio</div><div class="rest-meta">Takeaway sandwiches · <a href='https://maps.google.com/?q=All+Antico+Vinaio+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Sandwiches</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria da Gino al Parlamento</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Trattoria+da+Gino+al+Parlamento+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍷</div><div class="rest-info"><div class="rest-name">Pietro Valentini</div><div class="rest-meta">Sit-down · <a href='https://maps.google.com/?q=Pietro+Valentini+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div>
+<div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Armando al Pantheon</div><div class="rest-meta">Salita de' Crescenzi · Steps from your Airbnb · Reserve ahead · <a href='https://maps.google.com/?q=Armando+al+Pantheon+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Roman classics</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Forno Campo de Fiori</div><div class="rest-meta">Campo de' Fiori · Amazing pizza bianca · Open mornings · <a href='https://maps.google.com/?q=Forno+Campo+de+Fiori+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Pizza bianca</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Ristorante Il Sorpasso</div><div class="rest-meta">Via Properzio · Trastevere adjacent · Creative Roman dishes · <a href='https://maps.google.com/?q=Il+Sorpasso+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sit-down</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Checchino dal 1887</div><div class="rest-meta">Via di Monte Testaccio · Testaccio · Roman since 1887 · <a href='https://maps.google.com/?q=Checchino+dal+1887+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Classic Roman</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria del Teatro</div><div class="rest-meta">Via dei Coronari · Artisanal flavors near Navona · <a href='https://maps.google.com/?q=Gelateria+del+Teatro+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item" style="border: 2px solid rgba(212,168,67,0.4);"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Il Vero Alfredo ⭐ BOOKED</div><div class="rest-meta">Jun 21 · 7:30pm · Ref: BV4ML76Q · <a href='https://maps.google.com/?q=Il+Vero+Alfredo+Rome+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag booked" style="background:rgba(74,92,47,0.12);color:var(--olive);">✓ Confirmed</span><span class="rest-tag rest-price">€€€</span></div></div></div>
     </div>
     <div style="padding: 0 14px 12px;"><div class="info-box olive"><div class="info-box-icon">📱</div><div><div class="info-box-title">Too Good To Go App</div><div class="info-box-text">Grab discounted food bags at the end of each day from local restaurants. Great for a cheap late snack!</div></div></div></div>
   </div>
 
   <div id="florence-rests" class="rest-group" style="display:none">
     <div class="rest-grid">
-      <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria Sergio Gozzi</div><div class="rest-meta">Piazza San Lorenzo · Cash only · <a href='https://maps.google.com/?q=Trattoria+Sergio+Gozzi+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local institution</span><span class="rest-tag rest-price">€€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Mercato Centrale</div><div class="rest-meta">Via dell'Ariento · <a href='https://maps.google.com/?q=Mercato+Centrale+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Food hall</span><span class="rest-tag rest-price">€</span></div></div></div>
-<div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Buca Mario</div><div class="rest-meta">Piazza degli Ottaviani · Florence's oldest restaurant · Bistecca · <a href='https://maps.google.com/?q=Buca+Mario+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Historic</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Osteria dell'Enoteca</div><div class="rest-meta">Via Romana · Oltrarno · Refined Tuscan cuisine · <a href='https://maps.google.com/?q=Osteria+dell+Enoteca+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Tuscan</span><span class="rest-tag rest-price">€€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria dei Neri</div><div class="rest-meta">Via dei Neri · Santa Croce · Best gelato in Florence · <a href='https://maps.google.com/?q=Gelateria+dei+Neri+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🥪</div><div class="rest-info"><div class="rest-name">Semel</div><div class="rest-meta">Piazza Lorenzo Ghiberti · Stuffed focaccia sandwiches · <a href='https://maps.google.com/?q=Semel+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sandwiches</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Gusta Pizza</div><div class="rest-meta">Via Maggio · Neapolitan style · Locals favorite · <a href='https://maps.google.com/?q=Gusta+Pizza+Florence+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria Sergio Gozzi</div><div class="rest-meta">Piazza San Lorenzo · Cash only · <a href='https://maps.google.com/?q=Trattoria+Sergio+Gozzi+Florence+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local institution</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Mercato Centrale</div><div class="rest-meta">Via dell'Ariento · <a href='https://maps.google.com/?q=Mercato+Centrale+Florence+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Food hall</span><span class="rest-tag rest-price">€</span></div></div></div>
+<div class="rest-item"><div class="rest-emoji">🥩</div><div class="rest-info"><div class="rest-name">Buca Mario</div><div class="rest-meta">Piazza degli Ottaviani · Florence's oldest restaurant · Bistecca · <a href='https://maps.google.com/?q=Buca+Mario+Florence+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Historic</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Osteria dell'Enoteca</div><div class="rest-meta">Via Romana · Oltrarno · Refined Tuscan cuisine · <a href='https://maps.google.com/?q=Osteria+dell+Enoteca+Florence+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Tuscan</span><span class="rest-tag rest-price">€€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria dei Neri</div><div class="rest-meta">Via dei Neri · Santa Croce · Best gelato in Florence · <a href='https://maps.google.com/?q=Gelateria+dei+Neri+Florence+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🥪</div><div class="rest-info"><div class="rest-name">Semel</div><div class="rest-meta">Piazza Lorenzo Ghiberti · Stuffed focaccia sandwiches · <a href='https://maps.google.com/?q=Semel+Florence+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Sandwiches</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Gusta Pizza</div><div class="rest-meta">Via Maggio · Neapolitan style · Locals favorite · <a href='https://maps.google.com/?q=Gusta+Pizza+Florence+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€</span></div></div></div>
     </div>
     <div style="padding: 0 14px 12px;"><div class="info-box sky"><div class="info-box-icon">👜</div><div><div class="info-box-title info-box-title sky">Don't miss: Dimitri's leather shop</div><div class="info-box-text">Made in Tuscany Firenze · Via degli Alfani 129r · Bring cash for a discount! Ex-Gucci craftsman, seen on YouTube. Custom belts cut to size.</div></div></div></div>
   </div>
 
   <div id="parma-rests" class="rest-group" style="display:none">
     <div class="rest-grid">
-      <div class="rest-item"><div class="rest-emoji">🧀</div><div class="rest-info"><div class="rest-name">Osteria Miriam</div><div class="rest-meta">Via del Conservatorio · <a href='https://maps.google.com/?q=Osteria+Miriam+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local specialties</span><span class="rest-tag rest-price">€€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">🍖</div><div class="rest-info"><div class="rest-name">Trattoria Corrieri</div><div class="rest-meta">Via Conservatorio · <a href='https://maps.google.com/?q=Trattoria+Corrieri+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div>
-<div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria dei Corrieri</div><div class="rest-meta">Via Conservatorio 1 · Classic Parma pastas · Very local · <a href='https://maps.google.com/?q=Trattoria+dei+Corrieri+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🧀</div><div class="rest-info"><div class="rest-name">Salumeria Garibaldi</div><div class="rest-meta">Str. Giuseppe Garibaldi · Best charcuterie counter in Parma · <a href='https://maps.google.com/?q=Salumeria+Garibaldi+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Deli/Takeaway</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍷</div><div class="rest-info"><div class="rest-name">Ristorante Cocchi</div><div class="rest-meta">Via Gramsci 16 · Near station · Parma institution since 1925 · <a href='https://maps.google.com/?q=Ristorante+Cocchi+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">La Greppia</div><div class="rest-meta">Via Garibaldi 39 · Beloved local spot · Great lunch · <a href='https://maps.google.com/?q=La+Greppia+Parma+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Tuscan-style</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🧀</div><div class="rest-info"><div class="rest-name">Osteria Miriam</div><div class="rest-meta">Via del Conservatorio · <a href='https://maps.google.com/?q=Osteria+Miriam+Parma+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Local specialties</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍖</div><div class="rest-info"><div class="rest-name">Trattoria Corrieri</div><div class="rest-meta">Via Conservatorio · <a href='https://maps.google.com/?q=Trattoria+Corrieri+Parma+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div>
+<div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Trattoria dei Corrieri</div><div class="rest-meta">Via Conservatorio 1 · Classic Parma pastas · Very local · <a href='https://maps.google.com/?q=Trattoria+dei+Corrieri+Parma+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🧀</div><div class="rest-info"><div class="rest-name">Salumeria Garibaldi</div><div class="rest-meta">Str. Giuseppe Garibaldi · Best charcuterie counter in Parma · <a href='https://maps.google.com/?q=Salumeria+Garibaldi+Parma+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Deli/Takeaway</span><span class="rest-tag rest-price">€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍷</div><div class="rest-info"><div class="rest-name">Ristorante Cocchi</div><div class="rest-meta">Via Gramsci 16 · Near station · Parma institution since 1925 · <a href='https://maps.google.com/?q=Ristorante+Cocchi+Parma+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Traditional</span><span class="rest-tag rest-price">€€</span></div></div></div><div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">La Greppia</div><div class="rest-meta">Via Garibaldi 39 · Beloved local spot · Great lunch · <a href='https://maps.google.com/?q=La+Greppia+Parma+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Tuscan-style</span><span class="rest-tag rest-price">€€</span></div></div></div>
     </div>
     <div style="padding: 0 14px 12px;"><div class="info-box gold"><div class="info-box-icon">🧀</div><div><div class="info-box-title">Parma specialties to order</div><div class="info-box-text">Prosciutto di Parma, Parmigiano-Reggiano, Tortellini in brodo, Culatello. These are the best in the world here -- order them everywhere!</div></div></div></div>
   </div>
 
   <div id="garda-rests" class="rest-group" style="display:none">
     <div class="rest-grid">
-      <div class="rest-item"><div class="rest-emoji">🐟</div><div class="rest-info"><div class="rest-name">Ristorante Grifone</div><div class="rest-meta">Sirmione · On the water · <a href='https://maps.google.com/?q=Ristorante+Grifone+Sirmione+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Seafood</span><span class="rest-tag rest-price">€€€</span></div></div></div>
-      <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Pizzeria Lugana</div><div class="rest-meta">Sirmione · <a href='https://maps.google.com/?q=Pizzeria+Lugana+Sirmione+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza & pasta</span><span class="rest-tag rest-price">€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🐟</div><div class="rest-info"><div class="rest-name">Ristorante Grifone</div><div class="rest-meta">Sirmione · On the water · <a href='https://maps.google.com/?q=Ristorante+Grifone+Sirmione+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Seafood</span><span class="rest-tag rest-price">€€€</span></div></div></div>
+      <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Pizzeria Lugana</div><div class="rest-meta">Sirmione · <a href='https://maps.google.com/?q=Pizzeria+Lugana+Sirmione+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza & pasta</span><span class="rest-tag rest-price">€€</span></div></div></div>
 
 ```
-  <div class="rest-item"><div class="rest-emoji">🐟</div><div class="rest-info"><div class="rest-name">Osteria al Bacio</div><div class="rest-meta">Torri del Benaco village · Your town! Fresh lake trout · <a href='https://maps.google.com/?q=Osteria+al+Bacio+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Lake fish</span><span class="rest-tag rest-price">€€</span></div></div></div>
-  <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Ristorante Alla Campagnola</div><div class="rest-meta">Torri del Benaco · Garden seating · Homemade pasta · <a href='https://maps.google.com/?q=Ristorante+Alla+Campagnola+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Lakeside</span><span class="rest-tag rest-price">€€</span></div></div></div>
-  <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Pizzeria Benacus</div><div class="rest-meta">Torri del Benaco · Waterfront · Great wood-fired pizza · <a href='https://maps.google.com/?q=Pizzeria+Benacus+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€</span></div></div></div>
-  <div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria del Benaco</div><div class="rest-meta">Torri del Benaco village · Try lake lemon flavor · <a href='https://maps.google.com/?q=Gelateria+Torri+del+Benaco+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div>
+  <div class="rest-item"><div class="rest-emoji">🐟</div><div class="rest-info"><div class="rest-name">Osteria al Bacio</div><div class="rest-meta">Torri del Benaco village · Your town! Fresh lake trout · <a href='https://maps.google.com/?q=Osteria+al+Bacio+Torri+del+Benaco+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★★</div><div class="rest-tags"><span class="rest-tag">Lake fish</span><span class="rest-tag rest-price">€€</span></div></div></div>
+  <div class="rest-item"><div class="rest-emoji">🍝</div><div class="rest-info"><div class="rest-name">Ristorante Alla Campagnola</div><div class="rest-meta">Torri del Benaco · Garden seating · Homemade pasta · <a href='https://maps.google.com/?q=Ristorante+Alla+Campagnola+Torri+del+Benaco+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Lakeside</span><span class="rest-tag rest-price">€€</span></div></div></div>
+  <div class="rest-item"><div class="rest-emoji">🍕</div><div class="rest-info"><div class="rest-name">Pizzeria Benacus</div><div class="rest-meta">Torri del Benaco · Waterfront · Great wood-fired pizza · <a href='https://maps.google.com/?q=Pizzeria+Benacus+Torri+del+Benaco+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Pizza</span><span class="rest-tag rest-price">€</span></div></div></div>
+  <div class="rest-item"><div class="rest-emoji">🍦</div><div class="rest-info"><div class="rest-name">Gelateria del Benaco</div><div class="rest-meta">Torri del Benaco village · Try lake lemon flavor · <a href='https://maps.google.com/?q=Gelateria+Torri+del+Benaco+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a></div><div class="stars">★★★★☆</div><div class="rest-tags"><span class="rest-tag">Gelato</span><span class="rest-tag rest-price">€</span></div></div></div>
 </div>
 ```
 
@@ -535,8 +531,8 @@ a.link-btn { display: inline-block; background: var(–dark); color: var(–crea
       <div class="family-card"><div class="family-avatar">👧🏻</div><div class="family-name">Virginia</div><div class="family-status">Full trip</div></div>
       <div class="family-card"><div class="family-avatar">👧</div><div class="family-name">Adelle</div><div class="family-status">Full trip</div></div>
       <div class="family-card"><div class="family-avatar">👧🏼</div><div class="family-name">Pearl</div><div class="family-status">Full trip</div></div>
-      <div class="family-card"><div class="family-avatar">👴🏻</div><div class="family-name">Big Daddy</div><div class="family-status">Rome → Venice</div></div>
-      <div class="family-card"><div class="family-avatar">👵</div><div class="family-name">Nannie</div><div class="family-status">Rome → Venice</div></div>
+      <div class="family-card"><div class="family-avatar">👴🏻</div><div class="family-name">Big Daddy (Alfred)</div><div class="family-status">Rome → Venice</div></div>
+      <div class="family-card"><div class="family-avatar">👵</div><div class="family-name">Nannie (Ginger)</div><div class="family-status">Rome → Venice</div></div>
     </div>
     <div class="card">
       <div class="card-header"><div class="card-icon icon-sky">✈️</div><div><div class="card-title">Nannie & Big Daddy Note</div><div class="card-subtitle">Join Jun 20 · Split Jun 24 · Depart Jun 27</div></div></div>
@@ -695,9 +691,9 @@ const DAYS = [
   { day:2, date:'Jun 20', city:'Rome', label:'Monuments & Parks', cityCode:'ROME', events:[
     {time:'10:30 AM', title:'👴👵 Nannie & Big Daddy Arrive', desc:'AA flight 720 from CLT arrives Rome 10:30am', dot:'sky', tag:'AA720', tagClass:'flight'},
     {time:'Morning', title:'☕ Breakfast near Pantheon', desc:"Tazza d'Oro or Sant'Eustachio Caffè -- two of Rome's best espresso bars, both steps away", dot:'gold', tag:'Coffee'},
-    {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online -- cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
+    {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online -- cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
     {time:'1:00 PM', title:'🍕 Lunch', desc:'All\'Antico Vinaio (sandwiches) or Brucio (pizza) -- both Brandon picks', dot:'gold', tag:'Food'},
-    {time:'2:30 PM', title:'⛲ Trevi Fountain', desc:'Go mid-afternoon, early morning for fewer crowds. Toss a coin! <a href="https://maps.google.com/?q=Trevi+Fountain,Rome,Italy" target="_blank" style="color:var(--sky)">📍 Map</a>', dot:'', tag:'Free'},
+    {time:'2:30 PM', title:'⛲ Trevi Fountain', desc:'Go mid-afternoon, early morning for fewer crowds. Toss a coin! <a href="https://maps.google.com/?q=Trevi+Fountain,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'', tag:'Free'},
     {time:'4:00 PM', title:'🏡 Spanish Steps', desc:'Walk up for the panoramic view over Rome. <a href="https://maps.google.com/?q=Spanish+Steps,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
     {time:'5:00 PM', title:'🌳 Villa Borghese Park', desc:'Large park with villas, zoo, and beautiful gardens -- great for a stroll', dot:'olive', tag:'Free'},
     {time:'8:00 PM', title:'🍽️ Dinner -- Campo de\'Fiori → Trastevere', desc:'Walk through Campo de\'Fiori (site of executions, statue of Bruno the heretic) en route to dinner', dot:'gold', tag:'Evening'},
@@ -705,35 +701,35 @@ const DAYS = [
   { day:3, date:'Jun 21', city:'Rome', label:'Golf Cart Tour + Alfredo', cityCode:'ROME', events:[
     {time:'8:30 AM', title:'🏎️ Golf Cart Tour of Rome', desc:'Private Rome Golf Cart Tour · 3 hours · Ends 11:30am · <a href="https://livtours.com/tours/private-rome-golf-cart-tour/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a>', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'12:00 PM', title:'🏺 Largo Argentina', desc:'Where Julius Caesar was assassinated + cat sanctuary. Buy online -- much cheaper! <a href="https://maps.google.com/?q=Largo+di+Torre+Argentina,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a> · <a href="https://www.romanoimpero.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'olive', tag:'Book online'},
-    {time:'2:00 PM', title:'🌊 Vicus Caprarius -- Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
+    {time:'2:00 PM', title:'🌊 Vicus Caprarius -- Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
     {time:'3:30 PM', title:'☕ Antico Caffè Greco', desc:'One of the oldest cafes in Rome -- historic stop near Spanish Steps', dot:'gold', tag:'Must do'},
     {time:'7:30 PM', title:'🍝 Il Vero Alfredo -- BOOKED', desc:'Booking Reference: BV4ML76Q · The original Fettuccine Alfredo restaurant', dot:'', tag:'✓ Confirmed', tagClass:'booked'},
   ]},
   { day:4, date:'Jun 22', city:'Rome', label:'Vatican Day', cityCode:'ROME', events:[
-    {time:'7:45 AM', title:'🎨 VIP Vatican Breakfast Tour', desc:'Private Vatican tour with breakfast · 3.5 hours · <a href="https://livtours.com/tours/private-vatican-breakfast-tour-vip/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a> · <a href="https://maps.google.com/?q=Vatican+Museums,Vatican+City" target="_blank" style="color:var(--sky)">📍 Map</a>', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'7:45 AM', title:'🎨 VIP Vatican Breakfast Tour', desc:'Private Vatican tour with breakfast · 3.5 hours · <a href="https://livtours.com/tours/private-vatican-breakfast-tour-vip/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a> · <a href="https://maps.google.com/?q=Vatican+Museums,Vatican+City" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'12:00 PM', title:'🍽️ Lunch near Vatican', desc:'Pietro Valentini or explore Prati neighborhood (locals\' area near Vatican)', dot:'gold', tag:'Suggestion'},
     {time:'Afternoon', title:'🗺️ Free afternoon in Rome', desc:'Revisit favorites, souvenir shopping, or relax near Pantheon', dot:'olive', tag:'Free'},
     {time:'Evening', title:'🌙 Last night in Rome', desc:'Evening passeggiata -- the Italian tradition of the evening stroll', dot:'gold', tag:'Evening'},
   ]},
   { day:5, date:'Jun 23', city:'Florence', label:'Rome → Florence', cityCode:'FLORENCE', events:[
-    {time:'11:55 AM', title:'🚄 Italo Train -- Roma → Firenze SMN', desc:'Train 8914 · Coach 2 · Seats 14–20 · Arrives 13:31 · Ticket code: EE8MQZ · Prima Business class · Roma Termini → Firenze Santa Maria Novella', dot:'sky', tag:'✓ Booked', tagClass:'booked'},
+    {time:'11:55 AM', title:'🚄 Italo EE8MQZ -- Everyone: Roma Termini → Firenze SMN', desc:'Train 8914 · Prima Business · Arrives 13:31 · Coach 2 · Brandon 14, Holly 15, Alfred 16, Ginger 17, Virginia 18, Adelle 19, Pearl 20 · Fast Track · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/rome-to-florence.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ EE8MQZ', tagClass:'booked'},
     {time:'Afternoon', title:'🏨 Check in -- Solo Experience Hotel', desc:'2 rooms with breakfast included · soloexperiencehotel.com', dot:'', tag:'Hotel', tagClass:'booked'},
     {time:'2:00 PM', title:'👜 Made in Tuscany Firenze -- Dimitri', desc:'Via degli Alfani 129r · Ex-Gucci craftsman · Cash for discount! Custom belts. Open 9am–7:30pm. <a href="https://maps.google.com/?q=Via+degli+Alfani+129r,+Florence,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Must visit'},
     {time:'4:00 PM', title:'🌸 Ponte Vecchio & Oltrarno stroll', desc:'Famous jewelers bridge, then explore the artisan neighborhood south of the river. <a href="https://maps.google.com/?q=Ponte+Vecchio,+Florence,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
     {time:'7:30 PM', title:'🍝 Dinner -- Trattoria Sergio Gozzi', desc:'Piazza San Lorenzo · Cash only, arrive early, local institution', dot:'gold', tag:'Recommendation'},
   ]},
   { day:6, date:'Jun 24', city:'Florence → Parma', label:'Art + Split Day', cityCode:'FLORENCE', events:[
-    {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance -- Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--sky)'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--sky)'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
+    {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance -- Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
     {time:'1:00 PM', title:'🍝 Lunch -- Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
-    {time:'1:39 PM', title:'🚄 Italo -- Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Ticket code: EE8MQZ -- all aboard same train heading toward Bologna', dot:'sky', tag:'✓ Booked', tagClass:'booked'},
-    {time:'~2:40 PM', title:'🔀 Split at Bologna Centrale', desc:'Nannie & Big Daddy stay on Train 8914 to Venezia (arrives 15:55 · Coach 3 · Seats 37 & 36 · TBHQMV). Brandon + kids swap platforms to regional train to Parma.', dot:'gold', tag:'Split here'},
-    {time:'2:50 PM', title:'🚄 Brandon + kids: Bologna → Parma', desc:'Regionale TTPER 17416 · Bologna Centrale 14:50 → Parma 16:01 · Ticket: 2799971845 · €8.50 · 2nd class regional', dot:'sky', tag:'✓ Booked', tagClass:'booked'},
+    {time:'1:39 PM', title:'🚄 Italo -- Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Coach 3 · Brandon 29, Holly 30, Virginia 31, Adelle 32, Pearl 33 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-bologna.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ SEJ54J', tagClass:'booked'},
+    {time:'2:18 PM', title:'🔀 Split at Bologna Centrale', desc:'Ginger & Alfred stay on Train 8914 to Venezia -- arrives 15:55 · Coach 3 · Seats 37 & 36 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-venice.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'gold', tag:'✓ TBHQMV', tagClass:'booked'},
+    {time:'2:50 PM', title:'🚄 Brandon, Holly + kids: Bologna → Parma', desc:'Regionale TTPER 17416 · Bologna Centrale 14:50 → Parma 16:01 · Ticket: 2799971845 · CP: 766705 · €8.50 · 2nd class regional', dot:'', tag:'✓ Booked', tagClass:'booked'},
     {time:'Evening', title:'🏠 Check in -- Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
   ]},
   { day:7, date:'Jun 25', city:'Parma', label:'Parmigiano Bike Tour', cityCode:'PARMA', events:[
     {time:'Morning', title:'☕ Explore Parma city center', desc:'Cathedral, Baptistery, Piazza Garibaldi -- beautiful and uncrowded Italian city', dot:'olive', tag:'Free'},
     {time:'12:00 PM', title:'🍽️ Lunch', desc:'Order everything with Prosciutto di Parma and Parmigiano -- you\'re in the source!', dot:'gold', tag:'Food'},
-    {time:'3:00 PM', title:'🚲 Parmigiano Factory Bike Tour (4 hours)', desc:'Bike Food Stories · Str. Giuseppe Garibaldi 29 · ☎ +39 349 783 8492 · <a href="https://maps.google.com/?q=Str.+Giuseppe+Garibaldi+29,+Parma,+Italy" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.tripadvisor.com/AttractionProductReview-g187804-d15304065" target="_blank" style="color:var(--gold)">⭐ TripAdvisor</a>', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'3:00 PM', title:'🚲 Parmigiano Factory Bike Tour (4 hours)', desc:'Bike Food Stories · Str. Giuseppe Garibaldi 29 · ☎ +39 349 783 8492 · <a href="https://maps.google.com/?q=Str.+Giuseppe+Garibaldi+29,+Parma,+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.tripadvisor.com/AttractionProductReview-g187804-d15304065" target="_blank" style="color:var(--gold)">⭐ TripAdvisor</a>', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'7:00 PM', title:'🍷 Dinner after the tour', desc:'You\'ll be full of cheese and happy. Light dinner -- wine and charcuterie.', dot:'gold', tag:'Evening'},
   ]},
   { day:8, date:'Jun 26', city:'Parma', label:'Free Day in Parma', cityCode:'PARMA', events:[
@@ -742,7 +738,7 @@ const DAYS = [
     {time:'Evening', title:'🍝 Last full dinner in Parma', desc:'Osteria Miriam or Trattoria Corrieri -- order the local pasta', dot:'gold', tag:'Suggestion'},
   ]},
   { day:9, date:'Jun 27', city:'Parma', label:'Valmozzola -- Ancestral Village', cityCode:'PARMA', events:[
-    {time:'9:30 AM', title:'🚗 Pick up Sixt Rental Car', desc:'Via Trento 3D, Parma · Reservation #9730023172 · <a href="https://maps.google.com/?q=Via+Trento+3D,+Parma,+Italy" target="_blank" style="color:var(--sky)">📍 Map</a>', dot:'sky', tag:'Car rental'},
+    {time:'9:30 AM', title:'🚗 Pick up Sixt Rental Car', desc:'Via Trento 3D, Parma · Reservation #9730023172 · <a href="https://maps.google.com/?q=Via+Trento+3D,+Parma,+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'sky', tag:'Car rental'},
     {time:'~11:00 AM', title:'🏘️ Drive to Valmozzola', desc:'~1 hour south of Parma into the Apennine mountains. Stunning scenic drive. <a href="https://maps.google.com/?q=Valmozzola,+PR,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Special'},
     {time:'11:30 AM', title:'⛪ Visit Giuseppe Chiesa\'s birthplace', desc:'Strada San Siro 10, 43050 Valmozzola PR · Your family\'s ancestral home · <a href="https://maps.google.com/?q=Strada+San+Siro+10,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'', tag:'Ancestral', tagClass:'booked'},
     {time:'12:00 PM', title:'⛪ Visit Maria Ferretti\'s birthplace', desc:'San Martino 6, 43050 Valmozzola PR · Explore the village, photograph everything · <a href="https://maps.google.com/?q=San+Martino+6,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Ancestral'},
@@ -763,13 +759,13 @@ const DAYS = [
   { day:12, date:'Jun 30', city:'Venice Day Trip', label:"St. Mark's & Doge's Palace", cityCode:'GARDA', events:[
     {time:'Morning', title:'🚗 Drive to Verona train station', desc:'~45 mins from Torri del Benaco. Park at Verona Porta Nuova station.', dot:'sky', tag:'Drive'},
     {time:'~10:00 AM', title:'🚄 Train Verona → Venice', desc:'Fast regional train ~1.5 hrs. Buy on Trenitalia app. No cruise ships in port today -- best day to visit!', dot:'sky', tag:'Train'},
-    {time:'2:30 PM', title:"🏛️ St. Mark's & Doge's Palace Tour -- BOOKED", desc:"Semi-private tour · <a href='https://livtours.com/tours/semi-private-st-marks-doges-palace-tour/' target='_blank' style='color:var(--gold)'>🔗 livtours.com</a> · <a href='https://maps.google.com/?q=St+Marks+Basilica,Venice,Italy' target='_blank' style='color:var(--sky)'>📍 Map</a>", dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'2:30 PM', title:"🏛️ St. Mark's & Doge's Palace Tour -- BOOKED", desc:"Semi-private tour · <a href='https://livtours.com/tours/semi-private-st-marks-doges-palace-tour/' target='_blank' style='color:var(--gold)'>🔗 livtours.com</a> · <a href='https://maps.google.com/?q=St+Marks+Basilica,Venice,Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'', tag:'Booked', tagClass:'booked'},
     {time:'Evening', title:'🌙 Venice at night', desc:'Stay after dark -- magical canals, lit bridges, quiet calli with no crowds', dot:'gold', tag:'Must do'},
     {time:'Late', title:'🚄 Train back to Verona', desc:'Check last train time (typically ~11pm). Drive back to Torri del Benaco.', dot:'sky', tag:'Return'},
   ]},
   { day:13, date:'Jul 1', city:'Riva del Garda', label:'Northern Lake Adventure', cityCode:'GARDA', events:[
     {time:'Morning', title:'🚗 Drive north to Riva del Garda', desc:'~45 mins up the western shore -- stunning alpine scenery', dot:'sky', tag:'Drive'},
-    {time:'10:00 AM', title:'💧 Varone Cave Waterfalls', desc:"Spectacular waterfall inside a narrow gorge -- cool and misty, bring a layer! <a href='https://maps.google.com/?q=Cascata+del+Varone,+Riva+del+Garda,+Italy' target='_blank' style='color:var(--sky)'>📍 Map</a>", dot:'sky', tag:'Must see'},
+    {time:'10:00 AM', title:'💧 Varone Cave Waterfalls', desc:"Spectacular waterfall inside a narrow gorge -- cool and misty, bring a layer! <a href='https://maps.google.com/?q=Cascata+del+Varone,+Riva+del+Garda,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'sky', tag:'Must see'},
     {time:'12:00 PM', title:'🏔️ Canyon Adventures', desc:'Via ferrata, canyoning, or kayaking available near Riva del Garda', dot:'olive', tag:'Adventure'},
     {time:'2:00 PM', title:'🏘️ Canale di Tenno', desc:"Medieval mountain village above Riva -- tiny, ancient, completely unchanged. <a href='https://maps.google.com/?q=Canale+di+Tenno,+Trento,+Italy' target='_blank' style='color:var(--gold)'>📍 Map</a>", dot:'gold', tag:'Unique'},
     {time:'4:00 PM', title:'🍋 Optional: Limone sul Garda', desc:'Charming lemon-grove village on western shore -- beautiful for a stroll and gelato', dot:'olive', tag:'Optional'},
@@ -784,10 +780,11 @@ const DAYS = [
   { day:15, date:'Jul 3', city:'Homeward Bound', label:'Verona → Milan → Chicago', cityCode:'GARDA', events:[
     {time:'9:00 AM', title:'🚗 Drive to Verona Porta Nuova', desc:'~45 mins from Torri del Benaco. Allow extra time for the return!', dot:'sky', tag:'Drive'},
     {time:'10:00 AM', title:'🚗 Drop Sixt rental car', desc:'Verona Porta Nuova, level -1, in front of train station. Park in SIXT-marked bays, return key to SIXT branch.', dot:'', tag:'Car return', tagClass:'alert'},
-    {time:'~11:00 AM', title:'🚄 Train Verona → Milan Malpensa (MXP)', desc:'Allow 2+ hrs before flight. Malpensa Express or direct regional trains.', dot:'sky', tag:'Train'},
+    {time:'9:12 AM', title:'🚄 Italo XKDEGK -- Verona P.N. → Milano Centrale', desc:'Train 8974 · Prima Business · Arrives 10:25 · Coach 3 · Brandon 7, Holly 9, Virginia 10, Adelle 11, Pearl 12 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/verona-to-milan.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ XKDEGK', tagClass:'booked'},
+    {time:'~11:00 AM', title:'🚄 Milano Centrale → Malpensa Airport', desc:'Malpensa Express from Milano Centrale Platform 1 · ~50 mins · Buy ticket at station · Allow 2+ hrs before 3:20pm flight', dot:'sky', tag:'Train'},
     {time:'3:20 PM', title:'✈️ Depart Milan MXP → Chicago ORD', desc:'UA415 · United Economy · Arrives Chicago 6:10pm same day', dot:'sky', tag:'UA415', tagClass:'flight'},
     {time:'6:10 PM', title:'🛬 Arrive Chicago O\'Hare', desc:'Clear customs & immigration.', dot:'', tag:'Chicago'},
-    {time:'Evening', title:'🏨 SpringHill Suites Chicago O\'Hare', desc:'8101 West Higgins Rd, Chicago, IL · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank" style="color:var(--sky)">📍 Map</a> · <a href="https://www.marriott.com/hotels/travel/ordsh-springhill-suites-chicago-ohare" target="_blank" style="color:var(--gold)">🏨 Hotel site</a>', dot:'gold', tag:'Hotel'},
+    {time:'Evening', title:'🏨 SpringHill Suites Chicago O\'Hare', desc:'8101 West Higgins Rd, Chicago, IL · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.marriott.com/hotels/travel/ordsh-springhill-suites-chicago-ohare" target="_blank" style="color:var(--gold)">🏨 Hotel site</a>', dot:'gold', tag:'Hotel'},
   ]},
   { day:16, date:'Jul 4', city:'Home!', label:'Chicago → Charlottesville', cityCode:'GARDA', events:[
     {time:'7:15 AM', title:'✈️ Depart Chicago ORD → Charlottesville CHO', desc:'UA5532 · United Economy · Independence Day flight home! 🎆', dot:'sky', tag:'UA5532', tagClass:'flight'},
