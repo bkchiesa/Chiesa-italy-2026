@@ -53,7 +53,7 @@ nav::-webkit-scrollbar { display: none; }
 /* TODAY HERO */
 .today-hero { background: linear-gradient(135deg, var(–terracotta) 0%, #8B2A10 100%); padding: 24px 20px; position: relative; overflow: hidden; }
 .today-hero::before { content: attr(data-city); position: absolute; right: -10px; top: -10px; font-family: ‘Playfair Display’, serif; font-size: 80px; color: rgba(255,255,255,0.06); font-style: italic; pointer-events: none; }
-.today-day { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; text-shadow: 0 1px 4px rgba(0,0,0,0.6); }
+.today-day { color: rgba(255,255,255,0.85); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
 .countdown-hero {
 background-color: #1a1209;
 background-image: url(‘https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp’);
@@ -85,11 +85,11 @@ pointer-events: none;
 .countdown-hero-date { font-size: 14px; color: white; margin-top: 10px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 1px 4px rgba(0,0,0,1); }
 .notif-btn { display: none; }
 .notif-status { display: none; }
-.today-date { font-family: ‘Playfair Display’, serif; color: white; font-size: 28px; margin-top: 4px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 4px 16px rgba(0,0,0,0.8); }
-.today-city { color: var(–gold); font-size: 13px; font-weight: 700; margin-top: 3px; text-shadow: 0 1px 6px rgba(0,0,0,0.95), 0 2px 10px rgba(0,0,0,0.9); }
+.today-date { font-family: ‘Playfair Display’, serif; color: white; font-size: 28px; margin-top: 4px; font-weight: 700; }
+.today-city { color: var(–gold); font-size: 13px; font-weight: 700; margin-top: 3px; }
 .today-weather { position: absolute; top: 24px; right: 20px; text-align: right; }
-.weather-temp { color: white; font-size: 26px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95), 0 4px 16px rgba(0,0,0,0.8); }
-.weather-desc { color: white; font-size: 12px; font-weight: 600; text-shadow: 0 1px 6px rgba(0,0,0,0.95); }
+.weather-temp { color: white; font-size: 26px; font-weight: 700; }
+.weather-desc { color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 600; }
 
 /* CARDS */
 .section-content { padding: 14px; }
@@ -146,11 +146,12 @@ pointer-events: none;
 /* ITINERARY DAY SELECTOR */
 .day-selector { display: flex; gap: 5px; overflow-x: auto; padding: 4px 0; scrollbar-width: none; margin-bottom: 12px; }
 .day-selector::-webkit-scrollbar { display: none; }
-.day-btn { flex: 0 0 auto; width: 56px; height: 64px; border-radius: 12px; border: 2px solid var(–light-stone); background: white; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; transition: all 0.2s; box-shadow: 0 2px 6px rgba(26,18,9,0.08); }
+.day-btn { flex: 0 0 auto; width: 80px; height: 72px; border-radius: 12px; border: 2px solid var(–light-stone); background: white; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; transition: all 0.2s; box-shadow: 0 2px 6px rgba(26,18,9,0.08); padding: 6px 4px; }
 .day-btn.active-day { background: var(–terracotta); border-color: var(–terracotta); }
-.day-btn .day-num { font-size: 20px; font-weight: 800; color: var(–dark); }
-.day-btn .day-label { font-size: 10px; color: var(–stone); font-weight: 600; letter-spacing: 0.3px; }
-.day-btn.active-day .day-num, .day-btn.active-day .day-label { color: white; }
+.day-btn .day-num { font-size: 14px; font-weight: 800; color: var(–dark); line-height: 1.1; }
+.day-btn .day-label { font-size: 9px; color: var(–stone); font-weight: 600; letter-spacing: 0px; text-align: center; line-height: 1.2; }
+.day-btn.active-day .day-num, .day-btn.active-day .day-label, .day-btn.active-day .day-date { color: white; }
+.day-date { font-size: 9px; color: var(–terracotta); font-weight: 700; }
 
 /* UTILITIES */
 .util-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
@@ -698,7 +699,8 @@ const DAYS = [
     {time:'5:00 PM', title:'🌳 Villa Borghese Park', desc:'Large park with villas, zoo, and beautiful gardens -- great for a stroll', dot:'olive', tag:'Free'},
     {time:'8:00 PM', title:'🍽️ Dinner -- Campo de\'Fiori → Trastevere', desc:'Walk through Campo de\'Fiori (site of executions, statue of Bruno the heretic) en route to dinner', dot:'gold', tag:'Evening'},
   ]},
-  { day:3, date:'Jun 21', city:'Rome', label:'Golf Cart Tour + Alfredo', cityCode:'ROME', events:[
+  { day:3, date:'Jun 21', city:'Rome', label:"Golf Cart Tour + Alfredo 👨‍👧‍👦 Father's Day!", cityCode:'ROME', events:[
+    {time:'🎉', title:"Happy Father's Day! 👨‍👧‍👦", desc:"Celebrating Brandon in Rome -- what a place to spend Father's Day! Buona Festa del Papà!", dot:'gold', tag:"Father's Day"},
     {time:'8:30 AM', title:'🏎️ Golf Cart Tour of Rome', desc:'Private Rome Golf Cart Tour · 3 hours · Ends 11:30am · <a href="https://livtours.com/tours/private-rome-golf-cart-tour/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a>', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'12:00 PM', title:'🏺 Largo Argentina', desc:'Where Julius Caesar was assassinated + cat sanctuary. Buy online -- much cheaper! <a href="https://maps.google.com/?q=Largo+di+Torre+Argentina,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a> · <a href="https://www.romanoimpero.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'olive', tag:'Book online'},
     {time:'2:00 PM', title:'🌊 Vicus Caprarius -- Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
@@ -723,7 +725,7 @@ const DAYS = [
     {time:'1:00 PM', title:'🍝 Lunch -- Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
     {time:'1:39 PM', title:'🚄 Italo -- Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Coach 3 · Brandon 29, Holly 30, Virginia 31, Adelle 32, Pearl 33 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-bologna.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ SEJ54J', tagClass:'booked'},
     {time:'2:18 PM', title:'🔀 Split at Bologna Centrale', desc:'Ginger & Alfred stay on Train 8914 to Venezia -- arrives 15:55 · Coach 3 · Seats 37 & 36 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-venice.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'gold', tag:'✓ TBHQMV', tagClass:'booked'},
-    {time:'2:50 PM', title:'🚄 Brandon, Holly + kids: Bologna → Parma', desc:'Regionale TTPER 17416 · Bologna Centrale 14:50 → Parma 16:01 · Ticket: 2799971845 · CP: 766705 · €8.50 · 2nd class regional', dot:'', tag:'✓ Booked', tagClass:'booked'},
+    {time:'2:50 PM', title:'🚄 Brandon, Holly + kids: Bologna → Parma', desc:'Regionale TTPER 17416 · Bologna Centrale 14:50 → Parma 16:01 · Ticket: 2799971845 · CP: 766705 · €8.50 · 2nd class regional · <a href="https://www.lefrecce.it/Channels.Website.WEB/#/self-check-in?id=4RjR3E5P2scGWpNplxfvX4aSvoylSyr3y1gSypCoMFc=" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ Booked', tagClass:'booked'},
     {time:'Evening', title:'🏠 Check in -- Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
   ]},
   { day:7, date:'Jun 25', city:'Parma', label:'Parmigiano Bike Tour', cityCode:'PARMA', events:[
@@ -737,7 +739,8 @@ const DAYS = [
     {time:'Afternoon', title:'🛍️ Shopping & wandering', desc:'Parma is Italy\'s food capital -- prosciutto shops, cheese counters, local markets', dot:'gold', tag:'Free'},
     {time:'Evening', title:'🍝 Last full dinner in Parma', desc:'Osteria Miriam or Trattoria Corrieri -- order the local pasta', dot:'gold', tag:'Suggestion'},
   ]},
-  { day:9, date:'Jun 27', city:'Parma', label:'Valmozzola -- Ancestral Village', cityCode:'PARMA', events:[
+  { day:9, date:'Jun 27', city:'Parma', label:'Valmozzola + 🎂 Brandon\'s Birthday!', cityCode:'PARMA', events:[
+    {time:'🎂', title:"Happy Birthday Brandon! 🎉", desc:'Spending your birthday in the ancestral homeland of the Chiesa family -- it doesn\'t get more special than this. Auguri!', dot:'gold', tag:'Birthday!'},
     {time:'9:30 AM', title:'🚗 Pick up Sixt Rental Car', desc:'Via Trento 3D, Parma · Reservation #9730023172 · <a href="https://maps.google.com/?q=Via+Trento+3D,+Parma,+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'sky', tag:'Car rental'},
     {time:'~11:00 AM', title:'🏘️ Drive to Valmozzola', desc:'~1 hour south of Parma into the Apennine mountains. Stunning scenic drive. <a href="https://maps.google.com/?q=Valmozzola,+PR,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Special'},
     {time:'11:30 AM', title:'⛪ Visit Giuseppe Chiesa\'s birthplace', desc:'Strada San Siro 10, 43050 Valmozzola PR · Your family\'s ancestral home · <a href="https://maps.google.com/?q=Strada+San+Siro+10,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'', tag:'Ancestral', tagClass:'booked'},
@@ -1086,10 +1089,31 @@ function showSection(name, btn) {
 // ── ITINERARY ──
 function buildDaySelector() {
   const sel = document.getElementById('day-selector');
+  // Map full date strings to short weekday + day number
+  const dateMap = {
+    'Jun 18':'Thu 18','Jun 19':'Fri 19','Jun 20':'Sat 20','Jun 21':'Sun 21',
+    'Jun 22':'Mon 22','Jun 23':'Tue 23','Jun 24':'Wed 24','Jun 25':'Thu 25',
+    'Jun 26':'Fri 26','Jun 27':'Sat 27','Jun 28':'Sun 28','Jun 29':'Mon 29',
+    'Jun 30':'Tue 30','Jul 1':'Wed 1','Jul 2':'Thu 2','Jul 3':'Fri 3','Jul 4':'Sat 4'
+  };
+  // Short city names
+  const cityShort = {
+    'Charlottesville → Chicago → Munich':'CHO',
+    'Rome':'Rome','Florence → Parma':'Flor',
+    'Florence':'Flor','Parma':'Parma',
+    'Riva del Garda':'Riva','Lake Garda':'Garda',
+    'Venice Day Trip':'VCE','Homeward Bound':'Home','Home!':'Home'
+  };
   DAYS.forEach((d, i) => {
     const btn = document.createElement('button');
     btn.className = 'day-btn' + (i === 0 ? ' active-day' : '');
-    btn.innerHTML = `<div class="day-num">${d.day}</div><div class="day-label">${d.city.substring(0,3).toUpperCase()}</div>`;
+    const shortDate = dateMap[d.date] || d.date;
+    const shortCity = cityShort[d.city] || d.city.substring(0,4);
+    const isSpecial = d.date === 'Jun 21' ? '🎁' : d.date === 'Jun 27' ? '🎂' : '';
+    btn.innerHTML =
+      '<div class="day-num">Day ' + d.day + '</div>' +
+      '<div class="day-date">' + shortDate + '</div>' +
+      '<div class="day-label">' + shortCity + isSpecial + '</div>';
     btn.onclick = () => {
       document.querySelectorAll('.day-btn').forEach((b,j) => b.classList.toggle('active-day', j===i));
       renderDay(i);
