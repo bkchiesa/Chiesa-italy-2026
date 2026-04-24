@@ -15,606 +15,8 @@
 <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/app-icon.png">
 <!-- System fonts only - no external dependencies -->
 <style>
-:root {
-  --ink: #1C1409;
-  --gold: #C9973A;
-  --gold-light: #E8BE6A;
-  --terracotta: #B94A2C;
-  --cream: #F7F0E3;
-  --stone: #9C8E7E;
-  --olive: #4E5E30;
-  --sky: #2B6CB0;
-  --card: #FFFFFF;
-  --border: rgba(28,20,9,0.1);
-  --shadow: 0 2px 16px rgba(28,20,9,0.1);
-}
-
-- { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-
-html, body {
-font-family: -apple-system, BlinkMacSystemFont, ‘Helvetica Neue’, sans-serif;
-background: var(–cream, #F7F0E3);
-color: var(–ink, #1C1409);
-height: 100%;
-overflow: hidden;
-width: 100%;
-}
-#debug-box {
-display: none; position: fixed; bottom: 0; left: 0; right: 0;
-background: #c00; color: white; padding: 12px; font-size: 12px;
-z-index: 99999; white-space: pre-wrap; max-height: 40vh; overflow-y: auto;
-}
-
-/* ═══════════════════ SPLASH ═══════════════════ */
-#splash {
-position: fixed; inset: 0; z-index: 9999;
-background: var(–ink, #1C1409);
-display: flex; flex-direction: column;
-align-items: center; justify-content: center;
-gap: 4px;
-opacity: 1;
-visibility: visible;
-transition: opacity 0.6s ease, visibility 0.6s ease;
-/* Hard CSS fallback: always gone by 4s even if JS fails */
-animation: forceHide 0.01s linear 4s forwards;
-}
-@keyframes forceHide {
-to { display: none; opacity: 0; visibility: hidden; pointer-events: none; z-index: -1; }
-}
-#splash.out {
-opacity: 0;
-visibility: hidden;
-pointer-events: none;
-animation: none;
-}
-
-.sp-flag { font-size: 64px; margin-bottom: 8px;
-animation: sp-float 3s ease-in-out infinite; }
-@keyframes sp-float {
-0%,100% { transform: translateY(0); }
-50% { transform: translateY(-6px); }
-}
-.sp-title {
-font-family: Georgia, ‘Times New Roman’, serif;
-font-size: 28px; color: var(–cream, #F7F0E3);
-letter-spacing: 0.5px; text-align: center;
-line-height: 1.25; padding: 0 24px;
-}
-.sp-sub { font-size: 11px; color: var(–stone, #9C8E7E); letter-spacing: 3px; text-transform: uppercase; margin-top: 4px; }
-.sp-divider { width: 40px; height: 1px; background: var(–gold, #C9973A); margin: 16px auto; }
-.sp-days-num {
-font-family: Georgia, ‘Times New Roman’, serif;
-font-size: 72px; color: var(–gold, #C9973A);
-line-height: 1; font-weight: 600;
-animation: sp-pulse 2s ease-in-out infinite;
-}
-@keyframes sp-pulse { 0%,100%{opacity:1} 50%{opacity:0.8} }
-.sp-days-label { font-size: 12px; color: var(–stone, #9C8E7E); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
-.sp-bar { width: 160px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 28px; overflow: hidden; }
-.sp-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(–gold, #C9973A), var(–gold-light, #E8BE6A)); border-radius: 2px;
-animation: sp-load 2.8s cubic-bezier(0.4,0,0.2,1) forwards; }
-@keyframes sp-load { 0% { width: 0; } 85% { width: 100%; } 100% { width: 100%; } }
-
-/* ═══════════════════ HEADER ═══════════════════ */
-#app-header {
-position: fixed; top: 0; left: 0; right: 0;
-z-index: 500;
-height: 56px;
-background: var(–ink, #1C1409);
-display: flex; align-items: center; justify-content: space-between;
-padding: 0 16px;
-}
-.h-logo {
-font-family: Georgia, ‘Times New Roman’, serif;
-font-size: 20px; color: var(–cream, #F7F0E3);
-letter-spacing: 0.3px;
-}
-.h-logo span { color: var(–gold, #C9973A); }
-.h-right { display: flex; align-items: center; gap: 10px; }
-.h-pill {
-background: var(–gold, #C9973A); color: var(–ink, #1C1409);
-font-size: 12px; font-weight: 700;
-padding: 5px 12px; border-radius: 20px;
-white-space: nowrap; letter-spacing: 0.2px;
-}
-.h-burger {
-background: none; border: none; cursor: pointer;
-display: flex; flex-direction: column;
-justify-content: center; gap: 5px;
-padding: 6px; width: 38px; height: 38px;
-}
-.h-burger span {
-display: block; height: 2px;
-background: var(–cream, #F7F0E3); border-radius: 2px;
-transition: all 0.28s ease;
-transform-origin: center;
-}
-.h-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.h-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-.h-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-/* ═══════════════════ SIDE MENU ═══════════════════ */
-#menu-overlay {
-display: none; position: fixed; inset: 0; z-index: 600;
-background: rgba(28,20,9,0.5);
-backdrop-filter: blur(2px);
-}
-#menu-overlay.show { display: block; }
-#side-menu {
-position: fixed; top: 0; right: -300px; bottom: 0;
-width: 280px; z-index: 700;
-background: var(–ink, #1C1409);
-padding: 72px 0 32px;
-transition: right 0.32s cubic-bezier(0.4,0,0.2,1);
-overflow-y: auto;
-}
-#side-menu.open { right: 0; }
-.menu-lbl {
-font-size: 10px; font-weight: 600; letter-spacing: 2px;
-color: var(–stone, #9C8E7E); text-transform: uppercase;
-padding: 16px 20px 8px;
-}
-.menu-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 8px 0; }
-.menu-row {
-display: flex; align-items: center; gap: 14px;
-padding: 14px 20px; cursor: pointer;
-transition: background 0.15s;
-border: none; background: none; width: 100%; text-align: left;
-}
-.menu-row:active { background: rgba(255,255,255,0.06); }
-.menu-row-icon { font-size: 22px; width: 32px; text-align: center; flex-shrink: 0; }
-.menu-row-text { font-size: 16px; color: var(–cream, #F7F0E3); font-weight: 500; }
-.menu-row-sub { font-size: 11px; color: var(–stone, #9C8E7E); margin-top: 1px; }
-
-/* ═══════════════════ MAIN SCROLL AREA ═══════════════════ */
-#main-view {
-position: fixed; top: 56px; left: 0; right: 0; bottom: 0;
-overflow-y: auto; overflow-x: hidden;
--webkit-overflow-scrolling: touch;
-}
-
-/* ═══════════════════ HERO BAND ═══════════════════ */
-#hero-band {
-background: linear-gradient(135deg, var(–terracotta, #B94A2C) 0%, #8B2A10 100%);
-padding: 20px 20px 18px;
-position: relative; overflow: hidden;
-flex-shrink: 0;
-}
-#hero-band::before {
-content: attr(data-city);
-position: absolute; right: -8px; top: -8px;
-font-family: Georgia, ‘Times New Roman’, serif;
-font-size: 88px; color: rgba(255,255,255,0.06);
-font-style: italic; pointer-events: none; line-height: 1;
-}
-.hero-eyebrow {
-font-size: 10px; font-weight: 600; letter-spacing: 2.5px;
-text-transform: uppercase; color: rgba(255,255,255,0.7);
-}
-.hero-date {
-font-family: Georgia, ‘Times New Roman’, serif;
-font-size: 30px; color: white; margin-top: 2px;
-font-weight: 600; line-height: 1.15;
-}
-.hero-city { color: var(–gold-light, #E8BE6A); font-size: 13px; font-weight: 600; margin-top: 3px; }
-.hero-weather { position: absolute; top: 20px; right: 20px; text-align: right; }
-.hero-temp { color: white; font-size: 28px; font-weight: 300; }
-.hero-cond { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 1px; }
-
-/* ═══════════════════ WHEEL DATE PICKER ═══════════════════ */
-.wheel-wrap {
-background: var(–ink, #1C1409);
-padding: 10px 0 14px;
-position: relative;
-flex-shrink: 0;
-}
-/* Fading edges left/right */
-.wheel-wrap::before, .wheel-wrap::after {
-content: ‘’; position: absolute; top: 0; bottom: 0; width: 52px; z-index: 2; pointer-events: none;
-}
-.wheel-wrap::before { left: 0; background: linear-gradient(to right, var(–ink, #1C1409), transparent); }
-.wheel-wrap::after  { right: 0; background: linear-gradient(to left, var(–ink, #1C1409), transparent); }
-
-/* Center indicator line */
-.wheel-center-notch {
-position: absolute; top: 0; bottom: 0;
-left: 50%; transform: translateX(-50%);
-width: 76px;
-border-left: 1.5px solid rgba(201,151,58,0.35);
-border-right: 1.5px solid rgba(201,151,58,0.35);
-border-radius: 2px;
-pointer-events: none; z-index: 1;
-}
-
-#wheel-track {
-display: flex;
-gap: 8px;
-padding: 4px 50vw;
-overflow-x: auto;
-scroll-snap-type: x mandatory;
--webkit-overflow-scrolling: touch;
-scrollbar-width: none;
-cursor: grab;
-}
-#wheel-track::-webkit-scrollbar { display: none; }
-#wheel-track:active { cursor: grabbing; }
-
-.w-item {
-flex: 0 0 68px;
-width: 68px;
-height: 72px;
-border-radius: 14px;
-background: rgba(255,255,255,0.06);
-display: flex; flex-direction: column;
-align-items: center; justify-content: center;
-gap: 2px;
-scroll-snap-align: center;
-cursor: pointer;
-transition: transform 0.22s cubic-bezier(0.34,1.56,0.64,1),
-background 0.22s ease,
-opacity 0.22s ease;
-transform: scale(0.82);
-opacity: 0.5;
-border: 1.5px solid transparent;
-user-select: none;
-}
-.w-item.active {
-transform: scale(1.0);
-opacity: 1;
-background: rgba(201,151,58,0.15);
-border-color: rgba(201,151,58,0.5);
-}
-.w-item.near {
-transform: scale(0.92);
-opacity: 0.75;
-}
-.w-day-label {
-font-size: 9px; font-weight: 700;
-letter-spacing: 1px; text-transform: uppercase;
-color: var(–stone, #9C8E7E);
-}
-.w-item.active .w-day-label { color: var(–gold, #C9973A); }
-.w-day-num {
-font-family: Georgia, ‘Times New Roman’, serif;
-font-size: 22px; font-weight: 600; color: var(–cream, #F7F0E3);
-line-height: 1;
-}
-.w-item.active .w-day-num { color: white; }
-.w-city {
-font-size: 8px; font-weight: 600; letter-spacing: 0.3px;
-color: rgba(255,255,255,0.4); text-align: center;
-padding: 0 4px; line-height: 1.2;
-}
-.w-item.active .w-city { color: var(–gold-light, #E8BE6A); }
-.w-special { font-size: 11px; margin-top: 1px; }
-
-/* ═══════════════════ DAY CONTENT ═══════════════════ */
-#day-content-area {
-padding: 16px;
-min-height: 60vh;
-}
-
-/* Special banner */
-.special-banner {
-background: linear-gradient(135deg, var(–gold, #C9973A) 0%, #a07020 100%);
-border-radius: 14px; padding: 14px 16px;
-display: flex; align-items: center; gap: 12px;
-margin-bottom: 14px;
-}
-.special-banner-icon { font-size: 30px; }
-.special-banner-text .sp-b-title { font-weight: 700; font-size: 15px; color: var(–ink, #1C1409); }
-.special-banner-text .sp-b-sub { font-size: 12px; color: rgba(28,20,9,0.7); margin-top: 2px; }
-
-/* Day header card */
-.day-header-card {
-background: linear-gradient(135deg, var(–terracotta, #B94A2C), #8B2A10);
-border-radius: 14px; padding: 14px 16px;
-margin-bottom: 14px; color: white;
-}
-.dhc-label { font-size: 10px; opacity: 0.7; letter-spacing: 2px; text-transform: uppercase; }
-.dhc-city { font-family: Georgia, ‘Times New Roman’, serif; font-size: 26px; margin-top: 2px; font-weight: 600; }
-.dhc-sub { font-size: 12px; opacity: 0.8; margin-top: 2px; }
-
-/* Timeline */
-.tl-card {
-background: var(–card, #FFFFFF);
-border-radius: 14px;
-overflow: hidden;
-box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1));
-margin-bottom: 14px;
-}
-.tl-item {
-display: flex; gap: 12px;
-padding: 12px 14px;
-border-bottom: 1px solid var(–border, rgba(28,20,9,0.1));
-}
-.tl-item:last-child { border-bottom: none; }
-.tl-time {
-font-size: 11px; font-weight: 700;
-color: var(–ink, #1C1409); min-width: 54px;
-padding-top: 2px; flex-shrink: 0;
-}
-.tl-dot {
-width: 9px; height: 9px; border-radius: 50%;
-background: var(–terracotta, #B94A2C); margin-top: 4px; flex-shrink: 0;
-box-shadow: 0 0 0 3px rgba(185,74,44,0.15);
-}
-.tl-dot.gold { background: var(–gold, #C9973A); box-shadow: 0 0 0 3px rgba(201,151,58,0.2); }
-.tl-dot.olive { background: var(–olive, #4E5E30); box-shadow: 0 0 0 3px rgba(78,94,48,0.2); }
-.tl-dot.sky  { background: var(–sky);  box-shadow: 0 0 0 3px rgba(43,108,176,0.2); }
-.tl-body { flex: 1; }
-.tl-title { font-weight: 700; font-size: 14px; color: var(–ink, #1C1409); line-height: 1.3; }
-.tl-desc { font-size: 12px; color: #5a5048; margin-top: 3px; line-height: 1.55; }
-.tl-desc a { color: var(–terracotta, #B94A2C); font-weight: 700; text-decoration: none; }
-.tl-tag {
-display: inline-block; margin-top: 5px;
-background: #EEE8DC; color: var(–stone, #9C8E7E);
-font-size: 10px; font-weight: 600;
-padding: 2px 8px; border-radius: 10px;
-}
-.tl-tag.booked { background: rgba(78,94,48,0.12); color: var(–olive, #4E5E30); }
-.tl-tag.flight { background: rgba(43,108,176,0.1); color: #1a5fa8; }
-.tl-tag.alert  { background: rgba(185,74,44,0.1); color: var(–terracotta, #B94A2C); }
-
-/* ═══════════════════ PANEL OVERLAY ═══════════════════ */
-#panel-overlay {
-display: none; position: fixed; inset: 0; z-index: 800;
-background: rgba(28,20,9,0.45);
-backdrop-filter: blur(2px);
-}
-#panel-overlay.show { display: block; }
-#panel-sheet {
-position: fixed; left: 0; right: 0; bottom: -100%;
-z-index: 900; max-height: 90vh;
-background: var(–cream, #F7F0E3);
-border-radius: 22px 22px 0 0;
-transition: bottom 0.38s cubic-bezier(0.4,0,0.2,1);
-display: flex; flex-direction: column;
-overflow: hidden;
-}
-#panel-sheet.open { bottom: 0; }
-.ps-handle {
-width: 36px; height: 4px; border-radius: 2px;
-background: rgba(28,20,9,0.2);
-margin: 12px auto 0;
-flex-shrink: 0;
-}
-.ps-header {
-display: flex; align-items: center; justify-content: space-between;
-padding: 12px 20px 8px; flex-shrink: 0;
-border-bottom: 1px solid var(–border, rgba(28,20,9,0.1));
-}
-.ps-title { font-family: Georgia, ‘Times New Roman’, serif; font-size: 22px; font-weight: 600; }
-.ps-close {
-background: rgba(28,20,9,0.08); border: none;
-width: 30px; height: 30px; border-radius: 50%;
-font-size: 14px; cursor: pointer; color: var(–ink, #1C1409);
-display: flex; align-items: center; justify-content: center;
-}
-.ps-body { overflow-y: auto; flex: 1; padding: 14px; -webkit-overflow-scrolling: touch; }
-
-/* ═══════════════════ CARDS (reusable) ═══════════════════ */
-.card {
-background: var(–card, #FFFFFF); border-radius: 14px;
-margin-bottom: 12px;
-box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); overflow: hidden;
-}
-.card-hdr {
-display: flex; align-items: center; gap: 10px;
-padding: 12px 14px 8px;
-border-bottom: 1px solid var(–border, rgba(28,20,9,0.1));
-}
-.card-ico {
-width: 32px; height: 32px; border-radius: 8px;
-display: flex; align-items: center; justify-content: center;
-font-size: 16px; flex-shrink: 0;
-}
-.ico-t { background: rgba(185,74,44,0.1); }
-.ico-g { background: rgba(201,151,58,0.12); }
-.ico-o { background: rgba(78,94,48,0.1); }
-.ico-s { background: rgba(43,108,176,0.1); }
-.card-title { font-weight: 700; font-size: 15px; }
-.card-sub { font-size: 11px; color: var(–stone, #9C8E7E); margin-top: 1px; }
-
-/* City pills */
-.pills-row { display: flex; gap: 7px; overflow-x: auto; padding: 8px 0 4px; scrollbar-width: none; }
-.pills-row::-webkit-scrollbar { display: none; }
-.pill {
-flex: 0 0 auto; padding: 8px 14px; border-radius: 50px;
-font-size: 13px; font-weight: 600; cursor: pointer;
-border: 2px solid var(–border, rgba(28,20,9,0.1)); background: white;
-color: var(–ink, #1C1409); transition: all 0.15s;
-white-space: nowrap;
-}
-.pill.on { background: var(–terracotta, #B94A2C); color: white; border-color: var(–terracotta, #B94A2C); }
-
-/* Pin rows */
-.pin-row {
-display: flex; align-items: center; gap: 10px;
-padding: 10px 14px; border-bottom: 1px solid var(–border, rgba(28,20,9,0.1));
-}
-.pin-row:last-child { border-bottom: none; }
-.pin-em { font-size: 20px; }
-.pin-info { flex: 1; }
-.pin-name { font-weight: 600; font-size: 13px; }
-.pin-addr { font-size: 11px; color: var(–stone, #9C8E7E); margin-top: 1px; }
-.pin-addr a { color: var(–terracotta, #B94A2C); font-weight: 600; text-decoration: none; }
-.pin-btn {
-background: var(–ink, #1C1409); color: var(–cream, #F7F0E3);
-border: none; border-radius: 8px;
-padding: 7px 12px; font-size: 12px; font-weight: 600;
-cursor: pointer; font-family: -apple-system, BlinkMacSystemFont, ‘Helvetica Neue’, sans-serif;
-white-space: nowrap;
-}
-
-/* Restaurant items */
-.rest-item {
-background: #F0EAD8; border-radius: 12px;
-padding: 12px; margin-bottom: 8px;
-display: flex; gap: 10px;
-}
-.rest-em { font-size: 26px; flex-shrink: 0; }
-.rest-name { font-weight: 700; font-size: 14px; }
-.rest-meta { font-size: 11px; color: var(–stone, #9C8E7E); margin-top: 2px; }
-.rest-meta a { color: var(–terracotta, #B94A2C); font-weight: 600; text-decoration: none; }
-.rest-tags { display: flex; gap: 5px; flex-wrap: wrap; margin-top: 5px; }
-.rest-tag { background: white; color: var(–ink, #1C1409); font-size: 10px; padding: 2px 7px; border-radius: 10px; border: 1px solid var(–border, rgba(28,20,9,0.1)); }
-.rest-price { font-weight: 700; color: var(–terracotta, #B94A2C); }
-.rest-stars { color: var(–gold, #C9973A); font-size: 11px; }
-
-/* Util grid */
-.util-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-.util-card {
-background: var(–ink, #1C1409); border-radius: 14px;
-padding: 18px 14px; text-align: center;
-text-decoration: none; display: block;
-border: 1px solid rgba(201,151,58,0.25);
-box-shadow: 0 3px 12px rgba(0,0,0,0.2);
-transition: transform 0.12s;
-}
-.util-card:active { transform: scale(0.97); }
-.util-icon { font-size: 34px; margin-bottom: 7px; }
-.util-name { color: var(–cream, #F7F0E3); font-size: 14px; font-weight: 700; }
-.util-desc { color: rgba(255,255,255,0.55); font-size: 11px; margin-top: 2px; }
-
-/* Currency calc */
-.calc-card { background: white; border-radius: 14px; padding: 16px; margin-bottom: 12px; box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); }
-.calc-title { font-family: Georgia, ‘Times New Roman’, serif; font-size: 18px; font-weight: 600; margin-bottom: 12px; }
-.calc-row { display: flex; gap: 10px; align-items: center; margin-bottom: 10px; }
-.calc-wrap { flex: 1; position: relative; }
-.calc-sym { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-weight: 700; color: var(–stone, #9C8E7E); }
-.calc-in {
-width: 100%; padding: 11px 11px 11px 26px;
-border: 2px solid #EEE8DC; border-radius: 10px;
-font-size: 20px; font-family: -apple-system, BlinkMacSystemFont, ‘Helvetica Neue’, sans-serif;
-color: var(–ink, #1C1409); background: #F9F5EE; outline: none;
-}
-.calc-in:focus { border-color: var(–terracotta, #B94A2C); }
-.calc-arrow { font-size: 18px; color: var(–stone, #9C8E7E); }
-.calc-rate { font-size: 11px; color: var(–stone, #9C8E7E); text-align: right; }
-.rate-dot { display: inline-block; width: 6px; height: 6px; background: #4CAF50; border-radius: 50%; margin-right: 4px; animation: blink 2s infinite; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-/* Emergency */
-.emerg-card { background: #FFF3F0; border: 1.5px solid rgba(185,74,44,0.2); border-radius: 14px; padding: 14px; margin-bottom: 12px; }
-.emerg-title { color: var(–terracotta, #B94A2C); font-weight: 700; font-size: 13px; margin-bottom: 8px; }
-.emerg-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(185,74,44,0.08); font-size: 13px; }
-.emerg-row:last-child { border-bottom: none; }
-.emerg-num { font-weight: 700; color: var(–terracotta, #B94A2C); }
-
-/* Packing */
-.pack-cat { font-size: 10px; font-weight: 700; color: var(–stone, #9C8E7E); letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 0 6px; }
-.pack-row { display: flex; align-items: center; gap: 10px; padding: 7px 0; border-bottom: 1px solid var(–border, rgba(28,20,9,0.1)); cursor: pointer; }
-.pack-check { width: 20px; height: 20px; border-radius: 5px; border: 2px solid #DDD6C8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
-.pack-row.done .pack-check { background: var(–olive, #4E5E30); border-color: var(–olive, #4E5E30); }
-.pack-row.done .pack-check::after { content: ‘✓’; color: white; font-size: 12px; }
-.pack-lbl { font-size: 13px; }
-.pack-row.done .pack-lbl { color: var(–stone, #9C8E7E); text-decoration: line-through; }
-
-/* Phrases */
-.phrase-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 11px 14px; border-bottom: 1px solid var(–border, rgba(28,20,9,0.1)); }
-.phrase-row:last-child { border-bottom: none; }
-.p-en { font-size: 12px; color: var(–stone, #9C8E7E); }
-.p-it { font-weight: 700; font-size: 14px; }
-.p-speak { background: none; border: none; font-size: 17px; cursor: pointer; opacity: 0.6; }
-
-/* Tips */
-.tip-scroll { display: flex; gap: 8px; overflow-x: auto; padding: 4px 0 8px; scrollbar-width: none; }
-.tip-scroll::-webkit-scrollbar { display: none; }
-.tip-card { flex: 0 0 190px; background: white; border-radius: 13px; padding: 14px; box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); }
-.tip-icon { font-size: 22px; margin-bottom: 6px; }
-.tip-title { font-weight: 700; font-size: 13px; margin-bottom: 3px; }
-.tip-text { font-size: 11px; color: var(–stone, #9C8E7E); line-height: 1.5; }
-
-/* Family cards */
-.fam-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 12px; }
-.fam-card { background: white; border-radius: 13px; padding: 14px 8px; text-align: center; box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); }
-.fam-av { font-size: 30px; margin-bottom: 4px; }
-.fam-name { font-weight: 700; font-size: 12px; }
-.fam-role { font-size: 10px; color: var(–stone, #9C8E7E); margin-top: 1px; }
-
-/* FindMy banner */
-.findmy-bar {
-background: var(–ink, #1C1409); color: var(–cream, #F7F0E3);
-border-radius: 13px; padding: 14px;
-display: flex; align-items: center; gap: 12px;
-margin-bottom: 12px;
-}
-.findmy-btn {
-background: var(–gold, #C9973A); color: var(–ink, #1C1409);
-border: none; border-radius: 8px; padding: 7px 12px;
-font-size: 12px; font-weight: 700; cursor: pointer;
-font-family: -apple-system, BlinkMacSystemFont, ‘Helvetica Neue’, sans-serif; flex-shrink: 0;
-}
-
-/* Info box */
-.info-box { border-radius: 13px; padding: 14px; margin-bottom: 10px; display: flex; gap: 10px; }
-.info-box.olive-bg { background: var(–olive, #4E5E30); }
-.info-box-icon { font-size: 22px; }
-.info-box-title { font-weight: 700; font-size: 13px; margin-bottom: 3px; }
-.info-box.olive-bg .info-box-title, .info-box.olive-bg .info-box-text { color: white; }
-.info-box-text { font-size: 12px; line-height: 1.5; }
-
-/* Notes */
-.notes-wrap { background: white; border-radius: 13px; padding: 14px; box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); margin-bottom: 14px; }
-.notes-lbl { font-size: 10px; color: var(–stone, #9C8E7E); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
-.notes-ta { width: 100%; min-height: 90px; border: none; outline: none; font-family: -apple-system, BlinkMacSystemFont, ‘Helvetica Neue’, sans-serif; font-size: 13px; color: var(–ink, #1C1409); resize: none; background: transparent; line-height: 1.6; }
-
-/* Map */
-.map-container { width: 100%; height: 260px; border-radius: 14px; overflow: hidden; margin-bottom: 10px; box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); }
-.map-container iframe { width: 100%; height: 100%; border: none; }
-.map-open-btn { display: block; background: var(–ink, #1C1409); color: var(–cream, #F7F0E3); text-align: center; padding: 11px; border-radius: 11px; text-decoration: none; font-size: 13px; font-weight: 600; margin-bottom: 12px; }
-
-/* Weather */
-.wx-current { background: linear-gradient(135deg, #2B6CB0 0%, #1a4480 100%); border-radius: 14px; padding: 18px; margin-bottom: 10px; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 16px rgba(43,108,176,0.3); }
-.wx-big-temp { font-size: 52px; font-weight: 700; line-height: 1; }
-.wx-desc { font-size: 14px; opacity: 0.9; margin-top: 3px; }
-.wx-wind { font-size: 12px; opacity: 0.7; margin-top: 4px; }
-.wx-icon { font-size: 54px; }
-.wx-week { display: grid; grid-template-columns: repeat(7,1fr); gap: 5px; margin-bottom: 10px; }
-.wx-day { background: white; border-radius: 10px; padding: 8px 3px; text-align: center; box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); }
-.wx-dname { font-size: 9px; font-weight: 700; color: var(–stone, #9C8E7E); }
-.wx-ddate { font-size: 9px; color: var(–stone, #9C8E7E); opacity: 0.7; }
-.wx-dicon { font-size: 18px; margin: 4px 0; }
-.wx-dhi { font-size: 12px; font-weight: 700; color: var(–terracotta, #B94A2C); }
-.wx-dlo { font-size: 10px; color: var(–stone, #9C8E7E); }
-.wx-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 7px; margin-bottom: 10px; }
-.wx-stat { background: white; border-radius: 10px; padding: 10px 6px; text-align: center; box-shadow: var(–shadow, 0 2px 16px rgba(28,20,9,0.1)); }
-.wx-stat-icon { font-size: 18px; margin-bottom: 3px; }
-.wx-stat-val { font-size: 13px; font-weight: 700; }
-.wx-stat-lbl { font-size: 10px; color: var(–stone, #9C8E7E); margin-top: 1px; }
-.wx-src { font-size: 10px; color: var(–stone, #9C8E7E); text-align: center; padding-bottom: 4px; }
-.wx-loading { text-align: center; padding: 30px; color: var(–stone, #9C8E7E); }
-
-/* Countdown hero */
-.countdown-hero {
-background-color: #1a1209;
-background-image: url(‘https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp’);
-background-position: center center; background-size: cover;
-border-radius: 14px; padding: 28px 20px; margin-bottom: 14px;
-text-align: center; position: relative; overflow: hidden;
-isolation: isolate;
-}
-.countdown-hero::before {
-content: ‘’; position: absolute; inset: 0;
-background: linear-gradient(180deg, rgba(10,6,2,0.62) 0%, rgba(10,6,2,0.78) 100%);
-border-radius: 14px; pointer-events: none;
-}
-.countdown-hero > * { position: relative; z-index: 1; }
-.ch-num {
-font-family: Georgia, ‘Times New Roman’, serif;
-font-size: 84px; color: var(–gold, #C9973A); line-height: 1;
-font-weight: 700;
-text-shadow: 0 2px 12px rgba(0,0,0,0.9), 0 0 40px rgba(201,151,58,0.4);
-}
-.ch-label {
-font-size: 12px; color: white; font-weight: 700;
-letter-spacing: 3px; text-transform: uppercase; margin-top: 6px;
-text-shadow: 0 2px 8px rgba(0,0,0,0.95);
-}
-.ch-date { font-size: 14px; color: white; margin-top: 10px; font-weight: 700; text-shadow: 0 2px 8px rgba(0,0,0,0.95); }
+:root{--ink:#1C1409;--gold:#C9973A;--gold-light:#E8BE6A;--terracotta:#B94A2C;--cream:#F7F0E3;--stone:#9C8E7E;--olive:#4E5E30;--sky:#2B6CB0;--card:#FFFFFF;--border:rgba(28,20,9,0.1);--shadow:0 2px 16px rgba(28,20,9,0.1);}*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}html,body{font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;background:var(--cream,#F7F0E3);color:var(--ink,#1C1409);height:100%;overflow:hidden;width:100%;}#debug-box{display:none;position:fixed;bottom:0;left:0;right:0;background:#c00;color:white;padding:12px;font-size:12px;z-index:99999;white-space:pre-wrap;max-height:40vh;overflow-y:auto;}#splash{position:fixed;inset:0;z-index:9999;background:var(--ink,#1C1409);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;opacity:1;visibility:visible;transition:opacity 0.6s ease,visibility 0.6s ease;animation:forceHide 0.01s linear 4s forwards;}@keyframes forceHide{to{display:none;opacity:0;visibility:hidden;pointer-events:none;z-index:-1;}}#splash.out{opacity:0;visibility:hidden;pointer-events:none;animation:none;}.sp-flag{font-size:64px;margin-bottom:8px;animation:sp-float 3s ease-in-out infinite;}@keyframes sp-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}.sp-title{font-family:Georgia,'Times New Roman',serif;font-size:28px;color:var(--cream,#F7F0E3);letter-spacing:0.5px;text-align:center;line-height:1.25;padding:0 24px;}.sp-sub{font-size:11px;color:var(--stone,#9C8E7E);letter-spacing:3px;text-transform:uppercase;margin-top:4px;}.sp-divider{width:40px;height:1px;background:var(--gold,#C9973A);margin:16px auto;}.sp-days-num{font-family:Georgia,'Times New Roman',serif;font-size:72px;color:var(--gold,#C9973A);line-height:1;font-weight:600;animation:sp-pulse 2s ease-in-out infinite;}@keyframes sp-pulse{0%,100%{opacity:1}50%{opacity:0.8}}.sp-days-label{font-size:12px;color:var(--stone,#9C8E7E);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}.sp-bar{width:160px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;margin-top:28px;overflow:hidden;}.sp-fill{height:100%;width:0;background:linear-gradient(90deg,var(--gold,#C9973A),var(--gold-light,#E8BE6A));border-radius:2px;animation:sp-load 2.8s cubic-bezier(0.4,0,0.2,1) forwards;}@keyframes sp-load{0%{width:0;}85%{width:100%;}100%{width:100%;}}#app-header{position:fixed;top:0;left:0;right:0;z-index:500;height:56px;background:var(--ink,#1C1409);display:flex;align-items:center;justify-content:space-between;padding:0 16px;}.h-logo{font-family:Georgia,'Times New Roman',serif;font-size:20px;color:var(--cream,#F7F0E3);letter-spacing:0.3px;}.h-logo span{color:var(--gold,#C9973A);}.h-right{display:flex;align-items:center;gap:10px;}.h-pill{background:var(--gold,#C9973A);color:var(--ink,#1C1409);font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;white-space:nowrap;letter-spacing:0.2px;}.h-burger{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:5px;padding:6px;width:38px;height:38px;}.h-burger span{display:block;height:2px;background:var(--cream,#F7F0E3);border-radius:2px;transition:all 0.28s ease;transform-origin:center;}.h-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}.h-burger.open span:nth-child(2){opacity:0;transform:scaleX(0);}.h-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}#menu-overlay{display:none;position:fixed;inset:0;z-index:600;background:rgba(28,20,9,0.5);backdrop-filter:blur(2px);}#menu-overlay.show{display:block;}#side-menu{position:fixed;top:0;right:-300px;bottom:0;width:280px;z-index:700;background:var(--ink,#1C1409);padding:72px 0 32px;transition:right 0.32s cubic-bezier(0.4,0,0.2,1);overflow-y:auto;}#side-menu.open{right:0;}.menu-lbl{font-size:10px;font-weight:600;letter-spacing:2px;color:var(--stone,#9C8E7E);text-transform:uppercase;padding:16px 20px 8px;}.menu-divider{height:1px;background:rgba(255,255,255,0.07);margin:8px 0;}.menu-row{display:flex;align-items:center;gap:14px;padding:14px 20px;cursor:pointer;transition:background 0.15s;border:none;background:none;width:100%;text-align:left;}.menu-row:active{background:rgba(255,255,255,0.06);}.menu-row-icon{font-size:22px;width:32px;text-align:center;flex-shrink:0;}.menu-row-text{font-size:16px;color:var(--cream,#F7F0E3);font-weight:500;}.menu-row-sub{font-size:11px;color:var(--stone,#9C8E7E);margin-top:1px;}#main-view{position:fixed;top:56px;left:0;right:0;bottom:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;}#hero-band{background:linear-gradient(135deg,var(--terracotta,#B94A2C) 0%,#8B2A10 100%);padding:20px 20px 18px;position:relative;overflow:hidden;flex-shrink:0;}#hero-band::before{content:attr(data-city);position:absolute;right:-8px;top:-8px;font-family:Georgia,'Times New Roman',serif;font-size:88px;color:rgba(255,255,255,0.06);font-style:italic;pointer-events:none;line-height:1;}.hero-eyebrow{font-size:10px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,0.7);}.hero-date{font-family:Georgia,'Times New Roman',serif;font-size:30px;color:white;margin-top:2px;font-weight:600;line-height:1.15;}.hero-city{color:var(--gold-light,#E8BE6A);font-size:13px;font-weight:600;margin-top:3px;}.hero-weather{position:absolute;top:20px;right:20px;text-align:right;}.hero-temp{color:white;font-size:28px;font-weight:300;}.hero-cond{color:rgba(255,255,255,0.7);font-size:11px;margin-top:1px;}.wheel-wrap{background:var(--ink,#1C1409);padding:10px 0 14px;position:relative;flex-shrink:0;}.wheel-wrap::before,.wheel-wrap::after{content:'';position:absolute;top:0;bottom:0;width:52px;z-index:2;pointer-events:none;}.wheel-wrap::before{left:0;background:linear-gradient(to right,var(--ink,#1C1409),transparent);}.wheel-wrap::after{right:0;background:linear-gradient(to left,var(--ink,#1C1409),transparent);}.wheel-center-notch{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:76px;border-left:1.5px solid rgba(201,151,58,0.35);border-right:1.5px solid rgba(201,151,58,0.35);border-radius:2px;pointer-events:none;z-index:1;}#wheel-track{display:flex;gap:8px;padding:4px 50vw;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;cursor:grab;}#wheel-track::-webkit-scrollbar{display:none;}#wheel-track:active{cursor:grabbing;}.w-item{flex:0 0 68px;width:68px;height:72px;border-radius:14px;background:rgba(255,255,255,0.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;scroll-snap-align:center;cursor:pointer;transition:transform 0.22s cubic-bezier(0.34,1.56,0.64,1),background 0.22s ease,opacity 0.22s ease;transform:scale(0.82);opacity:0.5;border:1.5px solid transparent;user-select:none;}.w-item.active{transform:scale(1.0);opacity:1;background:rgba(201,151,58,0.15);border-color:rgba(201,151,58,0.5);}.w-item.near{transform:scale(0.92);opacity:0.75;}.w-day-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--stone,#9C8E7E);}.w-item.active .w-day-label{color:var(--gold,#C9973A);}.w-day-num{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:600;color:var(--cream,#F7F0E3);line-height:1;}.w-item.active .w-day-num{color:white;}.w-city{font-size:8px;font-weight:600;letter-spacing:0.3px;color:rgba(255,255,255,0.4);text-align:center;padding:0 4px;line-height:1.2;}.w-item.active .w-city{color:var(--gold-light,#E8BE6A);}.w-special{font-size:11px;margin-top:1px;}#day-content-area{padding:16px;min-height:60vh;}.special-banner{background:linear-gradient(135deg,var(--gold,#C9973A) 0%,#a07020 100%);border-radius:14px;padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:14px;}.special-banner-icon{font-size:30px;}.special-banner-text .sp-b-title{font-weight:700;font-size:15px;color:var(--ink,#1C1409);}.special-banner-text .sp-b-sub{font-size:12px;color:rgba(28,20,9,0.7);margin-top:2px;}.day-header-card{background:linear-gradient(135deg,var(--terracotta,#B94A2C),#8B2A10);border-radius:14px;padding:14px 16px;margin-bottom:14px;color:white;}.dhc-label{font-size:10px;opacity:0.7;letter-spacing:2px;text-transform:uppercase;}.dhc-city{font-family:Georgia,'Times New Roman',serif;font-size:26px;margin-top:2px;font-weight:600;}.dhc-sub{font-size:12px;opacity:0.8;margin-top:2px;}.tl-card{background:var(--card,#FFFFFF);border-radius:14px;overflow:hidden;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));margin-bottom:14px;}.tl-item{display:flex;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border,rgba(28,20,9,0.1));}.tl-item:last-child{border-bottom:none;}.tl-time{font-size:11px;font-weight:700;color:var(--ink,#1C1409);min-width:54px;padding-top:2px;flex-shrink:0;}.tl-dot{width:9px;height:9px;border-radius:50%;background:var(--terracotta,#B94A2C);margin-top:4px;flex-shrink:0;box-shadow:0 0 0 3px rgba(185,74,44,0.15);}.tl-dot.gold{background:var(--gold,#C9973A);box-shadow:0 0 0 3px rgba(201,151,58,0.2);}.tl-dot.olive{background:var(--olive,#4E5E30);box-shadow:0 0 0 3px rgba(78,94,48,0.2);}.tl-dot.sky{background:var(--sky);box-shadow:0 0 0 3px rgba(43,108,176,0.2);}.tl-body{flex:1;}.tl-title{font-weight:700;font-size:14px;color:var(--ink,#1C1409);line-height:1.3;}.tl-desc{font-size:12px;color:#5a5048;margin-top:3px;line-height:1.55;}.tl-desc a{color:var(--terracotta,#B94A2C);font-weight:700;text-decoration:none;}.tl-tag{display:inline-block;margin-top:5px;background:#EEE8DC;color:var(--stone,#9C8E7E);font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;}.tl-tag.booked{background:rgba(78,94,48,0.12);color:var(--olive,#4E5E30);}.tl-tag.flight{background:rgba(43,108,176,0.1);color:#1a5fa8;}.tl-tag.alert{background:rgba(185,74,44,0.1);color:var(--terracotta,#B94A2C);}#panel-overlay{display:none;position:fixed;inset:0;z-index:800;background:rgba(28,20,9,0.45);backdrop-filter:blur(2px);}#panel-overlay.show{display:block;}#panel-sheet{position:fixed;left:0;right:0;bottom:-100%;z-index:900;max-height:90vh;background:var(--cream,#F7F0E3);border-radius:22px 22px 0 0;transition:bottom 0.38s cubic-bezier(0.4,0,0.2,1);display:flex;flex-direction:column;overflow:hidden;}#panel-sheet.open{bottom:0;}.ps-handle{width:36px;height:4px;border-radius:2px;background:rgba(28,20,9,0.2);margin:12px auto 0;flex-shrink:0;}.ps-header{display:flex;align-items:center;justify-content:space-between;padding:12px 20px 8px;flex-shrink:0;border-bottom:1px solid var(--border,rgba(28,20,9,0.1));}.ps-title{font-family:Georgia,'Times New Roman',serif;font-size:22px;font-weight:600;}.ps-close{background:rgba(28,20,9,0.08);border:none;width:30px;height:30px;border-radius:50%;font-size:14px;cursor:pointer;color:var(--ink,#1C1409);display:flex;align-items:center;justify-content:center;}.ps-body{overflow-y:auto;flex:1;padding:14px;-webkit-overflow-scrolling:touch;}.card{background:var(--card,#FFFFFF);border-radius:14px;margin-bottom:12px;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));overflow:hidden;}.card-hdr{display:flex;align-items:center;gap:10px;padding:12px 14px 8px;border-bottom:1px solid var(--border,rgba(28,20,9,0.1));}.card-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}.ico-t{background:rgba(185,74,44,0.1);}.ico-g{background:rgba(201,151,58,0.12);}.ico-o{background:rgba(78,94,48,0.1);}.ico-s{background:rgba(43,108,176,0.1);}.card-title{font-weight:700;font-size:15px;}.card-sub{font-size:11px;color:var(--stone,#9C8E7E);margin-top:1px;}.pills-row{display:flex;gap:7px;overflow-x:auto;padding:8px 0 4px;scrollbar-width:none;}.pills-row::-webkit-scrollbar{display:none;}.pill{flex:0 0 auto;padding:8px 14px;border-radius:50px;font-size:13px;font-weight:600;cursor:pointer;border:2px solid var(--border,rgba(28,20,9,0.1));background:white;color:var(--ink,#1C1409);transition:all 0.15s;white-space:nowrap;}.pill.on{background:var(--terracotta,#B94A2C);color:white;border-color:var(--terracotta,#B94A2C);}.pin-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--border,rgba(28,20,9,0.1));}.pin-row:last-child{border-bottom:none;}.pin-em{font-size:20px;}.pin-info{flex:1;}.pin-name{font-weight:600;font-size:13px;}.pin-addr{font-size:11px;color:var(--stone,#9C8E7E);margin-top:1px;}.pin-addr a{color:var(--terracotta,#B94A2C);font-weight:600;text-decoration:none;}.pin-btn{background:var(--ink,#1C1409);color:var(--cream,#F7F0E3);border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:600;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;white-space:nowrap;}.rest-item{background:#F0EAD8;border-radius:12px;padding:12px;margin-bottom:8px;display:flex;gap:10px;}.rest-em{font-size:26px;flex-shrink:0;}.rest-name{font-weight:700;font-size:14px;}.rest-meta{font-size:11px;color:var(--stone,#9C8E7E);margin-top:2px;}.rest-meta a{color:var(--terracotta,#B94A2C);font-weight:600;text-decoration:none;}.rest-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}.rest-tag{background:white;color:var(--ink,#1C1409);font-size:10px;padding:2px 7px;border-radius:10px;border:1px solid var(--border,rgba(28,20,9,0.1));}.rest-price{font-weight:700;color:var(--terracotta,#B94A2C);}.rest-stars{color:var(--gold,#C9973A);font-size:11px;}.util-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}.util-card{background:var(--ink,#1C1409);border-radius:14px;padding:18px 14px;text-align:center;text-decoration:none;display:block;border:1px solid rgba(201,151,58,0.25);box-shadow:0 3px 12px rgba(0,0,0,0.2);transition:transform 0.12s;}.util-card:active{transform:scale(0.97);}.util-icon{font-size:34px;margin-bottom:7px;}.util-name{color:var(--cream,#F7F0E3);font-size:14px;font-weight:700;}.util-desc{color:rgba(255,255,255,0.55);font-size:11px;margin-top:2px;}.calc-card{background:white;border-radius:14px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));}.calc-title{font-family:Georgia,'Times New Roman',serif;font-size:18px;font-weight:600;margin-bottom:12px;}.calc-row{display:flex;gap:10px;align-items:center;margin-bottom:10px;}.calc-wrap{flex:1;position:relative;}.calc-sym{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-weight:700;color:var(--stone,#9C8E7E);}.calc-in{width:100%;padding:11px 11px 11px 26px;border:2px solid #EEE8DC;border-radius:10px;font-size:20px;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;color:var(--ink,#1C1409);background:#F9F5EE;outline:none;}.calc-in:focus{border-color:var(--terracotta,#B94A2C);}.calc-arrow{font-size:18px;color:var(--stone,#9C8E7E);}.calc-rate{font-size:11px;color:var(--stone,#9C8E7E);text-align:right;}.rate-dot{display:inline-block;width:6px;height:6px;background:#4CAF50;border-radius:50%;margin-right:4px;animation:blink 2s infinite;}@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}.emerg-card{background:#FFF3F0;border:1.5px solid rgba(185,74,44,0.2);border-radius:14px;padding:14px;margin-bottom:12px;}.emerg-title{color:var(--terracotta,#B94A2C);font-weight:700;font-size:13px;margin-bottom:8px;}.emerg-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(185,74,44,0.08);font-size:13px;}.emerg-row:last-child{border-bottom:none;}.emerg-num{font-weight:700;color:var(--terracotta,#B94A2C);}.pack-cat{font-size:10px;font-weight:700;color:var(--stone,#9C8E7E);letter-spacing:1.5px;text-transform:uppercase;padding:12px 0 6px;}.pack-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border,rgba(28,20,9,0.1));cursor:pointer;}.pack-check{width:20px;height:20px;border-radius:5px;border:2px solid #DDD6C8;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}.pack-row.done .pack-check{background:var(--olive,#4E5E30);border-color:var(--olive,#4E5E30);}.pack-row.done .pack-check::after{content:'✓';color:white;font-size:12px;}.pack-lbl{font-size:13px;}.pack-row.done .pack-lbl{color:var(--stone,#9C8E7E);text-decoration:line-through;}.phrase-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--border,rgba(28,20,9,0.1));}.phrase-row:last-child{border-bottom:none;}.p-en{font-size:12px;color:var(--stone,#9C8E7E);}.p-it{font-weight:700;font-size:14px;}.p-speak{background:none;border:none;font-size:17px;cursor:pointer;opacity:0.6;}.tip-scroll{display:flex;gap:8px;overflow-x:auto;padding:4px 0 8px;scrollbar-width:none;}.tip-scroll::-webkit-scrollbar{display:none;}.tip-card{flex:0 0 190px;background:white;border-radius:13px;padding:14px;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));}.tip-icon{font-size:22px;margin-bottom:6px;}.tip-title{font-weight:700;font-size:13px;margin-bottom:3px;}.tip-text{font-size:11px;color:var(--stone,#9C8E7E);line-height:1.5;}.fam-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;}.fam-card{background:white;border-radius:13px;padding:14px 8px;text-align:center;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));}.fam-av{font-size:30px;margin-bottom:4px;}.fam-name{font-weight:700;font-size:12px;}.fam-role{font-size:10px;color:var(--stone,#9C8E7E);margin-top:1px;}.findmy-bar{background:var(--ink,#1C1409);color:var(--cream,#F7F0E3);border-radius:13px;padding:14px;display:flex;align-items:center;gap:12px;margin-bottom:12px;}.findmy-btn{background:var(--gold,#C9973A);color:var(--ink,#1C1409);border:none;border-radius:8px;padding:7px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;flex-shrink:0;}.info-box{border-radius:13px;padding:14px;margin-bottom:10px;display:flex;gap:10px;}.info-box.olive-bg{background:var(--olive,#4E5E30);}.info-box-icon{font-size:22px;}.info-box-title{font-weight:700;font-size:13px;margin-bottom:3px;}.info-box.olive-bg .info-box-title,.info-box.olive-bg .info-box-text{color:white;}.info-box-text{font-size:12px;line-height:1.5;}.notes-wrap{background:white;border-radius:13px;padding:14px;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));margin-bottom:14px;}.notes-lbl{font-size:10px;color:var(--stone,#9C8E7E);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}.notes-ta{width:100%;min-height:90px;border:none;outline:none;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',sans-serif;font-size:13px;color:var(--ink,#1C1409);resize:none;background:transparent;line-height:1.6;}.map-container{width:100%;height:260px;border-radius:14px;overflow:hidden;margin-bottom:10px;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));}.map-container iframe{width:100%;height:100%;border:none;}.map-open-btn{display:block;background:var(--ink,#1C1409);color:var(--cream,#F7F0E3);text-align:center;padding:11px;border-radius:11px;text-decoration:none;font-size:13px;font-weight:600;margin-bottom:12px;}.wx-current{background:linear-gradient(135deg,#2B6CB0 0%,#1a4480 100%);border-radius:14px;padding:18px;margin-bottom:10px;color:white;display:flex;justify-content:space-between;align-items:center;box-shadow:0 4px 16px rgba(43,108,176,0.3);}.wx-big-temp{font-size:52px;font-weight:700;line-height:1;}.wx-desc{font-size:14px;opacity:0.9;margin-top:3px;}.wx-wind{font-size:12px;opacity:0.7;margin-top:4px;}.wx-icon{font-size:54px;}.wx-week{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:10px;}.wx-day{background:white;border-radius:10px;padding:8px 3px;text-align:center;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));}.wx-dname{font-size:9px;font-weight:700;color:var(--stone,#9C8E7E);}.wx-ddate{font-size:9px;color:var(--stone,#9C8E7E);opacity:0.7;}.wx-dicon{font-size:18px;margin:4px 0;}.wx-dhi{font-size:12px;font-weight:700;color:var(--terracotta,#B94A2C);}.wx-dlo{font-size:10px;color:var(--stone,#9C8E7E);}.wx-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-bottom:10px;}.wx-stat{background:white;border-radius:10px;padding:10px 6px;text-align:center;box-shadow:var(--shadow,0 2px 16px rgba(28,20,9,0.1));}.wx-stat-icon{font-size:18px;margin-bottom:3px;}.wx-stat-val{font-size:13px;font-weight:700;}.wx-stat-lbl{font-size:10px;color:var(--stone,#9C8E7E);margin-top:1px;}.wx-src{font-size:10px;color:var(--stone,#9C8E7E);text-align:center;padding-bottom:4px;}.wx-loading{text-align:center;padding:30px;color:var(--stone,#9C8E7E);}.countdown-hero{background-color:#1a1209;background-image:url('https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/images/pantheon.webp');background-position:center center;background-size:cover;border-radius:14px;padding:28px 20px;margin-bottom:14px;text-align:center;position:relative;overflow:hidden;isolation:isolate;}.countdown-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,6,2,0.62) 0%,rgba(10,6,2,0.78) 100%);border-radius:14px;pointer-events:none;}.countdown-hero>*{position:relative;z-index:1;}.ch-num{font-family:Georgia,'Times New Roman',serif;font-size:84px;color:var(--gold,#C9973A);line-height:1;font-weight:700;text-shadow:0 2px 12px rgba(0,0,0,0.9),0 0 40px rgba(201,151,58,0.4);}.ch-label{font-size:12px;color:white;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:6px;text-shadow:0 2px 8px rgba(0,0,0,0.95);}.ch-date{font-size:14px;color:white;margin-top:10px;font-weight:700;text-shadow:0 2px 8px rgba(0,0,0,0.95);}
 </style>
-
 </head>
 <body>
 
@@ -625,7 +27,7 @@ text-shadow: 0 2px 8px rgba(0,0,0,0.95);
   <div class="sp-title">The Chiesa Family's<br>Italian Holiday</div>
   <div class="sp-sub">June – July 2026</div>
   <div class="sp-divider"></div>
-  <div class="sp-days-num" id="splash-num">--</div>
+  <div class="sp-days-num" id="splash-num">—</div>
   <div class="sp-days-label">Days Until Departure</div>
   <div class="sp-bar"><div class="sp-fill"></div></div>
 </div>
@@ -682,11 +84,11 @@ text-shadow: 0 2px 8px rgba(0,0,0,0.95);
 <div id="main-view">
   <div id="hero-band" data-city="ROME">
     <div class="hero-eyebrow" id="hero-eyebrow">LOADING...</div>
-    <div class="hero-date" id="hero-date">--</div>
+    <div class="hero-date" id="hero-date">—</div>
     <div class="hero-city" id="hero-city">📍 Italy</div>
     <div class="hero-weather">
-      <div class="hero-temp" id="hero-temp">--°F</div>
-      <div class="hero-cond" id="hero-cond">⛅ --</div>
+      <div class="hero-temp" id="hero-temp">—°F</div>
+      <div class="hero-cond" id="hero-cond">⛅ —</div>
     </div>
   </div>
 
@@ -704,15 +106,13 @@ text-shadow: 0 2px 8px rgba(0,0,0,0.95);
 <div id="panel-sheet">
   <div class="ps-handle"></div>
   <div class="ps-header">
-    <div class="ps-title" id="ps-title">--</div>
+    <div class="ps-title" id="ps-title">—</div>
     <button class="ps-close" onclick="closePanel()">✕</button>
   </div>
   <div class="ps-body" id="ps-body"></div>
 </div>
 
 <script>
-
-
 const TRIP_START = new Date('2026-06-19');
 const TRIP_END   = new Date('2026-07-04');
 const DEPARTURE  = new Date('2026-06-18');
@@ -720,113 +120,113 @@ const DEPARTURE  = new Date('2026-06-18');
 const DAYS = [
   { day:0, date:'Jun 18', city:'Charlottesville → Chicago → Munich', label:'Departure Day 🇺🇸', cityCode:'ROME', events:[
     {time:'All day', title:'🧳 Final packing & prep', desc:'Check passports, print confirmations, charge all devices, download offline Google Maps for all cities.', dot:'gold', tag:'Prep'},
-    {time:'2:00 PM', title:'🚗 Drive to CHO Airport', desc:'Charlottesville Albemarle Airport · Allow extra time -- small airport, but confirm parking in advance.', dot:'olive', tag:'Depart'},
+    {time:'2:00 PM', title:'🚗 Drive to CHO Airport', desc:'Charlottesville Albemarle Airport · Allow extra time — small airport, but confirm parking in advance.', dot:'olive', tag:'Depart'},
     {time:'3:00 PM', title:'✈️ Flight 1: CHO → IAD', desc:'UA4328 operated by CommutAir/United Express · 45 min flight · Arrives Washington Dulles 3:45pm', dot:'sky', tag:'UA4328', tagClass:'flight'},
     {time:'3:45 PM', title:'🛬 Arrive Washington Dulles (IAD)', desc:'Layover ~6.5 hours · Time to eat, relax, charge everything. United Club or explore terminals.', dot:'', tag:'Layover'},
     {time:'10:20 PM', title:'✈️ Flight 2: IAD → Munich (MUC)', desc:'UA8784 operated by Lufthansa · Check in at LUFTHANSA counter · Overnight transatlantic flight · Arrives Munich 12:30pm next day', dot:'sky', tag:'UA8784', tagClass:'flight'},
-    {time:'Night', title:'😴 Try to sleep on the plane', desc:'Munich arrives at noon -- rest helps you skip jet lag. Neck pillow, eye mask, set watch to Rome time now.', dot:'gold', tag:'Tip'},
+    {time:'Night', title:'😴 Try to sleep on the plane', desc:'Munich arrives at noon — rest helps you skip jet lag. Neck pillow, eye mask, set watch to Rome time now.', dot:'gold', tag:'Tip'},
   ]},
   { day:1, date:'Jun 19', city:'Rome', label:'Arrival Day', cityCode:'ROME', events:[
-    {time:'3:05 PM', title:'✈️ Land at FCO -- Rome Fiumicino', desc:'Final leg: Munich → Rome (UA9212 / Lufthansa). Collect bags.', dot:'sky', tag:'Flight', tagClass:'flight'},
+    {time:'3:05 PM', title:'✈️ Land at FCO — Rome Fiumicino', desc:'Final leg: Munich → Rome (UA9212 / Lufthansa). Collect bags.', dot:'sky', tag:'Flight', tagClass:'flight'},
     {time:'~4:30 PM', title:'🚕 Taxi to Airbnb next to Pantheon', desc:'Use Uber, Free Now app, or official taxi (fixed rate ~€48 from airport). Reservation HMBAJ4K352', dot:'', tag:'Book taxi'},
-    {time:'Evening', title:'⛪ Quick walk -- Santa Maria Sopra Minerva', desc:"Right behind the Pantheon -- Michelangelo's Christ Carrying the Cross + elephant obelisk. Free entry.", dot:'olive', tag:'Free'},
+    {time:'Evening', title:'⛪ Quick walk — Santa Maria Sopra Minerva', desc:"Right behind the Pantheon — Michelangelo's Christ Carrying the Cross + elephant obelisk. Free entry.", dot:'olive', tag:'Free'},
     {time:'7:00 PM', title:'🍷 Dinner in Trastevere', desc:'Trendy neighborhood across the river. Note: may be far for Nannie & Big Daddy. Uber back.', dot:'gold', tag:'Suggestion'},
   ]},
   { day:2, date:'Jun 20', city:'Rome', label:'Monuments & Parks', cityCode:'ROME', events:[
     {time:'10:30 AM', title:'👴👵 Nannie & Big Daddy Arrive', desc:'AA flight 720 from CLT arrives Rome 10:30am', dot:'sky', tag:'AA720', tagClass:'flight'},
-    {time:'Morning', title:'☕ Breakfast near Pantheon', desc:"Tazza d'Oro or Sant'Eustachio Caffè -- two of Rome's best espresso bars, both steps away", dot:'gold', tag:'Coffee'},
-    {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online -- cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
-    {time:'1:00 PM', title:'🍕 Lunch', desc:'All\'Antico Vinaio (sandwiches) or Brucio (pizza) -- both Brandon picks', dot:'gold', tag:'Food'},
+    {time:'Morning', title:'☕ Breakfast near Pantheon', desc:"Tazza d'Oro or Sant'Eustachio Caffè — two of Rome's best espresso bars, both steps away", dot:'gold', tag:'Coffee'},
+    {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online — cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
+    {time:'1:00 PM', title:'🍕 Lunch', desc:'All\'Antico Vinaio (sandwiches) or Brucio (pizza) — both Brandon picks', dot:'gold', tag:'Food'},
     {time:'2:30 PM', title:'⛲ Trevi Fountain', desc:'Go mid-afternoon, early morning for fewer crowds. Toss a coin! <a href="https://maps.google.com/?q=Trevi+Fountain,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'', tag:'Free'},
     {time:'4:00 PM', title:'🏡 Spanish Steps', desc:'Walk up for the panoramic view over Rome. <a href="https://maps.google.com/?q=Spanish+Steps,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
-    {time:'5:00 PM', title:'🌳 Villa Borghese Park', desc:'Large park with villas, zoo, and beautiful gardens -- great for a stroll', dot:'olive', tag:'Free'},
-    {time:'8:00 PM', title:'🍽️ Dinner -- Campo de\'Fiori → Trastevere', desc:'Walk through Campo de\'Fiori (site of executions, statue of Bruno the heretic) en route to dinner', dot:'gold', tag:'Evening'},
+    {time:'5:00 PM', title:'🌳 Villa Borghese Park', desc:'Large park with villas, zoo, and beautiful gardens — great for a stroll', dot:'olive', tag:'Free'},
+    {time:'8:00 PM', title:'🍽️ Dinner — Campo de\'Fiori → Trastevere', desc:'Walk through Campo de\'Fiori (site of executions, statue of Bruno the heretic) en route to dinner', dot:'gold', tag:'Evening'},
   ]},
   { day:3, date:'Jun 21', city:'Rome', label:"Golf Cart Tour + Alfredo 👨‍👧‍👦 Father's Day!", cityCode:'ROME', events:[
-    {time:'🎉', title:"Happy Father's Day! 👨‍👧‍👦", desc:"Celebrating Brandon & Big Daddy in Rome -- what a place to spend Father's Day! Buona Festa del Papà!", dot:'gold', tag:"Father's Day"},
+    {time:'🎉', title:"Happy Father's Day! 👨‍👧‍👦", desc:"Celebrating Brandon & Big Daddy in Rome — what a place to spend Father's Day! Buona Festa del Papà!", dot:'gold', tag:"Father's Day"},
     {time:'8:30 AM', title:'🏎️ Golf Cart Tour of Rome', desc:'Private Rome Golf Cart Tour · 3 hours · Ends 11:30am · <a href="https://livtours.com/tours/private-rome-golf-cart-tour/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a>', dot:'', tag:'Booked', tagClass:'booked'},
-    {time:'12:00 PM', title:'🏺 Largo Argentina', desc:'Where Julius Caesar was assassinated + cat sanctuary. Buy online -- much cheaper! <a href="https://maps.google.com/?q=Largo+di+Torre+Argentina,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a> · <a href="https://www.romanoimpero.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'olive', tag:'Book online'},
-    {time:'2:00 PM', title:'🌊 Vicus Caprarius -- Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
-    {time:'3:30 PM', title:'☕ Antico Caffè Greco', desc:'One of the oldest cafes in Rome -- historic stop near Spanish Steps', dot:'gold', tag:'Must do'},
-    {time:'7:30 PM', title:'🍝 Il Vero Alfredo -- BOOKED', desc:'Booking Reference: BV4ML76Q · The original Fettuccine Alfredo restaurant', dot:'', tag:'✓ Confirmed', tagClass:'booked'},
+    {time:'12:00 PM', title:'🏺 Largo Argentina', desc:'Where Julius Caesar was assassinated + cat sanctuary. Buy online — much cheaper! <a href="https://maps.google.com/?q=Largo+di+Torre+Argentina,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a> · <a href="https://www.romanoimpero.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'olive', tag:'Book online'},
+    {time:'2:00 PM', title:'🌊 Vicus Caprarius — Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
+    {time:'3:30 PM', title:'☕ Antico Caffè Greco', desc:'One of the oldest cafes in Rome — historic stop near Spanish Steps', dot:'gold', tag:'Must do'},
+    {time:'7:30 PM', title:'🍝 Il Vero Alfredo — BOOKED', desc:'Booking Reference: BV4ML76Q · The original Fettuccine Alfredo restaurant', dot:'', tag:'✓ Confirmed', tagClass:'booked'},
   ]},
   { day:4, date:'Jun 22', city:'Rome', label:'Vatican Day', cityCode:'ROME', events:[
     {time:'7:45 AM', title:'🎨 VIP Vatican Breakfast Tour', desc:'Private Vatican tour with breakfast · 3.5 hours · <a href="https://livtours.com/tours/private-vatican-breakfast-tour-vip/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a> · <a href="https://maps.google.com/?q=Vatican+Museums,Vatican+City" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'12:00 PM', title:'🍽️ Lunch near Vatican', desc:'Pietro Valentini or explore Prati neighborhood (locals\' area near Vatican)', dot:'gold', tag:'Suggestion'},
     {time:'Afternoon', title:'🗺️ Free afternoon in Rome', desc:'Revisit favorites, souvenir shopping, or relax near Pantheon', dot:'olive', tag:'Free'},
-    {time:'Evening', title:'🌙 Last night in Rome', desc:'Evening passeggiata -- the Italian tradition of the evening stroll', dot:'gold', tag:'Evening'},
+    {time:'Evening', title:'🌙 Last night in Rome', desc:'Evening passeggiata — the Italian tradition of the evening stroll', dot:'gold', tag:'Evening'},
   ]},
   { day:5, date:'Jun 23', city:'Florence', label:'Rome → Florence', cityCode:'FLORENCE', events:[
-    {time:'11:55 AM', title:'🚄 Italo EE8MQZ -- Everyone: Roma Termini → Firenze SMN', desc:'Train 8914 · Prima Business · Arrives 13:31 · Coach 2 · Brandon 14, Holly 15, Alfred 16, Ginger 17, Virginia 18, Adelle 19, Pearl 20 · Fast Track · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/rome-to-florence.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ EE8MQZ', tagClass:'booked'},
-    {time:'Afternoon', title:'🏨 Check in -- Solo Experience Hotel', desc:'2 rooms with breakfast included · soloexperiencehotel.com', dot:'', tag:'Hotel', tagClass:'booked'},
-    {time:'2:00 PM', title:'👜 Made in Tuscany Firenze -- Dimitri', desc:'Via degli Alfani 129r · Ex-Gucci craftsman · Cash for discount! Custom belts. Open 9am–7:30pm. <a href="https://maps.google.com/?q=Via+degli+Alfani+129r,+Florence,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Must visit'},
+    {time:'11:55 AM', title:'🚄 Italo EE8MQZ — Everyone: Roma Termini → Firenze SMN', desc:'Train 8914 · Prima Business · Arrives 13:31 · Coach 2 · Brandon 14, Holly 15, Alfred 16, Ginger 17, Virginia 18, Adelle 19, Pearl 20 · Fast Track · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/rome-to-florence.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ EE8MQZ', tagClass:'booked'},
+    {time:'Afternoon', title:'🏨 Check in — Solo Experience Hotel', desc:'2 rooms with breakfast included · soloexperiencehotel.com', dot:'', tag:'Hotel', tagClass:'booked'},
+    {time:'2:00 PM', title:'👜 Made in Tuscany Firenze — Dimitri', desc:'Via degli Alfani 129r · Ex-Gucci craftsman · Cash for discount! Custom belts. Open 9am–7:30pm. <a href="https://maps.google.com/?q=Via+degli+Alfani+129r,+Florence,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Must visit'},
     {time:'4:00 PM', title:'🌸 Ponte Vecchio & Oltrarno stroll', desc:'Famous jewelers bridge, then explore the artisan neighborhood south of the river. <a href="https://maps.google.com/?q=Ponte+Vecchio,+Florence,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
-    {time:'7:30 PM', title:'🍝 Dinner -- Trattoria Sergio Gozzi', desc:'Piazza San Lorenzo · Cash only, arrive early, local institution', dot:'gold', tag:'Recommendation'},
+    {time:'7:30 PM', title:'🍝 Dinner — Trattoria Sergio Gozzi', desc:'Piazza San Lorenzo · Cash only, arrive early, local institution', dot:'gold', tag:'Recommendation'},
   ]},
   { day:6, date:'Jun 24', city:'Florence → Parma', label:'Art + Split Day', cityCode:'FLORENCE', events:[
-    {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance -- Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
-    {time:'1:00 PM', title:'🍝 Lunch -- Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
-    {time:'1:39 PM', title:'🚄 Italo -- Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Coach 3 · Brandon 29, Holly 30, Virginia 31, Adelle 32, Pearl 33 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-bologna.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ SEJ54J', tagClass:'booked'},
-    {time:'2:18 PM', title:'🔀 Split at Bologna Centrale', desc:'Ginger & Alfred stay on Train 8914 to Venezia -- arrives 15:55 · Coach 3 · Seats 37 & 36 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-venice.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'gold', tag:'✓ TBHQMV', tagClass:'booked'},
+    {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance — Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
+    {time:'1:00 PM', title:'🍝 Lunch — Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
+    {time:'1:39 PM', title:'🚄 Italo — Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Coach 3 · Brandon 29, Holly 30, Virginia 31, Adelle 32, Pearl 33 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-bologna.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ SEJ54J', tagClass:'booked'},
+    {time:'2:18 PM', title:'🔀 Split at Bologna Centrale', desc:'Ginger & Alfred stay on Train 8914 to Venezia — arrives 15:55 · Coach 3 · Seats 37 & 36 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-venice.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'gold', tag:'✓ TBHQMV', tagClass:'booked'},
     {time:'2:50 PM', title:'🚄 Brandon, Holly + kids: Bologna → Parma', desc:'Regionale TTPER 17416 · Bologna Centrale 14:50 → Parma 16:01 · Ticket: 2799971845 · CP: 766705 · €8.50 · 2nd class regional · <a href="https://www.lefrecce.it/Channels.Website.WEB/#/self-check-in?id=4RjR3E5P2scGWpNplxfvX4aSvoylSyr3y1gSypCoMFc=" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ Booked', tagClass:'booked'},
-    {time:'Evening', title:'🏠 Check in -- Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
+    {time:'Evening', title:'🏠 Check in — Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
   ]},
   { day:7, date:'Jun 25', city:'Parma', label:'Parmigiano Bike Tour', cityCode:'PARMA', events:[
-    {time:'Morning', title:'☕ Explore Parma city center', desc:'Cathedral, Baptistery, Piazza Garibaldi -- beautiful and uncrowded Italian city', dot:'olive', tag:'Free'},
-    {time:'12:00 PM', title:'🍽️ Lunch', desc:'Order everything with Prosciutto di Parma and Parmigiano -- you\'re in the source!', dot:'gold', tag:'Food'},
+    {time:'Morning', title:'☕ Explore Parma city center', desc:'Cathedral, Baptistery, Piazza Garibaldi — beautiful and uncrowded Italian city', dot:'olive', tag:'Free'},
+    {time:'12:00 PM', title:'🍽️ Lunch', desc:'Order everything with Prosciutto di Parma and Parmigiano — you\'re in the source!', dot:'gold', tag:'Food'},
     {time:'3:00 PM', title:'🚲 Parmigiano Factory Bike Tour (4 hours)', desc:'Bike Food Stories · Str. Giuseppe Garibaldi 29 · ☎ +39 349 783 8492 · <a href="https://maps.google.com/?q=Str.+Giuseppe+Garibaldi+29,+Parma,+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.tripadvisor.com/AttractionProductReview-g187804-d15304065" target="_blank" style="color:var(--gold)">⭐ TripAdvisor</a>', dot:'', tag:'Booked', tagClass:'booked'},
-    {time:'7:00 PM', title:'🍷 Dinner after the tour', desc:'You\'ll be full of cheese and happy. Light dinner -- wine and charcuterie.', dot:'gold', tag:'Evening'},
+    {time:'7:00 PM', title:'🍷 Dinner after the tour', desc:'You\'ll be full of cheese and happy. Light dinner — wine and charcuterie.', dot:'gold', tag:'Evening'},
   ]},
   { day:8, date:'Jun 26', city:'Parma', label:'Free Day in Parma', cityCode:'PARMA', events:[
-    {time:'Morning', title:'🏛️ Parma Duomo & Baptistery', desc:'Stunning frescoes by Correggio in the cathedral dome -- one of Italy\'s hidden gems', dot:'olive', tag:'Free'},
-    {time:'Afternoon', title:'🛍️ Shopping & wandering', desc:'Parma is Italy\'s food capital -- prosciutto shops, cheese counters, local markets', dot:'gold', tag:'Free'},
-    {time:'Evening', title:'🍝 Last full dinner in Parma', desc:'Osteria Miriam or Trattoria Corrieri -- order the local pasta', dot:'gold', tag:'Suggestion'},
+    {time:'Morning', title:'🏛️ Parma Duomo & Baptistery', desc:'Stunning frescoes by Correggio in the cathedral dome — one of Italy\'s hidden gems', dot:'olive', tag:'Free'},
+    {time:'Afternoon', title:'🛍️ Shopping & wandering', desc:'Parma is Italy\'s food capital — prosciutto shops, cheese counters, local markets', dot:'gold', tag:'Free'},
+    {time:'Evening', title:'🍝 Last full dinner in Parma', desc:'Osteria Miriam or Trattoria Corrieri — order the local pasta', dot:'gold', tag:'Suggestion'},
   ]},
   { day:9, date:'Jun 27', city:'Parma', label:'Valmozzola + 🎂 Brandon\'s Birthday!', cityCode:'PARMA', events:[
-    {time:'🎂', title:"Happy Birthday Brandon! 🎉", desc:'Spending your birthday in the ancestral homeland of the Chiesa family -- it doesn\'t get more special than this. Auguri!', dot:'gold', tag:'Birthday!'},
+    {time:'🎂', title:"Happy Birthday Brandon! 🎉", desc:'Spending your birthday in the ancestral homeland of the Chiesa family — it doesn\'t get more special than this. Auguri!', dot:'gold', tag:'Birthday!'},
     {time:'9:30 AM', title:'🚗 Pick up Sixt Rental Car', desc:'Via Trento 3D, Parma · Reservation #9730023172 · <a href="https://maps.google.com/?q=Via+Trento+3D,+Parma,+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'sky', tag:'Car rental'},
     {time:'~11:00 AM', title:'🏘️ Drive to Valmozzola', desc:'~1 hour south of Parma into the Apennine mountains. Stunning scenic drive. <a href="https://maps.google.com/?q=Valmozzola,+PR,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Special'},
     {time:'11:30 AM', title:'⛪ Visit Giuseppe Chiesa\'s birthplace', desc:'Strada San Siro 10, 43050 Valmozzola PR · Your family\'s ancestral home · <a href="https://maps.google.com/?q=Strada+San+Siro+10,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'', tag:'Ancestral', tagClass:'booked'},
     {time:'12:00 PM', title:'⛪ Visit Maria Ferretti\'s birthplace', desc:'San Martino 6, 43050 Valmozzola PR · Explore the village, photograph everything · <a href="https://maps.google.com/?q=San+Martino+6,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Ancestral'},
     {time:'2:00 PM', title:'🛒 Optional: Fidenza Village outlet stop', desc:'Designer outlet shopping on the drive back north toward Parma. Save Fidenza for the Jun 28 drive to Lake Garda if preferred.', dot:'olive', tag:'Optional'},
-    {time:'Late PM', title:'👴👵 Nannie & Big Daddy depart Venice', desc:'Aer Lingus EI8074 at 11pm from VCE -- safe travels!', dot:'sky', tag:'EI8074', tagClass:'flight'},
+    {time:'Late PM', title:'👴👵 Nannie & Big Daddy depart Venice', desc:'Aer Lingus EI8074 at 11pm from VCE — safe travels!', dot:'sky', tag:'EI8074', tagClass:'flight'},
   ]},
   { day:10, date:'Jun 28', city:'Lake Garda', label:'Parma → Lake Garda', cityCode:'GARDA', events:[
     {time:'Morning', title:'🚗 Drive Parma → Lake Garda', desc:'~1.5 hrs via A22. Optional stop at Fidenza Village outlet if not done yesterday.', dot:'sky', tag:'Drive'},
-    {time:'~12:00 PM', title:'🏠 Check in -- Torri del Benaco Airbnb', desc:'Beautiful medieval village on eastern shore of Lake Garda · Reservation HMKHFXXT8F', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'~12:00 PM', title:'🏠 Check in — Torri del Benaco Airbnb', desc:'Beautiful medieval village on eastern shore of Lake Garda · Reservation HMKHFXXT8F', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'Afternoon', title:'🏖️ Afternoon at the lake', desc:'Swimming, kayaking, just sitting and looking at the Alps reflecting in the water', dot:'olive', tag:'Relax'},
-    {time:'7:00 PM', title:'🐟 Lakeside dinner', desc:'Fresh lake fish at Ristorante Grifone in Sirmione -- on the water, spectacular', dot:'gold', tag:'Suggestion'},
+    {time:'7:00 PM', title:'🐟 Lakeside dinner', desc:'Fresh lake fish at Ristorante Grifone in Sirmione — on the water, spectacular', dot:'gold', tag:'Suggestion'},
   ]},
   { day:11, date:'Jun 29', city:'Lake Garda', label:'Lake Day', cityCode:'GARDA', events:[
     {time:'Morning', title:'⛵ Boat trip on the lake', desc:'Ferry between towns (Malcesine, Sirmione, Gardone) or rent a small private boat', dot:'sky', tag:'Optional'},
-    {time:'Afternoon', title:'🏰 Sirmione -- Scaligero Castle', desc:"Medieval castle jutting into the lake -- one of Italy's most dramatic locations. <a href='https://maps.google.com/?q=Castello+Scaligero+Sirmione+Italy' target='_blank' style='color:var(--olive)'>📍 Map</a>", dot:'olive', tag:'Must see'},
+    {time:'Afternoon', title:'🏰 Sirmione — Scaligero Castle', desc:"Medieval castle jutting into the lake — one of Italy's most dramatic locations. <a href='https://maps.google.com/?q=Castello+Scaligero+Sirmione+Italy' target='_blank' style='color:var(--olive)'>📍 Map</a>", dot:'olive', tag:'Must see'},
     {time:'Evening', title:'🌅 Lake Garda sunset', desc:'Watch the sun set over the lake with a glass of local Lugana wine', dot:'', tag:'Evening'},
   ]},
   { day:12, date:'Jun 30', city:'Venice Day Trip', label:"St. Mark's & Doge's Palace", cityCode:'GARDA', events:[
     {time:'Morning', title:'🚗 Drive to Verona train station', desc:'~45 mins from Torri del Benaco. Park at Verona Porta Nuova station.', dot:'sky', tag:'Drive'},
-    {time:'~10:00 AM', title:'🚄 Train Verona → Venice', desc:'Fast regional train ~1.5 hrs. Buy on Trenitalia app. No cruise ships in port today -- best day to visit!', dot:'sky', tag:'Train'},
-    {time:'2:30 PM', title:"🏛️ St. Mark's & Doge's Palace Tour -- BOOKED", desc:"Semi-private tour · <a href='https://livtours.com/tours/semi-private-st-marks-doges-palace-tour/' target='_blank' style='color:var(--gold)'>🔗 livtours.com</a> · <a href='https://maps.google.com/?q=St+Marks+Basilica,Venice,Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'', tag:'Booked', tagClass:'booked'},
-    {time:'Evening', title:'🌙 Venice at night', desc:'Stay after dark -- magical canals, lit bridges, quiet calli with no crowds', dot:'gold', tag:'Must do'},
+    {time:'~10:00 AM', title:'🚄 Train Verona → Venice', desc:'Fast regional train ~1.5 hrs. Buy on Trenitalia app. No cruise ships in port today — best day to visit!', dot:'sky', tag:'Train'},
+    {time:'2:30 PM', title:"🏛️ St. Mark's & Doge's Palace Tour — BOOKED", desc:"Semi-private tour · <a href='https://livtours.com/tours/semi-private-st-marks-doges-palace-tour/' target='_blank' style='color:var(--gold)'>🔗 livtours.com</a> · <a href='https://maps.google.com/?q=St+Marks+Basilica,Venice,Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'Evening', title:'🌙 Venice at night', desc:'Stay after dark — magical canals, lit bridges, quiet calli with no crowds', dot:'gold', tag:'Must do'},
     {time:'Late', title:'🚄 Train back to Verona', desc:'Check last train time (typically ~11pm). Drive back to Torri del Benaco.', dot:'sky', tag:'Return'},
   ]},
   { day:13, date:'Jul 1', city:'Riva del Garda', label:'Northern Lake Adventure', cityCode:'GARDA', events:[
-    {time:'Morning', title:'🚗 Drive north to Riva del Garda', desc:'~45 mins up the western shore -- stunning alpine scenery', dot:'sky', tag:'Drive'},
-    {time:'10:00 AM', title:'💧 Varone Cave Waterfalls', desc:"Spectacular waterfall inside a narrow gorge -- cool and misty, bring a layer! <a href='https://maps.google.com/?q=Cascata+del+Varone,+Riva+del+Garda,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'sky', tag:'Must see'},
+    {time:'Morning', title:'🚗 Drive north to Riva del Garda', desc:'~45 mins up the western shore — stunning alpine scenery', dot:'sky', tag:'Drive'},
+    {time:'10:00 AM', title:'💧 Varone Cave Waterfalls', desc:"Spectacular waterfall inside a narrow gorge — cool and misty, bring a layer! <a href='https://maps.google.com/?q=Cascata+del+Varone,+Riva+del+Garda,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'sky', tag:'Must see'},
     {time:'12:00 PM', title:'🏔️ Canyon Adventures', desc:'Via ferrata, canyoning, or kayaking available near Riva del Garda', dot:'olive', tag:'Adventure'},
-    {time:'2:00 PM', title:'🏘️ Canale di Tenno', desc:"Medieval mountain village above Riva -- tiny, ancient, completely unchanged. <a href='https://maps.google.com/?q=Canale+di+Tenno,+Trento,+Italy' target='_blank' style='color:var(--gold)'>📍 Map</a>", dot:'gold', tag:'Unique'},
-    {time:'4:00 PM', title:'🍋 Optional: Limone sul Garda', desc:'Charming lemon-grove village on western shore -- beautiful for a stroll and gelato', dot:'olive', tag:'Optional'},
-    {time:'Evening', title:'🌅 Return to Torri del Benaco', desc:'Last full day on the lake -- one more sunset dinner by the water', dot:'gold', tag:'Evening'},
+    {time:'2:00 PM', title:'🏘️ Canale di Tenno', desc:"Medieval mountain village above Riva — tiny, ancient, completely unchanged. <a href='https://maps.google.com/?q=Canale+di+Tenno,+Trento,+Italy' target='_blank' style='color:var(--gold)'>📍 Map</a>", dot:'gold', tag:'Unique'},
+    {time:'4:00 PM', title:'🍋 Optional: Limone sul Garda', desc:'Charming lemon-grove village on western shore — beautiful for a stroll and gelato', dot:'olive', tag:'Optional'},
+    {time:'Evening', title:'🌅 Return to Torri del Benaco', desc:'Last full day on the lake — one more sunset dinner by the water', dot:'gold', tag:'Evening'},
   ]},
   { day:14, date:'Jul 2', city:'Lake Garda', label:'Last Day in Italy', cityCode:'GARDA', events:[
-    {time:'Morning', title:'☀️ Slow morning at the lake', desc:'Last morning in Italy -- swim, coffee, soak it all in', dot:'gold', tag:'Relax'},
-    {time:'Afternoon', title:'🛍️ Final souvenir shopping', desc:'Torri del Benaco village -- olive oil, wine, ceramics, limoncello', dot:'olive', tag:'Shopping'},
-    {time:'Evening', title:'🍷 Farewell dinner', desc:'Make it special -- toast to the Chiesa family Italian adventure!', dot:'', tag:'Last night'},
-    {time:'Night', title:'🧳 Pack up for early departure', desc:'Sixt drop-off is 10am in Verona tomorrow -- pack tonight, set alarms', dot:'sky', tag:'Logistics'},
+    {time:'Morning', title:'☀️ Slow morning at the lake', desc:'Last morning in Italy — swim, coffee, soak it all in', dot:'gold', tag:'Relax'},
+    {time:'Afternoon', title:'🛍️ Final souvenir shopping', desc:'Torri del Benaco village — olive oil, wine, ceramics, limoncello', dot:'olive', tag:'Shopping'},
+    {time:'Evening', title:'🍷 Farewell dinner', desc:'Make it special — toast to the Chiesa family Italian adventure!', dot:'', tag:'Last night'},
+    {time:'Night', title:'🧳 Pack up for early departure', desc:'Sixt drop-off is 10am in Verona tomorrow — pack tonight, set alarms', dot:'sky', tag:'Logistics'},
   ]},
   { day:15, date:'Jul 3', city:'Homeward Bound', label:'Verona → Milan → Chicago', cityCode:'GARDA', events:[
     {time:'9:00 AM', title:'🚗 Drive to Verona Porta Nuova', desc:'~45 mins from Torri del Benaco. Allow extra time for the return!', dot:'sky', tag:'Drive'},
     {time:'10:00 AM', title:'🚗 Drop Sixt rental car', desc:'Verona Porta Nuova, level -1, in front of train station. Park in SIXT-marked bays, return key to SIXT branch.', dot:'', tag:'Car return', tagClass:'alert'},
-    {time:'9:12 AM', title:'🚄 Italo XKDEGK -- Verona P.N. → Milano Centrale', desc:'Train 8974 · Prima Business · Arrives 10:25 · Coach 3 · Brandon 7, Holly 9, Virginia 10, Adelle 11, Pearl 12 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/verona-to-milan.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ XKDEGK', tagClass:'booked'},
+    {time:'9:12 AM', title:'🚄 Italo XKDEGK — Verona P.N. → Milano Centrale', desc:'Train 8974 · Prima Business · Arrives 10:25 · Coach 3 · Brandon 7, Holly 9, Virginia 10, Adelle 11, Pearl 12 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/verona-to-milan.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ XKDEGK', tagClass:'booked'},
     {time:'~11:00 AM', title:'🚄 Milano Centrale → Malpensa Airport', desc:'Malpensa Express from Milano Centrale Platform 1 · ~50 mins · Buy ticket at station · Allow 2+ hrs before 3:20pm flight', dot:'sky', tag:'Train'},
     {time:'3:20 PM', title:'✈️ Depart Milan MXP → Chicago ORD', desc:'UA415 · United Economy · Arrives Chicago 6:10pm same day', dot:'sky', tag:'UA415', tagClass:'flight'},
     {time:'6:10 PM', title:'🛬 Arrive Chicago O\'Hare', desc:'Clear customs & immigration.', dot:'', tag:'Chicago'},
@@ -877,11 +277,6 @@ const WX_DESC = {
 
 const DAY_NAMES = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
-
-// ══════════════════════════════════════════════════════
-// WHEEL + HERO + DAY CONTENT
-// ══════════════════════════════════════════════════════
-
 const DATE_MAP = {
   'Jun 18':'Thu 18','Jun 19':'Fri 19','Jun 20':'Sat 20','Jun 21':'Sun 21',
   'Jun 22':'Mon 22','Jun 23':'Tue 23','Jun 24':'Wed 24','Jun 25':'Thu 25',
@@ -920,9 +315,8 @@ function buildWheel() {
     track.appendChild(item);
   });
 
-  // Scroll listener with snap detection
   track.addEventListener('scroll', onWheelScroll, { passive: true });
-  // Touch/mouse drag
+
   let startX = 0, startScroll = 0, dragging = false;
   track.addEventListener('mousedown', e => { dragging = true; startX = e.pageX; startScroll = track.scrollLeft; track.style.cursor='grabbing'; });
   window.addEventListener('mouseup', () => { dragging = false; track.style.cursor=''; });
@@ -948,7 +342,6 @@ function onWheelScroll() {
     if (closest !== activeIdx) setActive(closest, false);
   }, 80);
 
-  // Live scale update while scrolling
   const track = document.getElementById('wheel-track');
   const items = track.querySelectorAll('.w-item');
   const trackCenter = track.scrollLeft + track.clientWidth / 2;
@@ -1000,7 +393,7 @@ function updateHero(d) {
   if (diff > 0) {
     const days = Math.floor(diff / 86400000);
     document.getElementById('hero-eyebrow').textContent = days + ' DAYS UNTIL DEPARTURE';
-    document.getElementById('hero-date').textContent = 'Jun 18, 2026 -- Departure';
+    document.getElementById('hero-date').textContent = 'Jun 18, 2026 — Departure';
     document.getElementById('hero-city').textContent = '📍 Charlottesville, VA';
     band.setAttribute('data-city', 'HOME');
   } else {
@@ -1017,18 +410,15 @@ function renderDayContent(idx) {
   const area = document.getElementById('day-content-area');
   let html = '';
 
-  // Special banners
   if (d.date === 'Jun 21') {
-    html += '<div class="special-banner"><div class="special-banner-icon">👨‍👧‍👦</div><div class="special-banner-text"><div class="sp-b-title">Happy Father\'s Day! 🎉</div><div class="sp-b-sub">Celebrating Brandon & Big Daddy in Rome -- Buona Festa del Papà!</div></div></div>';
+    html += '<div class="special-banner"><div class="special-banner-icon">👨‍👧‍👦</div><div class="special-banner-text"><div class="sp-b-title">Happy Father\'s Day! 🎉</div><div class="sp-b-sub">Celebrating Brandon & Big Daddy in Rome — Buona Festa del Papà!</div></div></div>';
   }
   if (d.date === 'Jun 27') {
-    html += '<div class="special-banner"><div class="special-banner-icon">🎂</div><div class="special-banner-text"><div class="sp-b-title">Happy Birthday Brandon! 🎂</div><div class="sp-b-sub">Spending your birthday in the ancestral Chiesa homeland -- Auguri!</div></div></div>';
+    html += '<div class="special-banner"><div class="special-banner-icon">🎂</div><div class="special-banner-text"><div class="sp-b-title">Happy Birthday Brandon! 🎂</div><div class="sp-b-sub">Spending your birthday in the ancestral Chiesa homeland — Auguri!</div></div></div>';
   }
 
-  // Day header
   html += '<div class="day-header-card"><div class="dhc-label">Day ' + d.day + ' · ' + d.date + '</div><div class="dhc-city">' + d.city + '</div><div class="dhc-sub">' + d.label + '</div></div>';
 
-  // Timeline
   html += '<div class="tl-card">';
   d.events.forEach(e => {
     const dotClass = 'tl-dot' + (e.dot ? ' ' + e.dot : '');
@@ -1046,9 +436,6 @@ function renderDayContent(idx) {
   area.innerHTML = html;
 }
 
-// ══════════════════════════════════════════════════════
-// MENU + PANEL
-// ══════════════════════════════════════════════════════
 function toggleMenu() {
   const menu = document.getElementById('side-menu');
   const overlay = document.getElementById('menu-overlay');
@@ -1073,7 +460,7 @@ function openPanel(name) {
   else body.innerHTML = '<p style="padding:20px;color:var(--stone)">Coming soon</p>';
   document.getElementById('panel-overlay').classList.add('show');
   document.getElementById('panel-sheet').classList.add('open');
-  // Post-render hooks
+
   if (name === 'weather') { loadWeather(currentWxCity); setupWxPills(); }
   if (name === 'tools') { fetchRate(); loadPacking(); loadNotes(); }
   if (name === 'info') { loadPacking(); loadNotes(); }
@@ -1092,9 +479,6 @@ function setupWxPills() {
   }));
 }
 
-// ══════════════════════════════════════════════════════
-// PANEL BUILDERS
-// ══════════════════════════════════════════════════════
 let currentWxCity = 'rome';
 let wxCache = {};
 function buildWeatherPanel() {
@@ -1124,11 +508,11 @@ function buildMapPanel() {
   h += '<a id="map-open-link" href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" class="map-open-btn">Open in Google Maps ↗</a>';
   h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-t">🏠</div><div><div class="card-title">Accommodations</div><div class="card-sub">Tap Map to navigate</div></div></div><div style="padding:0">';
   const stays = [
-    {em:'🏛️', name:'Rome -- Airbnb next to Pantheon', addr:'Jun 19–23 · HMBAJ4K352 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMBAJ4K352" target="_blank">🏠 Airbnb</a>', q:'Pantheon Rome Italy'},
-    {em:'🌺', name:'Florence -- Solo Experience Hotel', addr:'Jun 23–24 · <a href="https://www.soloexperiencehotel.com" target="_blank">🏨 Hotel</a>', q:'Solo Experience Hotel Florence Italy'},
-    {em:'🧀', name:'Parma -- Borgo Sant\'Antonio, 8', addr:'Jun 24–28 · HMPS9NTX85 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMPS9NTX85" target="_blank">🏠 Airbnb</a>', q:'Borgo SantAntonio 8 Parma Italy'},
-    {em:'🏔️', name:'Lake Garda -- Torri del Benaco', addr:'Jun 28–Jul 3 · HMKHFXXT8F · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMKHFXXT8F" target="_blank">🏠 Airbnb</a>', q:'Torri del Benaco Lake Garda Italy'},
-    {em:'🏨', name:"Chicago -- SpringHill Suites O'Hare", addr:'8101 W Higgins Rd · Jul 3 · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank">📍 Map</a>', q:'SpringHill Suites 8101 West Higgins Chicago'},
+    {em:'🏛️', name:'Rome — Airbnb next to Pantheon', addr:'Jun 19–23 · HMBAJ4K352 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMBAJ4K352" target="_blank">🏠 Airbnb</a>', q:'Pantheon Rome Italy'},
+    {em:'🌺', name:'Florence — Solo Experience Hotel', addr:'Jun 23–24 · <a href="https://www.soloexperiencehotel.com" target="_blank">🏨 Hotel</a>', q:'Solo Experience Hotel Florence Italy'},
+    {em:'🧀', name:'Parma — Borgo Sant\'Antonio, 8', addr:'Jun 24–28 · HMPS9NTX85 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMPS9NTX85" target="_blank">🏠 Airbnb</a>', q:'Borgo SantAntonio 8 Parma Italy'},
+    {em:'🏔️', name:'Lake Garda — Torri del Benaco', addr:'Jun 28–Jul 3 · HMKHFXXT8F · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMKHFXXT8F" target="_blank">🏠 Airbnb</a>', q:'Torri del Benaco Lake Garda Italy'},
+    {em:'🏨', name:"Chicago — SpringHill Suites O'Hare", addr:'8101 W Higgins Rd · Jul 3 · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank">📍 Map</a>', q:'SpringHill Suites 8101 West Higgins Chicago'},
   ];
   stays.forEach(s => h += '<div class="pin-row"><div class="pin-em">' + s.em + '</div><div class="pin-info"><div class="pin-name">' + s.name + '</div><div class="pin-addr">' + s.addr + '</div></div><button class="pin-btn" onclick="window.open(\'https://maps.google.com/?q=' + encodeURIComponent(s.q) + '\',\'_blank\')">Map</button></div>');
   h += '</div></div>';
@@ -1226,7 +610,7 @@ function buildFamilyPanel() {
   members.forEach(m => h += '<div class="fam-card"><div class="fam-av">' + m.av + '</div><div class="fam-name">' + m.name + '</div><div class="fam-role">' + m.role + '</div></div>');
   h += '</div>';
   h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-s">✈️</div><div><div class="card-title">Nannie & Big Daddy</div><div class="card-sub">Join Jun 20 · Split Jun 24 · Depart Jun 27</div></div></div><div style="padding:10px 14px;font-size:13px;color:var(--stone);line-height:1.6">AA720 from CLT · arrives Rome 10:30am Jun 20.<br>Splits from group Jun 24 → Venice (Italo TBHQMV).<br>Departs Venice Jun 27 · Aer Lingus EI8074 at 11pm.</div></div>';
-  h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-t">🆘</div><div><div class="card-title">Meeting Points</div><div class="card-sub">If separated -- no signal needed</div></div></div><div style="padding:10px 14px;font-size:13px;line-height:1.8;color:var(--stone)"><b style="color:var(--ink)">Rome:</b> Trevi Fountain top steps · every hour<br><b style="color:var(--ink)">Florence:</b> Piazza della Signoria · David replica<br><b style="color:var(--ink)">Parma:</b> Piazza Garibaldi central fountain<br><b style="color:var(--ink)">Venice:</b> St. Mark\'s Basilica main entrance</div></div>';
+  h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-t">🆘</div><div><div class="card-title">Meeting Points</div><div class="card-sub">If separated — no signal needed</div></div></div><div style="padding:10px 14px;font-size:13px;line-height:1.8;color:var(--stone)"><b style="color:var(--ink)">Rome:</b> Trevi Fountain top steps · every hour<br><b style="color:var(--ink)">Florence:</b> Piazza della Signoria · David replica<br><b style="color:var(--ink)">Parma:</b> Piazza Garibaldi central fountain<br><b style="color:var(--ink)">Venice:</b> St. Mark\'s Basilica main entrance</div></div>';
   return h;
 }
 
@@ -1246,14 +630,14 @@ function buildToolsPanel() {
   ];
   utils.forEach(u => h += '<a href="' + u.url + '" target="_blank" class="util-card"><div class="util-icon">' + u.icon + '</div><div class="util-name">' + u.name + '</div><div class="util-desc">' + u.desc + '</div></a>');
   h += '</div>';
-  h += '<div class="emerg-card"><div class="emerg-title">🚨 Emergency Numbers -- Italy</div>';
+  h += '<div class="emerg-card"><div class="emerg-title">🚨 Emergency Numbers — Italy</div>';
   [['General Emergency','112'],['Ambulance','118'],['Police','113'],['Fire','115'],['US Embassy Rome','+39 06 46741'],['Sixt Rental','#9730023172']].forEach(r => h += '<div class="emerg-row"><span>' + r[0] + '</span><span class="emerg-num">' + r[1] + '</span></div>');
   h += '</div>';
-  // Packing list
+
   h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-o">🧳</div><div><div class="card-title">Packing Checklist</div><div class="card-sub">Tap to check off</div></div></div><div style="padding:0 14px 14px">';
   const packs = {
     'Documents':['Passports (valid 6+ months)','Flight confirmations printed','Airbnb reservation codes','Driver\'s license (Sixt rental)','Travel insurance cards','Notify bank of travel dates'],
-    'Tech':['EU plug adapter (Type F/L)','Portable power bank','eSIM for Italy (try Airalo app)','Google Maps offline -- download all cities','Download Too Good To Go app'],
+    'Tech':['EU plug adapter (Type F/L)','Portable power bank','eSIM for Italy (try Airalo app)','Google Maps offline — download all cities','Download Too Good To Go app'],
     'Clothing':['Modest clothing for Vatican & churches','Comfortable walking shoes (cobblestones!)','Light jacket / layer (evenings cool)','Swimsuit (Lake Garda)'],
     'Health':['Prescription medications','Sunscreen SPF 50+','Motion sickness tabs (curvy Parma roads)'],
   };
@@ -1267,21 +651,21 @@ function buildToolsPanel() {
 
 function buildInfoPanel() {
   let h = '';
-  // Tip cards
+
   const tips = [
-    {icon:'🏛️',title:'Near Your Rome Airbnb',text:"You're right next to the Pantheon! Santa Maria Sopra Minerva is steps away -- Michelangelo's Christ Carrying the Cross. Free entry."},
-    {icon:'🚗',title:'ZTL Zones',text:'Rome and Florence historic centers restrict traffic. Never drive in -- fines come by mail months later.'},
-    {icon:'⛪',title:"Campo de' Fiori",text:'Walk through on the way to Trastevere. Site of public executions -- the statue is Giordano Bruno, burned alive as a heretic.'},
-    {icon:'💧',title:'Free Water -- Rome',text:'Nasoni fountains give free clean drinking water throughout Rome. Refill your bottles -- cold and delicious.'},
+    {icon:'🏛️',title:'Near Your Rome Airbnb',text:"You're right next to the Pantheon! Santa Maria Sopra Minerva is steps away — Michelangelo's Christ Carrying the Cross. Free entry."},
+    {icon:'🚗',title:'ZTL Zones',text:'Rome and Florence historic centers restrict traffic. Never drive in — fines come by mail months later.'},
+    {icon:'⛪',title:"Campo de' Fiori",text:'Walk through on the way to Trastevere. Site of public executions — the statue is Giordano Bruno, burned alive as a heretic.'},
+    {icon:'💧',title:'Free Water — Rome',text:'Nasoni fountains give free clean drinking water throughout Rome. Refill your bottles — cold and delicious.'},
     {icon:'🏰',title:'Valmozzola',text:"The ancestral Chiesa village! Visit Giuseppe's home (Strada San Siro 10) and Maria Ferretti's (San Martino 6)."},
-    {icon:'🛒',title:'Fidenza Village',text:'On the drive from Parma to Lake Garda -- designer outlet shopping. Good stop if the group wants it.'},
+    {icon:'🛒',title:'Fidenza Village',text:'On the drive from Parma to Lake Garda — designer outlet shopping. Good stop if the group wants it.'},
     {icon:'🎟️',title:'Buy Tickets Online',text:'Largo Argentina, Vicus Caprarius, and Colosseum are much cheaper online. Walk-up prices can double in June.'},
     {icon:'🍝',title:'Meal Times',text:'Italians eat dinner 8–10pm. Restaurants before 7pm are mostly for tourists. Afternoon gelato tides you over.'},
   ];
   h += '<div class="tip-scroll">';
   tips.forEach(t => h += '<div class="tip-card"><div class="tip-icon">' + t.icon + '</div><div class="tip-title">' + t.title + '</div><div class="tip-text">' + t.text + '</div></div>');
   h += '</div>';
-  // Phrases
+
   const phrases = [
     ['Good morning / Goodbye','Buongiorno / Arrivederci','Buongiorno'],
     ['Please / Thank you','Per favore / Grazie','Per favore. Grazie'],
@@ -1295,15 +679,12 @@ function buildInfoPanel() {
   h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-o">🗣️</div><div><div class="card-title">Essential Italian</div><div class="card-sub">Tap 🔊 to hear pronunciation</div></div></div><div style="padding:0">';
   phrases.forEach(p => h += '<div class="phrase-row"><div><div class="p-en">' + p[0] + '</div><div class="p-it">' + p[1] + '</div></div><button class="p-speak" onclick="speak(\'' + p[2] + '\')">🔊</button></div>');
   h += '</div></div>';
-  // Notes
+
   h += '<div class="notes-wrap"><div class="notes-lbl">Trip Notes (saves on this device)</div><textarea class="notes-ta" id="trip-notes" placeholder="Add confirmations, addresses, notes from the trip..."></textarea></div>';
 
 return h;
 }
 
-// ══════════════════════════════════════════════════════
-// PACKING (uses dynamic IDs)
-// ══════════════════════════════════════════════════════
 function togglePack(el) {
 el.classList.toggle(‘done’);
 const all = document.querySelectorAll(’.pack-row’);
@@ -1323,9 +704,6 @@ if (saved) ta.value = saved;
 ta.addEventListener(‘input’, e => localStorage.setItem(‘tripnotes’, e.target.value));
 }
 
-// ══════════════════════════════════════════════════════
-// WEATHER (override renderWeather for new HTML structure)
-// ══════════════════════════════════════════════════════
 const WX_MONTHS = [‘Jan’,‘Feb’,‘Mar’,‘Apr’,‘May’,‘Jun’,‘Jul’,‘Aug’,‘Sep’,‘Oct’,‘Nov’,‘Dec’];
 function loadWeather(cityKey) {
 try {
@@ -1386,9 +764,6 @@ if (c) { const code = data.current_weather.weathercode; c.textContent = (WX_ICON
 }
 }
 
-// ══════════════════════════════════════════════════════
-// COUNTDOWN BADGE
-// ══════════════════════════════════════════════════════
 function updateCountdown() {
 const now = new Date();
 const diff = TRIP_START - now;
@@ -1411,9 +786,6 @@ pill.style.color = ‘white’;
 }
 }
 
-// ══════════════════════════════════════════════════════
-// INIT
-// ══════════════════════════════════════════════════════
 function dbg(msg) {
 const el = document.getElementById(‘debug-box’);
 if (el) { el.style.display = ‘block’; el.textContent += msg + ‘\n’; }
@@ -1429,7 +801,7 @@ dbg(’PROMISE ERROR: ’ + (e.reason && e.reason.message || e.reason));
 
 window.addEventListener(‘load’, () => {
 dbg(‘load fired’);
-// Splash countdown
+
 try {
 const now = new Date();
 const diff = DEPARTURE - now;
@@ -1438,21 +810,22 @@ if (splashNum) splashNum.textContent = diff > 0 ? Math.floor(diff/86400000) : �
 dbg(‘splash num set’);
 } catch(e) { dbg(’splash err: ’ + e.message); }
 
-// Hide splash after 3s
 const splash = document.getElementById(‘splash’);
 setTimeout(() => {
 try {
 if (splash) {
 splash.classList.add(‘out’);
-// Fully remove after transition completes
-setTimeout(() => {
-if (splash) splash.style.display = ‘none’;
-}, 650);
-}
+
+```
+    setTimeout(() => {
+      if (splash) splash.style.display = 'none';
+    }, 650);
+  }
 } catch(e) {}
+```
+
 }, 3000);
 
-// Build app after first paint
 requestAnimationFrame(() => {
 requestAnimationFrame(() => {
 try {
@@ -1481,10 +854,9 @@ dbg(’BUILD ERROR: ’ + e.message + ’ | ’ + e.stack);
 });
 });
 
-// Load weather -- non-blocking, safe to fail
 try { loadWeather(‘rome’); } catch(e) {}
 });
-
 </script>
+
 </body>
 </html>
