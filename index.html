@@ -46,10 +46,16 @@ position: fixed; inset: 0; z-index: 9999;
 background: var(–ink);
 display: flex; flex-direction: column;
 align-items: center; justify-content: center;
-transition: opacity 0.7s ease;
 gap: 4px;
+/* CSS-only auto-hide: fade out at 3s, gone by 3.7s -- no JS needed */
+animation: splashHide 0.7s ease 3s forwards;
 }
-#splash.out { opacity: 0; pointer-events: none; }
+@keyframes splashHide {
+0%   { opacity: 1; pointer-events: all; z-index: 9999; }
+99%  { opacity: 0; pointer-events: none; z-index: 9999; }
+100% { opacity: 0; pointer-events: none; z-index: -1; }
+}
+#splash.out { opacity: 0; pointer-events: none; animation: none; }
 
 .sp-flag { font-size: 64px; margin-bottom: 8px;
 animation: sp-float 3s ease-in-out infinite; }
@@ -75,8 +81,8 @@ animation: sp-pulse 2s ease-in-out infinite;
 .sp-days-label { font-size: 12px; color: var(–stone); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; }
 .sp-bar { width: 160px; height: 2px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 28px; overflow: hidden; }
 .sp-fill { height: 100%; width: 0; background: linear-gradient(90deg, var(–gold), var(–gold-light)); border-radius: 2px;
-animation: sp-load 2s cubic-bezier(0.4,0,0.2,1) forwards; }
-@keyframes sp-load { to { width: 100%; } }
+animation: sp-load 2.8s cubic-bezier(0.4,0,0.2,1) forwards; }
+@keyframes sp-load { 0% { width: 0; } 85% { width: 100%; } 100% { width: 100%; } }
 
 /* ═══════════════════ HEADER ═══════════════════ */
 #app-header {
@@ -1078,6 +1084,7 @@ function setupWxPills() {
 // PANEL BUILDERS
 // ══════════════════════════════════════════════════════
 let currentWxCity = 'rome';
+let wxCache = {};
 function buildWeatherPanel() {
   return '<div class="pills-row" id="wx-pills">' +
     '<div class="pill on wx-pill" data-city="rome">🏛️ Rome</div>' +
@@ -1404,12 +1411,21 @@ const splashNum = document.getElementById(‘splash-num’);
 if (splashNum) splashNum.textContent = diff > 0 ? Math.floor(diff/86400000) : ‘🇮🇹’;
 } catch(e) {}
 
-// Hide splash -- always fires regardless of any other errors
+// Hide splash -- JS backup (CSS animation already handles this)
 const splash = document.getElementById(‘splash’);
-setTimeout(() => {
-try { if (splash) splash.classList.add(‘out’); } catch(e) {}
-setTimeout(() => { try { if (splash) splash.style.display = ‘none’; } catch(e) {} }, 800);
-}, 2500);
+function hideSplash() {
+try {
+if (splash) {
+splash.classList.add(‘out’);
+splash.style.animation = ‘none’;
+splash.style.opacity = ‘0’;
+splash.style.pointerEvents = ‘none’;
+splash.style.zIndex = ‘-1’;
+setTimeout(() => { if (splash) splash.style.display = ‘none’; }, 700);
+}
+} catch(e) {}
+}
+setTimeout(hideSplash, 3000);
 
 // Build app
 try {
