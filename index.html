@@ -32,8 +32,8 @@
   <div class="sp-bar"><div class="sp-fill"></div></div>
 </div>
 
-<div id="debug-box"></div>
 <!-- ═══ HEADER ═══ -->
+
 <div id="app-header">
   <div class="h-logo">🇮🇹 <span>Chiesa</span> Italia</div>
   <div class="h-right">
@@ -786,11 +786,7 @@ pill.style.color = ‘white’;
 }
 }
 
-function dbg(msg) {
-const el = document.getElementById(‘debug-box’);
-if (el) { el.style.display = ‘block’; el.textContent += msg + ‘\n’; }
-console.log(’[DEBUG]’, msg);
-}
+function dbg(msg) { console.log(’[DEBUG]’, msg); }
 window.onerror = function(msg, src, line, col, err) {
 dbg(‘ERROR: ’ + msg + ’ (L’ + line + ‘)’);
 return false;
@@ -826,33 +822,40 @@ splash.classList.add(‘out’);
 
 }, 3000);
 
-requestAnimationFrame(() => {
-requestAnimationFrame(() => {
+// Build wheel then render content with generous timing
 try {
-dbg(‘building wheel…’);
 buildWheel();
-dbg(‘wheel built OK’);
-const today = new Date();
+dbg(‘wheel built OK - items: ’ + document.querySelectorAll(’.w-item’).length);
+} catch(e) { dbg(’wheel err: ’ + e.message); }
+
+// Calculate start day
+const today2 = new Date();
 let startIdx = 1;
-if (DEPARTURE - today <= 0) {
-const elapsed = Math.floor((today - TRIP_START) / 86400000);
+if (DEPARTURE - today2 <= 0) {
+const elapsed = Math.floor((today2 - TRIP_START) / 86400000);
 startIdx = Math.max(0, Math.min(elapsed + 1, DAYS.length - 1));
 }
-dbg(’scrolling to day ’ + startIdx);
+dbg(’startIdx: ’ + startIdx);
+
+// Render day content directly first (no scroll needed)
+try {
+updateHero(DAYS[startIdx]);
+renderDayContent(startIdx);
+setActive(startIdx, false);
+dbg(‘content rendered OK’);
+} catch(e) { dbg(’render err: ’ + e.message); }
+
+// Then try to scroll wheel into position
 setTimeout(() => {
 try {
 scrollToIdx(startIdx, false);
-dbg(‘scrolled OK’);
+dbg(‘scroll OK’);
 } catch(e) { dbg(’scroll err: ’ + e.message); }
-}, 150);
+}, 300);
+
 updateCountdown();
 setInterval(updateCountdown, 60000);
 dbg(‘init complete’);
-} catch(e) {
-dbg(’BUILD ERROR: ’ + e.message + ’ | ’ + e.stack);
-}
-});
-});
 
 try { loadWeather(‘rome’); } catch(e) {}
 });
