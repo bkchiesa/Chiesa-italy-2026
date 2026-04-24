@@ -36,7 +36,6 @@ background: var(–cream);
 color: var(–ink);
 height: 100%;
 overflow: hidden;
-position: fixed;
 width: 100%;
 }
 
@@ -47,15 +46,15 @@ background: var(–ink);
 display: flex; flex-direction: column;
 align-items: center; justify-content: center;
 gap: 4px;
-/* CSS-only auto-hide: fade out at 3s, gone by 3.7s -- no JS needed */
-animation: splashHide 0.7s ease 3s forwards;
+opacity: 1;
+visibility: visible;
+transition: opacity 0.6s ease, visibility 0.6s ease;
 }
-@keyframes splashHide {
-0%   { opacity: 1; pointer-events: all; z-index: 9999; }
-99%  { opacity: 0; pointer-events: none; z-index: 9999; }
-100% { opacity: 0; pointer-events: none; z-index: -1; }
+#splash.out {
+opacity: 0;
+visibility: hidden;
+pointer-events: none;
 }
-#splash.out { opacity: 0; pointer-events: none; animation: none; }
 
 .sp-flag { font-size: 64px; margin-bottom: 8px;
 animation: sp-float 3s ease-in-out infinite; }
@@ -1402,7 +1401,7 @@ pill.style.color = ‘white’;
 // ══════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════
-window.addEventListener(‘load’, () => {
+document.addEventListener(‘DOMContentLoaded’, () => {
 // Splash countdown
 try {
 const now = new Date();
@@ -1411,21 +1410,19 @@ const splashNum = document.getElementById(‘splash-num’);
 if (splashNum) splashNum.textContent = diff > 0 ? Math.floor(diff/86400000) : ‘🇮🇹’;
 } catch(e) {}
 
-// Hide splash -- JS backup (CSS animation already handles this)
+// Hide splash after 3s
 const splash = document.getElementById(‘splash’);
-function hideSplash() {
+setTimeout(() => {
 try {
 if (splash) {
 splash.classList.add(‘out’);
-splash.style.animation = ‘none’;
-splash.style.opacity = ‘0’;
-splash.style.pointerEvents = ‘none’;
-splash.style.zIndex = ‘-1’;
-setTimeout(() => { if (splash) splash.style.display = ‘none’; }, 700);
+// Fully remove after transition completes
+setTimeout(() => {
+if (splash) splash.style.display = ‘none’;
+}, 650);
 }
 } catch(e) {}
-}
-setTimeout(hideSplash, 3000);
+}, 3000);
 
 // Build app
 try {
