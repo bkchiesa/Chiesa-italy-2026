@@ -49,11 +49,17 @@ gap: 4px;
 opacity: 1;
 visibility: visible;
 transition: opacity 0.6s ease, visibility 0.6s ease;
+/* Hard CSS fallback: always gone by 4s even if JS fails */
+animation: forceHide 0.01s linear 4s forwards;
+}
+@keyframes forceHide {
+to { display: none; opacity: 0; visibility: hidden; pointer-events: none; z-index: -1; }
 }
 #splash.out {
 opacity: 0;
 visibility: hidden;
 pointer-events: none;
+animation: none;
 }
 
 .sp-flag { font-size: 64px; margin-bottom: 8px;
@@ -607,7 +613,7 @@ text-shadow: 0 2px 8px rgba(0,0,0,0.95);
 
 <!-- ═══ SPLASH ═══ -->
 
-<div id="splash">
+<div id="splash" style="position:fixed;inset:0;z-index:9999;background:#1C1409;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
   <div class="sp-flag">🇮🇹</div>
   <div class="sp-title">The Chiesa Family's<br>Italian Holiday</div>
   <div class="sp-sub">June – July 2026</div>
@@ -1401,7 +1407,7 @@ pill.style.color = ‘white’;
 // ══════════════════════════════════════════════════════
 // INIT
 // ══════════════════════════════════════════════════════
-document.addEventListener(‘DOMContentLoaded’, () => {
+window.addEventListener(‘load’, () => {
 // Splash countdown
 try {
 const now = new Date();
@@ -1424,7 +1430,9 @@ if (splash) splash.style.display = ‘none’;
 } catch(e) {}
 }, 3000);
 
-// Build app
+// Build app after first paint
+requestAnimationFrame(() => {
+requestAnimationFrame(() => {
 try {
 buildWheel();
 const today = new Date();
@@ -1433,12 +1441,14 @@ if (DEPARTURE - today <= 0) {
 const elapsed = Math.floor((today - TRIP_START) / 86400000);
 startIdx = Math.max(0, Math.min(elapsed + 1, DAYS.length - 1));
 }
-setTimeout(() => scrollToIdx(startIdx, false), 100);
+setTimeout(() => scrollToIdx(startIdx, false), 150);
 updateCountdown();
 setInterval(updateCountdown, 60000);
 } catch(e) {
 console.error(‘App init error:’, e);
 }
+});
+});
 
 // Load weather -- non-blocking, safe to fail
 try { loadWeather(‘rome’); } catch(e) {}
