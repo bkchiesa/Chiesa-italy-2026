@@ -882,7 +882,9 @@ let isScrolling = false;
 let scrollTimer = null;
 
 function buildWheel() {
+  try {
   const track = document.getElementById('wheel-track');
+  if (!track) return;
   track.innerHTML = '';
   DAYS.forEach((d, i) => {
     const item = document.createElement('div');
@@ -910,6 +912,7 @@ function buildWheel() {
     if (!dragging) return;
     track.scrollLeft = startScroll - (e.pageX - startX);
   });
+  } catch(e) { console.error('Wheel build error:', e); }
 }
 
 function onWheelScroll() {
@@ -1306,6 +1309,7 @@ ta.addEventListener(‘input’, e => localStorage.setItem(‘tripnotes’, e.ta
 // ══════════════════════════════════════════════════════
 const WX_MONTHS = [‘Jan’,‘Feb’,‘Mar’,‘Apr’,‘May’,‘Jun’,‘Jul’,‘Aug’,‘Sep’,‘Oct’,‘Nov’,‘Dec’];
 function loadWeather(cityKey) {
+try {
 currentWxCity = cityKey;
 const city = WX_CITIES[cityKey];
 if (!city) return;
@@ -1321,6 +1325,7 @@ wxCache[cityKey] = data;
 renderWeather(cityKey, data);
 if (cityKey === ‘rome’) updateHeroTemp(data);
 }).catch(() => { const el2 = document.getElementById(‘wx-content’); if(el2) el2.innerHTML = ‘<div class="wx-loading">⚠️ Could not load weather.</div>’; });
+} catch(e) { console.error(‘Weather error:’, e); }
 }
 
 function renderWeather(cityKey, data) {
@@ -1392,33 +1397,38 @@ pill.style.color = ‘white’;
 // ══════════════════════════════════════════════════════
 window.addEventListener(‘load’, () => {
 // Splash countdown
+try {
 const now = new Date();
 const diff = DEPARTURE - now;
 const splashNum = document.getElementById(‘splash-num’);
 if (splashNum) splashNum.textContent = diff > 0 ? Math.floor(diff/86400000) : ‘🇮🇹’;
+} catch(e) {}
 
-// Hide splash after 2.5s
-setTimeout(() => {
+// Hide splash -- always fires regardless of any other errors
 const splash = document.getElementById(‘splash’);
-if (splash) splash.classList.add(‘out’);
-setTimeout(() => { if (splash) splash.style.display = ‘none’; }, 800);
+setTimeout(() => {
+try { if (splash) splash.classList.add(‘out’); } catch(e) {}
+setTimeout(() => { try { if (splash) splash.style.display = ‘none’; } catch(e) {} }, 800);
 }, 2500);
 
-// Build wheel and set today’s day
+// Build app
+try {
 buildWheel();
 const today = new Date();
-let startIdx = 1; // default Day 1
+let startIdx = 1;
 if (DEPARTURE - today <= 0) {
 const elapsed = Math.floor((today - TRIP_START) / 86400000);
 startIdx = Math.max(0, Math.min(elapsed + 1, DAYS.length - 1));
 }
 setTimeout(() => scrollToIdx(startIdx, false), 100);
-
 updateCountdown();
 setInterval(updateCountdown, 60000);
+} catch(e) {
+console.error(‘App init error:’, e);
+}
 
-// Load Rome weather silently for hero
-loadWeather(‘rome’);
+// Load weather -- non-blocking, safe to fail
+try { loadWeather(‘rome’); } catch(e) {}
 });
 
 </script>
