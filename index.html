@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -699,43 +698,43 @@ return h;
 }
 
 function togglePack(el) {
-el.classList.toggle(‘done’);
-const all = document.querySelectorAll(’.pack-row’);
-const states = Array.from(all).map(e => e.classList.contains(‘done’));
-localStorage.setItem(‘pack2’, JSON.stringify(states));
+  el.classList.toggle('done');
+  const all = document.querySelectorAll('.pack-row');
+  const states = Array.from(all).map(e => e.classList.contains('done'));
+  localStorage.setItem('pack2', JSON.stringify(states));
 }
 function loadPacking() {
-const saved = JSON.parse(localStorage.getItem(‘pack2’) || ‘[]’);
-const rows = document.querySelectorAll(’.pack-row’);
-rows.forEach((r, i) => { if (saved[i]) r.classList.add(‘done’); });
+  const saved = JSON.parse(localStorage.getItem('pack2') || '[]');
+  const rows = document.querySelectorAll('.pack-row');
+  rows.forEach((r, i) => { if (saved[i]) r.classList.add('done'); });
 }
 function loadNotes() {
-const ta = document.getElementById(‘trip-notes’);
-if (!ta) return;
-const saved = localStorage.getItem(‘tripnotes’);
-if (saved) ta.value = saved;
-ta.addEventListener(‘input’, e => localStorage.setItem(‘tripnotes’, e.target.value));
+  const ta = document.getElementById('trip-notes');
+  if (!ta) return;
+  const saved = localStorage.getItem('tripnotes');
+  if (saved) ta.value = saved;
+  ta.addEventListener('input', e => localStorage.setItem('tripnotes', e.target.value));
 }
 
-const WX_MONTHS = [‘Jan’,‘Feb’,‘Mar’,‘Apr’,‘May’,‘Jun’,‘Jul’,‘Aug’,‘Sep’,‘Oct’,‘Nov’,‘Dec’];
+const WX_MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 function loadWeather(cityKey) {
 try {
 currentWxCity = cityKey;
 const city = WX_CITIES[cityKey];
 if (!city) return;
 if (wxCache[cityKey]) { renderWeather(cityKey, wxCache[cityKey]); return; }
-const el = document.getElementById(‘wx-content’);
-if (el) el.innerHTML = ’<div class="wx-loading">⛅ Loading ’ + city.name + ‘…</div>’;
-const url = ‘https://api.open-meteo.com/v1/forecast?latitude=’ + city.lat +
-‘&longitude=’ + city.lon +
-‘&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,precipitation_probability_max’ +
-‘&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=Europe%2FRome&forecast_days=7’;
+const el = document.getElementById('wx-content');
+if (el) el.innerHTML = '<div class="wx-loading">⛅ Loading ' + city.name + '…</div>';
+const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + city.lat +
+'&longitude=' + city.lon +
+'&daily=weathercode,temperature_2m_max,temperature_2m_min,precipitation_sum,windspeed_10m_max,precipitation_probability_max' +
+'&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&timezone=Europe%2FRome&forecast_days=7';
 fetch(url).then(r => r.json()).then(data => {
 wxCache[cityKey] = data;
 renderWeather(cityKey, data);
-if (cityKey === ‘rome’) updateHeroTemp(data);
-}).catch(() => { const el2 = document.getElementById(‘wx-content’); if(el2) el2.innerHTML = ‘<div class="wx-loading">⚠️ Could not load weather.</div>’; });
-} catch(e) { console.error(‘Weather error:’, e); }
+if (cityKey === 'rome') updateHeroTemp(data);
+}).catch(() => { const el2 = document.getElementById('wx-content'); if(el2) el2.innerHTML = '<div class="wx-loading">⚠️ Could not load weather.</div>'; });
+} catch(e) { console.error('Weather error:', e); }
 }
 
 function renderWeather(cityKey, data) {
@@ -744,102 +743,99 @@ const cur = data.current_weather;
 const daily = data.daily;
 const curCode = cur ? cur.weathercode : daily.weathercode[0];
 const curTemp = cur ? Math.round(cur.temperature) : Math.round(daily.temperature_2m_max[0]);
-const curIcon = WX_ICONS[curCode] || ‘⛅’;
-const curDesc = WX_DESC[curCode] || ‘Variable’;
+const curIcon = WX_ICONS[curCode] || '⛅';
+const curDesc = WX_DESC[curCode] || 'Variable';
 const curWind = cur ? Math.round(cur.windspeed) : 0;
 
-let weekHtml = ‘’;
+let weekHtml = '';
 for (let i = 0; i < 7; i++) {
 const dt = new Date(daily.time[i]);
-const dayName = i === 0 ? ‘Today’ : DAY_NAMES[dt.getDay()];
-const dateLabel = (dt.getMonth()+1) + ‘/’ + dt.getDate();
-weekHtml += ‘<div class="wx-day"><div class="wx-dname">’ + dayName + ‘</div><div class="wx-ddate">’ + dateLabel + ‘</div><div class="wx-dicon">’ + (WX_ICONS[daily.weathercode[i]]||‘⛅’) + ‘</div><div class="wx-dhi">’ + Math.round(daily.temperature_2m_max[i]) + ‘°</div><div class="wx-dlo">’ + Math.round(daily.temperature_2m_min[i]) + ‘°</div></div>’;
+const dayName = i === 0 ? 'Today' : DAY_NAMES[dt.getDay()];
+const dateLabel = (dt.getMonth()+1) + '/' + dt.getDate();
+weekHtml += '<div class="wx-day"><div class="wx-dname">' + dayName + '</div><div class="wx-ddate">' + dateLabel + '</div><div class="wx-dicon">' + (WX_ICONS[daily.weathercode[i]]||'⛅') + '</div><div class="wx-dhi">' + Math.round(daily.temperature_2m_max[i]) + '°</div><div class="wx-dlo">' + Math.round(daily.temperature_2m_min[i]) + '°</div></div>';
 }
 
-const rainChance = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : ‘–’;
-const wind = daily.windspeed_10m_max ? Math.round(daily.windspeed_10m_max[0]) : ‘–’;
-const rain = daily.precipitation_sum ? daily.precipitation_sum[0].toFixed(1) : ‘0.0’;
+const rainChance = daily.precipitation_probability_max ? daily.precipitation_probability_max[0] : '–';
+const wind = daily.windspeed_10m_max ? Math.round(daily.windspeed_10m_max[0]) : '–';
+const rain = daily.precipitation_sum ? daily.precipitation_sum[0].toFixed(1) : '0.0';
 
-const el = document.getElementById(‘wx-content’);
+const el = document.getElementById('wx-content');
 if (!el) return;
-el.innerHTML = ‘<div style="font-family:Georgia,serif;font-size:18px;font-weight:600;margin-bottom:10px;">’ + city.emoji + ’ ’ + city.name + ‘</div>’ +
-‘<div class="wx-current"><div><div class="wx-big-temp">’ + curTemp + ‘°F</div><div class="wx-desc">’ + curDesc + ‘</div><div class="wx-wind">💨 ’ + curWind + ’ mph</div></div><div class="wx-icon">’ + curIcon + ‘</div></div>’ +
-‘<div class="wx-week">’ + weekHtml + ‘</div>’ +
-‘<div class="wx-stats"><div class="wx-stat"><div class="wx-stat-icon">🌧️</div><div class="wx-stat-val">’ + rainChance + ‘%</div><div class="wx-stat-lbl">Rain chance</div></div><div class="wx-stat"><div class="wx-stat-icon">💨</div><div class="wx-stat-val">’ + wind + ’ mph</div><div class="wx-stat-lbl">Max wind</div></div><div class="wx-stat"><div class="wx-stat-icon">☔</div><div class="wx-stat-val">’ + rain + ’ in</div><div class="wx-stat-lbl">Precip.</div></div></div>’;
+el.innerHTML = '<div style="font-family:Georgia,serif;font-size:18px;font-weight:600;margin-bottom:10px;">' + city.emoji + ' ' + city.name + '</div>' +
+'<div class="wx-current"><div><div class="wx-big-temp">' + curTemp + '°F</div><div class="wx-desc">' + curDesc + '</div><div class="wx-wind">💨 ' + curWind + ' mph</div></div><div class="wx-icon">' + curIcon + '</div></div>' +
+'<div class="wx-week">' + weekHtml + '</div>' +
+'<div class="wx-stats"><div class="wx-stat"><div class="wx-stat-icon">🌧️</div><div class="wx-stat-val">' + rainChance + '%</div><div class="wx-stat-lbl">Rain chance</div></div><div class="wx-stat"><div class="wx-stat-icon">💨</div><div class="wx-stat-val">' + wind + ' mph</div><div class="wx-stat-lbl">Max wind</div></div><div class="wx-stat"><div class="wx-stat-icon">☔</div><div class="wx-stat-val">' + rain + ' in</div><div class="wx-stat-lbl">Precip.</div></div></div>';
 }
 
 function updateHeroTemp(data) {
 if (data.current_weather) {
-const t = document.getElementById(‘hero-temp’);
-const c = document.getElementById(‘hero-cond’);
-if (t) t.textContent = Math.round(data.current_weather.temperature) + ‘°F’;
-if (c) { const code = data.current_weather.weathercode; c.textContent = (WX_ICONS[code]||‘⛅’) + ’ ’ + (WX_DESC[code]||’’); }
+const t = document.getElementById('hero-temp');
+const c = document.getElementById('hero-cond');
+if (t) t.textContent = Math.round(data.current_weather.temperature) + '°F';
+if (c) { const code = data.current_weather.weathercode; c.textContent = (WX_ICONS[code]||'⛅') + ' ' + (WX_DESC[code]||''); }
 }
 }
 
 function updateCountdown() {
 const now = new Date();
 const diff = TRIP_START - now;
-const pill = document.getElementById(‘countdown-pill’);
+const pill = document.getElementById('countdown-pill');
 if (!pill) return;
 if (diff > 0) {
 const days = Math.floor(diff / 86400000);
-pill.textContent = days + ’ Days to Italia!’;
-pill.style.background = ‘var(–gold)’;
-pill.style.color = ‘var(–ink)’;
+pill.textContent = days + ' Days to Italia!';
+pill.style.background = 'var(--gold)';
+pill.style.color = 'var(--ink)';
 } else if (now <= TRIP_END) {
 const tripDay = Math.floor((now - TRIP_START) / 86400000) + 1;
-pill.textContent = ‘Day ’ + tripDay + ’ of 16 🇮🇹’;
-pill.style.background = ‘#2E7D32’;
-pill.style.color = ‘white’;
+pill.textContent = 'Day ' + tripDay + ' of 16 🇮🇹';
+pill.style.background = '#2E7D32';
+pill.style.color = 'white';
 } else {
-pill.textContent = ‘Che viaggio! 🇮🇹’;
-pill.style.background = ‘var(–stone)’;
-pill.style.color = ‘white’;
+pill.textContent = 'Che viaggio! 🇮🇹';
+pill.style.background = 'var(--stone)';
+pill.style.color = 'white';
 }
 }
 
-function dbg(msg) { console.log(’[DEBUG]’, msg); }
+function dbg(msg) { console.log('[DEBUG]', msg); }
 window.onerror = function(msg, src, line, col, err) {
-dbg(‘ERROR: ’ + msg + ’ (L’ + line + ‘)’);
+dbg('ERROR: ' + msg + ' (L' + line + ')');
 return false;
 };
-window.addEventListener(‘unhandledrejection’, e => {
-dbg(’PROMISE ERROR: ’ + (e.reason && e.reason.message || e.reason));
+window.addEventListener('unhandledrejection', e => {
+dbg('PROMISE ERROR: ' + (e.reason && e.reason.message || e.reason));
 });
 
-window.addEventListener(‘load’, () => {
-dbg(‘load fired’);
+window.addEventListener('load', () => {
+dbg('load fired');
 
 try {
 const now = new Date();
 const diff = DEPARTURE - now;
-const splashNum = document.getElementById(‘splash-num’);
-if (splashNum) splashNum.textContent = diff > 0 ? Math.floor(diff/86400000) : ‘🇮🇹’;
-dbg(‘splash num set’);
-} catch(e) { dbg(’splash err: ’ + e.message); }
+const splashNum = document.getElementById('splash-num');
+if (splashNum) splashNum.textContent = diff > 0 ? Math.floor(diff/86400000) : '🇮🇹';
+dbg('splash num set');
+} catch(e) { dbg('splash err: ' + e.message); }
 
-const splash = document.getElementById(‘splash’);
+const splash = document.getElementById('splash');
 setTimeout(() => {
 try {
 if (splash) {
-splash.classList.add(‘out’);
+splash.classList.add('out');
 
-```
     setTimeout(() => {
       if (splash) splash.style.display = 'none';
     }, 650);
   }
 } catch(e) {}
-```
-
 }, 3000);
 
 // Build wheel then render content with generous timing
 try {
 buildWheel();
-dbg(‘wheel built OK - items: ’ + document.querySelectorAll(’.w-item’).length);
-} catch(e) { dbg(’wheel err: ’ + e.message); }
+dbg('wheel built OK - items: ' + document.querySelectorAll('.w-item').length);
+} catch(e) { dbg('wheel err: ' + e.message); }
 
 // Calculate start day
 const today2 = new Date();
@@ -848,29 +844,29 @@ if (DEPARTURE - today2 <= 0) {
 const elapsed = Math.floor((today2 - TRIP_START) / 86400000);
 startIdx = Math.max(0, Math.min(elapsed + 1, DAYS.length - 1));
 }
-dbg(’startIdx: ’ + startIdx);
+dbg('startIdx: ' + startIdx);
 
 // Render day content directly first (no scroll needed)
 try {
 updateHero(DAYS[startIdx]);
 renderDayContent(startIdx);
 setActive(startIdx, false);
-dbg(‘content rendered OK’);
-} catch(e) { dbg(’render err: ’ + e.message); }
+dbg('content rendered OK');
+} catch(e) { dbg('render err: ' + e.message); }
 
 // Then try to scroll wheel into position
 setTimeout(() => {
 try {
 scrollToIdx(startIdx, false);
-dbg(‘scroll OK’);
-} catch(e) { dbg(’scroll err: ’ + e.message); }
+dbg('scroll OK');
+} catch(e) { dbg('scroll err: ' + e.message); }
 }, 300);
 
 updateCountdown();
 setInterval(updateCountdown, 60000);
-dbg(‘init complete’);
+dbg('init complete');
 
-try { loadWeather(‘rome’); } catch(e) {}
+try { loadWeather('rome'); } catch(e) {}
 });
 </script>
 
