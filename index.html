@@ -339,7 +339,11 @@ function onWheelScroll() {
       const dist = Math.abs(itemCenter - trackCenter);
       if (dist < closestDist) { closestDist = dist; closest = i; }
     });
-    if (closest !== activeIdx) setActive(closest, false);
+    if (closest !== activeIdx) {
+      updateHero(DAYS[closest]);
+      renderDayContent(closest);
+      setActive(closest, false);
+    }
   }, 80);
 
   const track = document.getElementById('wheel-track');
@@ -358,15 +362,20 @@ function onWheelScroll() {
   });
 }
 
-function scrollToIdx(idx, animate = true) {
-  const track = document.getElementById('wheel-track');
-  const items = track.querySelectorAll('.w-item');
-  if (!items[idx]) return;
-  const item = items[idx];
-  const itemCenter = item.offsetLeft + item.offsetWidth / 2;
-  const targetScroll = itemCenter - track.clientWidth / 2;
-  track.scrollTo({ left: targetScroll, behavior: animate ? 'smooth' : 'auto' });
-  setActive(idx, true);
+function scrollToIdx(idx, animate) {
+  try {
+    var track = document.getElementById('wheel-track');
+    if (!track) return;
+    var items = track.querySelectorAll('.w-item');
+    if (!items[idx]) return;
+    var item = items[idx];
+    var itemCenter = item.offsetLeft + item.offsetWidth / 2;
+    var targetScroll = itemCenter - track.clientWidth / 2;
+    if (targetScroll > 0) {
+      track.scrollTo({ left: targetScroll, behavior: animate ? 'smooth' : 'auto' });
+    }
+    setActive(idx, false);
+  } catch(e) { console.log('scrollToIdx err:', e.message); }
 }
 
 function setActive(idx, render = true) {
@@ -385,8 +394,10 @@ function setActive(idx, render = true) {
 }
 
 function updateHero(d) {
-  const band = document.getElementById('hero-band');
-  const now = new Date();
+  if (!d) return;
+  var band = document.getElementById('hero-band');
+  if (!band) return;
+  var now = new Date();
   const diff = TRIP_START - now;
   const deptDiff = DEPARTURE - now;
 
@@ -406,9 +417,11 @@ function updateHero(d) {
 }
 
 function renderDayContent(idx) {
-  const d = DAYS[idx];
-  const area = document.getElementById('day-content-area');
-  let html = '';
+  var d = DAYS[idx];
+  if (!d) { console.log('No day at idx', idx); return; }
+  var area = document.getElementById('day-content-area');
+  if (!area) { console.log('No day-content-area'); return; }
+  var html = '';
 
   if (d.date === 'Jun 21') {
     html += '<div class="special-banner"><div class="special-banner-icon">👨‍👧‍👦</div><div class="special-banner-text"><div class="sp-b-title">Happy Father\'s Day! 🎉</div><div class="sp-b-sub">Celebrating Brandon & Big Daddy in Rome — Buona Festa del Papà!</div></div></div>';
