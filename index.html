@@ -26,7 +26,7 @@
   <div class="sp-title">The Chiesa Family's<br>Italian Holiday</div>
   <div class="sp-sub">June – July 2026</div>
   <div class="sp-divider"></div>
-  <div class="sp-days-num" id="splash-num">--</div>
+  <div class="sp-days-num" id="splash-num">—</div>
   <div class="sp-days-label">Days Until Departure</div>
   <div class="sp-bar"><div class="sp-fill"></div></div>
 </div>
@@ -83,11 +83,11 @@
 <div id="main-view">
   <div id="hero-band" data-city="ROME">
     <div class="hero-eyebrow" id="hero-eyebrow">LOADING...</div>
-    <div class="hero-date" id="hero-date">--</div>
+    <div class="hero-date" id="hero-date">—</div>
     <div class="hero-city" id="hero-city">📍 Italy</div>
     <div class="hero-weather">
-      <div class="hero-temp" id="hero-temp">--°F</div>
-      <div class="hero-cond" id="hero-cond">⛅ --</div>
+      <div class="hero-temp" id="hero-temp">—°F</div>
+      <div class="hero-cond" id="hero-cond">⛅ —</div>
     </div>
   </div>
 
@@ -105,7 +105,7 @@
 <div id="panel-sheet">
   <div class="ps-handle"></div>
   <div class="ps-header">
-    <div class="ps-title" id="ps-title">--</div>
+    <div class="ps-title" id="ps-title">—</div>
     <button class="ps-close" onclick="closePanel()">✕</button>
   </div>
   <div class="ps-body" id="ps-body"></div>
@@ -119,113 +119,113 @@ const DEPARTURE  = new Date('2026-06-18');
 const DAYS = [
   { day:0, date:'Jun 18', city:'Charlottesville → Chicago → Munich', label:'Departure Day 🇺🇸', cityCode:'ROME', events:[
     {time:'All day', title:'🧳 Final packing & prep', desc:'Check passports, print confirmations, charge all devices, download offline Google Maps for all cities.', dot:'gold', tag:'Prep'},
-    {time:'2:00 PM', title:'🚗 Drive to CHO Airport', desc:'Charlottesville Albemarle Airport · Allow extra time -- small airport, but confirm parking in advance.', dot:'olive', tag:'Depart'},
+    {time:'2:00 PM', title:'🚗 Drive to CHO Airport', desc:'Charlottesville Albemarle Airport · Allow extra time — small airport, but confirm parking in advance.', dot:'olive', tag:'Depart'},
     {time:'3:00 PM', title:'✈️ Flight 1: CHO → IAD', desc:'UA4328 operated by CommutAir/United Express · 45 min flight · Arrives Washington Dulles 3:45pm', dot:'sky', tag:'UA4328', tagClass:'flight'},
     {time:'3:45 PM', title:'🛬 Arrive Washington Dulles (IAD)', desc:'Layover ~6.5 hours · Time to eat, relax, charge everything. United Club or explore terminals.', dot:'', tag:'Layover'},
     {time:'10:20 PM', title:'✈️ Flight 2: IAD → Munich (MUC)', desc:'UA8784 operated by Lufthansa · Check in at LUFTHANSA counter · Overnight transatlantic flight · Arrives Munich 12:30pm next day', dot:'sky', tag:'UA8784', tagClass:'flight'},
-    {time:'Night', title:'😴 Try to sleep on the plane', desc:'Munich arrives at noon -- rest helps you skip jet lag. Neck pillow, eye mask, set watch to Rome time now.', dot:'gold', tag:'Tip'},
+    {time:'Night', title:'😴 Try to sleep on the plane', desc:'Munich arrives at noon — rest helps you skip jet lag. Neck pillow, eye mask, set watch to Rome time now.', dot:'gold', tag:'Tip'},
   ]},
   { day:1, date:'Jun 19', city:'Rome', label:'Arrival Day', cityCode:'ROME', events:[
-    {time:'3:05 PM', title:'✈️ Land at FCO -- Rome Fiumicino', desc:'Final leg: Munich → Rome (UA9212 / Lufthansa). Collect bags.', dot:'sky', tag:'Flight', tagClass:'flight'},
+    {time:'3:05 PM', title:'✈️ Land at FCO — Rome Fiumicino', desc:'Final leg: Munich → Rome (UA9212 / Lufthansa). Collect bags.', dot:'sky', tag:'Flight', tagClass:'flight'},
     {time:'~4:30 PM', title:'🚕 Taxi to Airbnb next to Pantheon', desc:'Use Uber, Free Now app, or official taxi (fixed rate ~€48 from airport). Reservation HMBAJ4K352', dot:'', tag:'Book taxi'},
-    {time:'Evening', title:'⛪ Quick walk -- Santa Maria Sopra Minerva', desc:"Right behind the Pantheon -- Michelangelo's Christ Carrying the Cross + elephant obelisk. Free entry.", dot:'olive', tag:'Free'},
+    {time:'Evening', title:'⛪ Quick walk — Santa Maria Sopra Minerva', desc:"Right behind the Pantheon — Michelangelo's Christ Carrying the Cross + elephant obelisk. Free entry.", dot:'olive', tag:'Free'},
     {time:'7:00 PM', title:'🍷 Dinner in Trastevere', desc:'Trendy neighborhood across the river. Note: may be far for Nannie & Big Daddy. Uber back.', dot:'gold', tag:'Suggestion'},
   ]},
   { day:2, date:'Jun 20', city:'Rome', label:'Monuments & Parks', cityCode:'ROME', events:[
     {time:'10:30 AM', title:'👴👵 Nannie & Big Daddy Arrive', desc:'AA flight 720 from CLT arrives Rome 10:30am', dot:'sky', tag:'AA720', tagClass:'flight'},
-    {time:'Morning', title:'☕ Breakfast near Pantheon', desc:"Tazza d'Oro or Sant'Eustachio Caffè -- two of Rome's best espresso bars, both steps away", dot:'gold', tag:'Coffee'},
-    {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online -- cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
-    {time:'1:00 PM', title:'🍕 Lunch', desc:'All\'Antico Vinaio (sandwiches) or Brucio (pizza) -- both Brandon picks', dot:'gold', tag:'Food'},
+    {time:'Morning', title:'☕ Breakfast near Pantheon', desc:"Tazza d'Oro or Sant'Eustachio Caffè — two of Rome's best espresso bars, both steps away", dot:'gold', tag:'Coffee'},
+    {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online — cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
+    {time:'1:00 PM', title:'🍕 Lunch', desc:'All\'Antico Vinaio (sandwiches) or Brucio (pizza) — both Brandon picks', dot:'gold', tag:'Food'},
     {time:'2:30 PM', title:'⛲ Trevi Fountain', desc:'Go mid-afternoon, early morning for fewer crowds. Toss a coin! <a href="https://maps.google.com/?q=Trevi+Fountain,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'', tag:'Free'},
     {time:'4:00 PM', title:'🏡 Spanish Steps', desc:'Walk up for the panoramic view over Rome. <a href="https://maps.google.com/?q=Spanish+Steps,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
-    {time:'5:00 PM', title:'🌳 Villa Borghese Park', desc:'Large park with villas, zoo, and beautiful gardens -- great for a stroll', dot:'olive', tag:'Free'},
-    {time:'8:00 PM', title:'🍽️ Dinner -- Campo de\'Fiori → Trastevere', desc:'Walk through Campo de\'Fiori (site of executions, statue of Bruno the heretic) en route to dinner', dot:'gold', tag:'Evening'},
+    {time:'5:00 PM', title:'🌳 Villa Borghese Park', desc:'Large park with villas, zoo, and beautiful gardens — great for a stroll', dot:'olive', tag:'Free'},
+    {time:'8:00 PM', title:'🍽️ Dinner — Campo de\'Fiori → Trastevere', desc:'Walk through Campo de\'Fiori (site of executions, statue of Bruno the heretic) en route to dinner', dot:'gold', tag:'Evening'},
   ]},
   { day:3, date:'Jun 21', city:'Rome', label:"Golf Cart Tour + Alfredo 👨‍👧‍👦 Father's Day!", cityCode:'ROME', events:[
-    {time:'🎉', title:"Happy Father's Day! 👨‍👧‍👦", desc:"Celebrating Brandon & Big Daddy in Rome -- what a place to spend Father's Day! Buona Festa del Papà!", dot:'gold', tag:"Father's Day"},
+    {time:'🎉', title:"Happy Father's Day! 👨‍👧‍👦", desc:"Celebrating Brandon & Big Daddy in Rome — what a place to spend Father's Day! Buona Festa del Papà!", dot:'gold', tag:"Father's Day"},
     {time:'8:30 AM', title:'🏎️ Golf Cart Tour of Rome', desc:'Private Rome Golf Cart Tour · 3 hours · Ends 11:30am · <a href="https://livtours.com/tours/private-rome-golf-cart-tour/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a>', dot:'', tag:'Booked', tagClass:'booked'},
-    {time:'12:00 PM', title:'🏺 Largo Argentina', desc:'Where Julius Caesar was assassinated + cat sanctuary. Buy online -- much cheaper! <a href="https://maps.google.com/?q=Largo+di+Torre+Argentina,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a> · <a href="https://www.romanoimpero.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'olive', tag:'Book online'},
-    {time:'2:00 PM', title:'🌊 Vicus Caprarius -- Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
-    {time:'3:30 PM', title:'☕ Antico Caffè Greco', desc:'One of the oldest cafes in Rome -- historic stop near Spanish Steps', dot:'gold', tag:'Must do'},
-    {time:'7:30 PM', title:'🍝 Il Vero Alfredo -- BOOKED', desc:'Booking Reference: BV4ML76Q · The original Fettuccine Alfredo restaurant', dot:'', tag:'✓ Confirmed', tagClass:'booked'},
+    {time:'12:00 PM', title:'🏺 Largo Argentina', desc:'Where Julius Caesar was assassinated + cat sanctuary. Buy online — much cheaper! <a href="https://maps.google.com/?q=Largo+di+Torre+Argentina,Rome,Italy" target="_blank" style="color:var(--olive)">📍 Map</a> · <a href="https://www.romanoimpero.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'olive', tag:'Book online'},
+    {time:'2:00 PM', title:'🌊 Vicus Caprarius — Water City Underground', desc:'Small underground museum of ancient water. ~30 mins. Buy online! <a href="https://maps.google.com/?q=Vicus+Caprarius+Rome+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.vicuscaprarius.com" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'sky', tag:'Book online'},
+    {time:'3:30 PM', title:'☕ Antico Caffè Greco', desc:'One of the oldest cafes in Rome — historic stop near Spanish Steps', dot:'gold', tag:'Must do'},
+    {time:'7:30 PM', title:'🍝 Il Vero Alfredo — BOOKED', desc:'Booking Reference: BV4ML76Q · The original Fettuccine Alfredo restaurant', dot:'', tag:'✓ Confirmed', tagClass:'booked'},
   ]},
   { day:4, date:'Jun 22', city:'Rome', label:'Vatican Day', cityCode:'ROME', events:[
     {time:'7:45 AM', title:'🎨 VIP Vatican Breakfast Tour', desc:'Private Vatican tour with breakfast · 3.5 hours · <a href="https://livtours.com/tours/private-vatican-breakfast-tour-vip/" target="_blank" style="color:var(--gold)">🔗 livtours.com</a> · <a href="https://maps.google.com/?q=Vatican+Museums,Vatican+City" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'12:00 PM', title:'🍽️ Lunch near Vatican', desc:'Pietro Valentini or explore Prati neighborhood (locals\' area near Vatican)', dot:'gold', tag:'Suggestion'},
     {time:'Afternoon', title:'🗺️ Free afternoon in Rome', desc:'Revisit favorites, souvenir shopping, or relax near Pantheon', dot:'olive', tag:'Free'},
-    {time:'Evening', title:'🌙 Last night in Rome', desc:'Evening passeggiata -- the Italian tradition of the evening stroll', dot:'gold', tag:'Evening'},
+    {time:'Evening', title:'🌙 Last night in Rome', desc:'Evening passeggiata — the Italian tradition of the evening stroll', dot:'gold', tag:'Evening'},
   ]},
   { day:5, date:'Jun 23', city:'Florence', label:'Rome → Florence', cityCode:'FLORENCE', events:[
-    {time:'11:55 AM', title:'🚄 Italo EE8MQZ -- Everyone: Roma Termini → Firenze SMN', desc:'Train 8914 · Prima Business · Arrives 13:31 · Coach 2 · Brandon 14, Holly 15, Alfred 16, Ginger 17, Virginia 18, Adelle 19, Pearl 20 · Fast Track · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/rome-to-florence.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ EE8MQZ', tagClass:'booked'},
-    {time:'Afternoon', title:'🏨 Check in -- Solo Experience Hotel', desc:'2 rooms with breakfast included · soloexperiencehotel.com', dot:'', tag:'Hotel', tagClass:'booked'},
-    {time:'2:00 PM', title:'👜 Made in Tuscany Firenze -- Dimitri', desc:'Via degli Alfani 129r · Ex-Gucci craftsman · Cash for discount! Custom belts. Open 9am–7:30pm. <a href="https://maps.google.com/?q=Via+degli+Alfani+129r,+Florence,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Must visit'},
+    {time:'11:55 AM', title:'🚄 Italo EE8MQZ — Everyone: Roma Termini → Firenze SMN', desc:'Train 8914 · Prima Business · Arrives 13:31 · Coach 2 · Brandon 14, Holly 15, Alfred 16, Ginger 17, Virginia 18, Adelle 19, Pearl 20 · Fast Track · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/rome-to-florence.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ EE8MQZ', tagClass:'booked'},
+    {time:'Afternoon', title:'🏨 Check in — Solo Experience Hotel', desc:'2 rooms with breakfast included · soloexperiencehotel.com', dot:'', tag:'Hotel', tagClass:'booked'},
+    {time:'2:00 PM', title:'👜 Made in Tuscany Firenze — Dimitri', desc:'Via degli Alfani 129r · Ex-Gucci craftsman · Cash for discount! Custom belts. Open 9am–7:30pm. <a href="https://maps.google.com/?q=Via+degli+Alfani+129r,+Florence,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Must visit'},
     {time:'4:00 PM', title:'🌸 Ponte Vecchio & Oltrarno stroll', desc:'Famous jewelers bridge, then explore the artisan neighborhood south of the river. <a href="https://maps.google.com/?q=Ponte+Vecchio,+Florence,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Free'},
-    {time:'7:30 PM', title:'🍝 Dinner -- Trattoria Sergio Gozzi', desc:'Piazza San Lorenzo · Cash only, arrive early, local institution', dot:'gold', tag:'Recommendation'},
+    {time:'7:30 PM', title:'🍝 Dinner — Trattoria Sergio Gozzi', desc:'Piazza San Lorenzo · Cash only, arrive early, local institution', dot:'gold', tag:'Recommendation'},
   ]},
   { day:6, date:'Jun 24', city:'Florence → Parma', label:'Art + Split Day', cityCode:'FLORENCE', events:[
-    {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance -- Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
-    {time:'1:00 PM', title:'🍝 Lunch -- Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
-    {time:'1:39 PM', title:'🚄 Italo -- Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Coach 3 · Brandon 29, Holly 30, Virginia 31, Adelle 32, Pearl 33 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-bologna.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ SEJ54J', tagClass:'booked'},
-    {time:'2:18 PM', title:'🔀 Split at Bologna Centrale', desc:'Ginger & Alfred stay on Train 8914 to Venezia -- arrives 15:55 · Coach 3 · Seats 37 & 36 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-venice.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'gold', tag:'✓ TBHQMV', tagClass:'booked'},
+    {time:'Morning', title:'🎨 Uffizi Gallery or Accademia', desc:"Book tickets in advance — Michelangelo's David or world-class Renaissance art. <a href='https://maps.google.com/?q=Uffizi+Gallery,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Uffizi Map</a> · <a href='https://maps.google.com/?q=Galleria+dell+Accademia,+Florence,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Accademia Map</a> · <a href='https://www.uffizi.it' target='_blank' style='color:var(--gold)'>🎟️ Book Uffizi</a> · <a href='https://www.galleriaaccademiafirenze.it' target='_blank' style='color:var(--gold)'>🎟️ Book Accademia</a>", dot:'', tag:'Book ahead'},
+    {time:'1:00 PM', title:'🍝 Lunch — Trattoria Sergio Gozzi', desc:'Return to this great spot before departure', dot:'gold', tag:'Recommended'},
+    {time:'1:39 PM', title:'🚄 Italo — Everyone departs Firenze SMN together', desc:'Train 8914 · Prima Business · Coach 3 · Brandon 29, Holly 30, Virginia 31, Adelle 32, Pearl 33 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-bologna.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ SEJ54J', tagClass:'booked'},
+    {time:'2:18 PM', title:'🔀 Split at Bologna Centrale', desc:'Ginger & Alfred stay on Train 8914 to Venezia — arrives 15:55 · Coach 3 · Seats 37 & 36 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/florence-to-venice.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'gold', tag:'✓ TBHQMV', tagClass:'booked'},
     {time:'2:50 PM', title:'🚄 Brandon, Holly + kids: Bologna → Parma', desc:'Regionale TTPER 17416 · Bologna Centrale 14:50 → Parma 16:01 · Ticket: 2799971845 · CP: 766705 · €8.50 · 2nd class regional · <a href="https://www.lefrecce.it/Channels.Website.WEB/#/self-check-in?id=4RjR3E5P2scGWpNplxfvX4aSvoylSyr3y1gSypCoMFc=" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ Booked', tagClass:'booked'},
-    {time:'Evening', title:'🏠 Check in -- Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
+    {time:'Evening', title:'🏠 Check in — Borgo Sant\'Antonio, 8', desc:'Ultimo piano (top floor!) · Parma, Emilia-Romagna 43121 · Reservation HMPS9NTX85', dot:'olive', tag:'Booked', tagClass:'booked'},
   ]},
   { day:7, date:'Jun 25', city:'Parma', label:'Parmigiano Bike Tour', cityCode:'PARMA', events:[
-    {time:'Morning', title:'☕ Explore Parma city center', desc:'Cathedral, Baptistery, Piazza Garibaldi -- beautiful and uncrowded Italian city', dot:'olive', tag:'Free'},
-    {time:'12:00 PM', title:'🍽️ Lunch', desc:'Order everything with Prosciutto di Parma and Parmigiano -- you\'re in the source!', dot:'gold', tag:'Food'},
+    {time:'Morning', title:'☕ Explore Parma city center', desc:'Cathedral, Baptistery, Piazza Garibaldi — beautiful and uncrowded Italian city', dot:'olive', tag:'Free'},
+    {time:'12:00 PM', title:'🍽️ Lunch', desc:'Order everything with Prosciutto di Parma and Parmigiano — you\'re in the source!', dot:'gold', tag:'Food'},
     {time:'3:00 PM', title:'🚲 Parmigiano Factory Bike Tour (4 hours)', desc:'Bike Food Stories · Str. Giuseppe Garibaldi 29 · ☎ +39 349 783 8492 · <a href="https://maps.google.com/?q=Str.+Giuseppe+Garibaldi+29,+Parma,+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.tripadvisor.com/AttractionProductReview-g187804-d15304065" target="_blank" style="color:var(--gold)">⭐ TripAdvisor</a>', dot:'', tag:'Booked', tagClass:'booked'},
-    {time:'7:00 PM', title:'🍷 Dinner after the tour', desc:'You\'ll be full of cheese and happy. Light dinner -- wine and charcuterie.', dot:'gold', tag:'Evening'},
+    {time:'7:00 PM', title:'🍷 Dinner after the tour', desc:'You\'ll be full of cheese and happy. Light dinner — wine and charcuterie.', dot:'gold', tag:'Evening'},
   ]},
   { day:8, date:'Jun 26', city:'Parma', label:'Free Day in Parma', cityCode:'PARMA', events:[
-    {time:'Morning', title:'🏛️ Parma Duomo & Baptistery', desc:'Stunning frescoes by Correggio in the cathedral dome -- one of Italy\'s hidden gems', dot:'olive', tag:'Free'},
-    {time:'Afternoon', title:'🛍️ Shopping & wandering', desc:'Parma is Italy\'s food capital -- prosciutto shops, cheese counters, local markets', dot:'gold', tag:'Free'},
-    {time:'Evening', title:'🍝 Last full dinner in Parma', desc:'Osteria Miriam or Trattoria Corrieri -- order the local pasta', dot:'gold', tag:'Suggestion'},
+    {time:'Morning', title:'🏛️ Parma Duomo & Baptistery', desc:'Stunning frescoes by Correggio in the cathedral dome — one of Italy\'s hidden gems', dot:'olive', tag:'Free'},
+    {time:'Afternoon', title:'🛍️ Shopping & wandering', desc:'Parma is Italy\'s food capital — prosciutto shops, cheese counters, local markets', dot:'gold', tag:'Free'},
+    {time:'Evening', title:'🍝 Last full dinner in Parma', desc:'Osteria Miriam or Trattoria Corrieri — order the local pasta', dot:'gold', tag:'Suggestion'},
   ]},
   { day:9, date:'Jun 27', city:'Parma', label:'Valmozzola + 🎂 Brandon\'s Birthday!', cityCode:'PARMA', events:[
-    {time:'🎂', title:"Happy Birthday Brandon! 🎉", desc:'Spending your birthday in the ancestral homeland of the Chiesa family -- it doesn\'t get more special than this. Auguri!', dot:'gold', tag:'Birthday!'},
+    {time:'🎂', title:"Happy Birthday Brandon! 🎉", desc:'Spending your birthday in the ancestral homeland of the Chiesa family — it doesn\'t get more special than this. Auguri!', dot:'gold', tag:'Birthday!'},
     {time:'9:30 AM', title:'🚗 Pick up Sixt Rental Car', desc:'Via Trento 3D, Parma · Reservation #9730023172 · <a href="https://maps.google.com/?q=Via+Trento+3D,+Parma,+Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a>', dot:'sky', tag:'Car rental'},
     {time:'~11:00 AM', title:'🏘️ Drive to Valmozzola', desc:'~1 hour south of Parma into the Apennine mountains. Stunning scenic drive. <a href="https://maps.google.com/?q=Valmozzola,+PR,+Italy" target="_blank" style="color:var(--olive)">📍 Map</a>', dot:'olive', tag:'Special'},
     {time:'11:30 AM', title:'⛪ Visit Giuseppe Chiesa\'s birthplace', desc:'Strada San Siro 10, 43050 Valmozzola PR · Your family\'s ancestral home · <a href="https://maps.google.com/?q=Strada+San+Siro+10,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'', tag:'Ancestral', tagClass:'booked'},
     {time:'12:00 PM', title:'⛪ Visit Maria Ferretti\'s birthplace', desc:'San Martino 6, 43050 Valmozzola PR · Explore the village, photograph everything · <a href="https://maps.google.com/?q=San+Martino+6,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Ancestral'},
     {time:'2:00 PM', title:'🛒 Optional: Fidenza Village outlet stop', desc:'Designer outlet shopping on the drive back north toward Parma. Save Fidenza for the Jun 28 drive to Lake Garda if preferred.', dot:'olive', tag:'Optional'},
-    {time:'Late PM', title:'👴👵 Nannie & Big Daddy depart Venice', desc:'Aer Lingus EI8074 at 11pm from VCE -- safe travels!', dot:'sky', tag:'EI8074', tagClass:'flight'},
+    {time:'Late PM', title:'👴👵 Nannie & Big Daddy depart Venice', desc:'Aer Lingus EI8074 at 11pm from VCE — safe travels!', dot:'sky', tag:'EI8074', tagClass:'flight'},
   ]},
   { day:10, date:'Jun 28', city:'Lake Garda', label:'Parma → Lake Garda', cityCode:'GARDA', events:[
     {time:'Morning', title:'🚗 Drive Parma → Lake Garda', desc:'~1.5 hrs via A22. Optional stop at Fidenza Village outlet if not done yesterday.', dot:'sky', tag:'Drive'},
-    {time:'~12:00 PM', title:'🏠 Check in -- Torri del Benaco Airbnb', desc:'Beautiful medieval village on eastern shore of Lake Garda · Reservation HMKHFXXT8F', dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'~12:00 PM', title:'🏠 Check in — Torri del Benaco Airbnb', desc:'Beautiful medieval village on eastern shore of Lake Garda · Reservation HMKHFXXT8F', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'Afternoon', title:'🏖️ Afternoon at the lake', desc:'Swimming, kayaking, just sitting and looking at the Alps reflecting in the water', dot:'olive', tag:'Relax'},
-    {time:'7:00 PM', title:'🐟 Lakeside dinner', desc:'Fresh lake fish at Ristorante Grifone in Sirmione -- on the water, spectacular', dot:'gold', tag:'Suggestion'},
+    {time:'7:00 PM', title:'🐟 Lakeside dinner', desc:'Fresh lake fish at Ristorante Grifone in Sirmione — on the water, spectacular', dot:'gold', tag:'Suggestion'},
   ]},
   { day:11, date:'Jun 29', city:'Lake Garda', label:'Lake Day', cityCode:'GARDA', events:[
     {time:'Morning', title:'⛵ Boat trip on the lake', desc:'Ferry between towns (Malcesine, Sirmione, Gardone) or rent a small private boat', dot:'sky', tag:'Optional'},
-    {time:'Afternoon', title:'🏰 Sirmione -- Scaligero Castle', desc:"Medieval castle jutting into the lake -- one of Italy's most dramatic locations. <a href='https://maps.google.com/?q=Castello+Scaligero+Sirmione+Italy' target='_blank' style='color:var(--olive)'>📍 Map</a>", dot:'olive', tag:'Must see'},
+    {time:'Afternoon', title:'🏰 Sirmione — Scaligero Castle', desc:"Medieval castle jutting into the lake — one of Italy's most dramatic locations. <a href='https://maps.google.com/?q=Castello+Scaligero+Sirmione+Italy' target='_blank' style='color:var(--olive)'>📍 Map</a>", dot:'olive', tag:'Must see'},
     {time:'Evening', title:'🌅 Lake Garda sunset', desc:'Watch the sun set over the lake with a glass of local Lugana wine', dot:'', tag:'Evening'},
   ]},
   { day:12, date:'Jun 30', city:'Venice Day Trip', label:"St. Mark's & Doge's Palace", cityCode:'GARDA', events:[
     {time:'Morning', title:'🚗 Drive to Verona train station', desc:'~45 mins from Torri del Benaco. Park at Verona Porta Nuova station.', dot:'sky', tag:'Drive'},
-    {time:'~10:00 AM', title:'🚄 Train Verona → Venice', desc:'Fast regional train ~1.5 hrs. Buy on Trenitalia app. No cruise ships in port today -- best day to visit!', dot:'sky', tag:'Train'},
-    {time:'2:30 PM', title:"🏛️ St. Mark's & Doge's Palace Tour -- BOOKED", desc:"Semi-private tour · <a href='https://livtours.com/tours/semi-private-st-marks-doges-palace-tour/' target='_blank' style='color:var(--gold)'>🔗 livtours.com</a> · <a href='https://maps.google.com/?q=St+Marks+Basilica,Venice,Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'', tag:'Booked', tagClass:'booked'},
-    {time:'Evening', title:'🌙 Venice at night', desc:'Stay after dark -- magical canals, lit bridges, quiet calli with no crowds', dot:'gold', tag:'Must do'},
+    {time:'~10:00 AM', title:'🚄 Train Verona → Venice', desc:'Fast regional train ~1.5 hrs. Buy on Trenitalia app. No cruise ships in port today — best day to visit!', dot:'sky', tag:'Train'},
+    {time:'2:30 PM', title:"🏛️ St. Mark's & Doge's Palace Tour — BOOKED", desc:"Semi-private tour · <a href='https://livtours.com/tours/semi-private-st-marks-doges-palace-tour/' target='_blank' style='color:var(--gold)'>🔗 livtours.com</a> · <a href='https://maps.google.com/?q=St+Marks+Basilica,Venice,Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'', tag:'Booked', tagClass:'booked'},
+    {time:'Evening', title:'🌙 Venice at night', desc:'Stay after dark — magical canals, lit bridges, quiet calli with no crowds', dot:'gold', tag:'Must do'},
     {time:'Late', title:'🚄 Train back to Verona', desc:'Check last train time (typically ~11pm). Drive back to Torri del Benaco.', dot:'sky', tag:'Return'},
   ]},
   { day:13, date:'Jul 1', city:'Riva del Garda', label:'Northern Lake Adventure', cityCode:'GARDA', events:[
-    {time:'Morning', title:'🚗 Drive north to Riva del Garda', desc:'~45 mins up the western shore -- stunning alpine scenery', dot:'sky', tag:'Drive'},
-    {time:'10:00 AM', title:'💧 Varone Cave Waterfalls', desc:"Spectacular waterfall inside a narrow gorge -- cool and misty, bring a layer! <a href='https://maps.google.com/?q=Cascata+del+Varone,+Riva+del+Garda,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'sky', tag:'Must see'},
+    {time:'Morning', title:'🚗 Drive north to Riva del Garda', desc:'~45 mins up the western shore — stunning alpine scenery', dot:'sky', tag:'Drive'},
+    {time:'10:00 AM', title:'💧 Varone Cave Waterfalls', desc:"Spectacular waterfall inside a narrow gorge — cool and misty, bring a layer! <a href='https://maps.google.com/?q=Cascata+del+Varone,+Riva+del+Garda,+Italy' target='_blank' style='color:var(--terracotta);font-weight:600'>📍 Map</a>", dot:'sky', tag:'Must see'},
     {time:'12:00 PM', title:'🏔️ Canyon Adventures', desc:'Via ferrata, canyoning, or kayaking available near Riva del Garda', dot:'olive', tag:'Adventure'},
-    {time:'2:00 PM', title:'🏘️ Canale di Tenno', desc:"Medieval mountain village above Riva -- tiny, ancient, completely unchanged. <a href='https://maps.google.com/?q=Canale+di+Tenno,+Trento,+Italy' target='_blank' style='color:var(--gold)'>📍 Map</a>", dot:'gold', tag:'Unique'},
-    {time:'4:00 PM', title:'🍋 Optional: Limone sul Garda', desc:'Charming lemon-grove village on western shore -- beautiful for a stroll and gelato', dot:'olive', tag:'Optional'},
-    {time:'Evening', title:'🌅 Return to Torri del Benaco', desc:'Last full day on the lake -- one more sunset dinner by the water', dot:'gold', tag:'Evening'},
+    {time:'2:00 PM', title:'🏘️ Canale di Tenno', desc:"Medieval mountain village above Riva — tiny, ancient, completely unchanged. <a href='https://maps.google.com/?q=Canale+di+Tenno,+Trento,+Italy' target='_blank' style='color:var(--gold)'>📍 Map</a>", dot:'gold', tag:'Unique'},
+    {time:'4:00 PM', title:'🍋 Optional: Limone sul Garda', desc:'Charming lemon-grove village on western shore — beautiful for a stroll and gelato', dot:'olive', tag:'Optional'},
+    {time:'Evening', title:'🌅 Return to Torri del Benaco', desc:'Last full day on the lake — one more sunset dinner by the water', dot:'gold', tag:'Evening'},
   ]},
   { day:14, date:'Jul 2', city:'Lake Garda', label:'Last Day in Italy', cityCode:'GARDA', events:[
-    {time:'Morning', title:'☀️ Slow morning at the lake', desc:'Last morning in Italy -- swim, coffee, soak it all in', dot:'gold', tag:'Relax'},
-    {time:'Afternoon', title:'🛍️ Final souvenir shopping', desc:'Torri del Benaco village -- olive oil, wine, ceramics, limoncello', dot:'olive', tag:'Shopping'},
-    {time:'Evening', title:'🍷 Farewell dinner', desc:'Make it special -- toast to the Chiesa family Italian adventure!', dot:'', tag:'Last night'},
-    {time:'Night', title:'🧳 Pack up for early departure', desc:'Sixt drop-off is 10am in Verona tomorrow -- pack tonight, set alarms', dot:'sky', tag:'Logistics'},
+    {time:'Morning', title:'☀️ Slow morning at the lake', desc:'Last morning in Italy — swim, coffee, soak it all in', dot:'gold', tag:'Relax'},
+    {time:'Afternoon', title:'🛍️ Final souvenir shopping', desc:'Torri del Benaco village — olive oil, wine, ceramics, limoncello', dot:'olive', tag:'Shopping'},
+    {time:'Evening', title:'🍷 Farewell dinner', desc:'Make it special — toast to the Chiesa family Italian adventure!', dot:'', tag:'Last night'},
+    {time:'Night', title:'🧳 Pack up for early departure', desc:'Sixt drop-off is 10am in Verona tomorrow — pack tonight, set alarms', dot:'sky', tag:'Logistics'},
   ]},
   { day:15, date:'Jul 3', city:'Homeward Bound', label:'Verona → Milan → Chicago', cityCode:'GARDA', events:[
     {time:'9:00 AM', title:'🚗 Drive to Verona Porta Nuova', desc:'~45 mins from Torri del Benaco. Allow extra time for the return!', dot:'sky', tag:'Drive'},
     {time:'10:00 AM', title:'🚗 Drop Sixt rental car', desc:'Verona Porta Nuova, level -1, in front of train station. Park in SIXT-marked bays, return key to SIXT branch.', dot:'', tag:'Car return', tagClass:'alert'},
-    {time:'9:12 AM', title:'🚄 Italo XKDEGK -- Verona P.N. → Milano Centrale', desc:'Train 8974 · Prima Business · Arrives 10:25 · Coach 3 · Brandon 7, Holly 9, Virginia 10, Adelle 11, Pearl 12 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/verona-to-milan.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ XKDEGK', tagClass:'booked'},
+    {time:'9:12 AM', title:'🚄 Italo XKDEGK — Verona P.N. → Milano Centrale', desc:'Train 8974 · Prima Business · Arrives 10:25 · Coach 3 · Brandon 7, Holly 9, Virginia 10, Adelle 11, Pearl 12 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/verona-to-milan.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ XKDEGK', tagClass:'booked'},
     {time:'~11:00 AM', title:'🚄 Milano Centrale → Malpensa Airport', desc:'Malpensa Express from Milano Centrale Platform 1 · ~50 mins · Buy ticket at station · Allow 2+ hrs before 3:20pm flight', dot:'sky', tag:'Train'},
     {time:'3:20 PM', title:'✈️ Depart Milan MXP → Chicago ORD', desc:'UA415 · United Economy · Arrives Chicago 6:10pm same day', dot:'sky', tag:'UA415', tagClass:'flight'},
     {time:'6:10 PM', title:'🛬 Arrive Chicago O\'Hare', desc:'Clear customs & immigration.', dot:'', tag:'Chicago'},
@@ -403,7 +403,7 @@ function updateHero(d) {
   if (diff > 0) {
     const days = Math.floor(diff / 86400000);
     document.getElementById('hero-eyebrow').textContent = days + ' DAYS UNTIL DEPARTURE';
-    document.getElementById('hero-date').textContent = 'Jun 18, 2026 -- Departure';
+    document.getElementById('hero-date').textContent = 'Jun 18, 2026 — Departure';
     document.getElementById('hero-city').textContent = '📍 Charlottesville, VA';
     band.setAttribute('data-city', 'HOME');
   } else {
@@ -423,10 +423,10 @@ function renderDayContent(idx) {
   var html = '';
 
   if (d.date === 'Jun 21') {
-    html += '<div class="special-banner"><div class="special-banner-icon">👨‍👧‍👦</div><div class="special-banner-text"><div class="sp-b-title">Happy Father\'s Day! 🎉</div><div class="sp-b-sub">Celebrating Brandon & Big Daddy in Rome -- Buona Festa del Papà!</div></div></div>';
+    html += '<div class="special-banner"><div class="special-banner-icon">👨‍👧‍👦</div><div class="special-banner-text"><div class="sp-b-title">Happy Father\'s Day! 🎉</div><div class="sp-b-sub">Celebrating Brandon & Big Daddy in Rome — Buona Festa del Papà!</div></div></div>';
   }
   if (d.date === 'Jun 27') {
-    html += '<div class="special-banner"><div class="special-banner-icon">🎂</div><div class="special-banner-text"><div class="sp-b-title">Happy Birthday Brandon! 🎂</div><div class="sp-b-sub">Spending your birthday in the ancestral Chiesa homeland -- Auguri!</div></div></div>';
+    html += '<div class="special-banner"><div class="special-banner-icon">🎂</div><div class="special-banner-text"><div class="sp-b-title">Happy Birthday Brandon! 🎂</div><div class="sp-b-sub">Spending your birthday in the ancestral Chiesa homeland — Auguri!</div></div></div>';
   }
 
   html += '<div class="day-header-card"><div class="dhc-label">Day ' + d.day + ' · ' + d.date + '</div><div class="dhc-city">' + d.city + '</div><div class="dhc-sub">' + d.label + '</div></div>';
@@ -520,11 +520,11 @@ function buildMapPanel() {
   h += '<a id="map-open-link" href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" class="map-open-btn">Open in Google Maps ↗</a>';
   h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-t">🏠</div><div><div class="card-title">Accommodations</div><div class="card-sub">Tap Map to navigate</div></div></div><div style="padding:0">';
   const stays = [
-    {em:'🏛️', name:'Rome -- Airbnb next to Pantheon', addr:'Jun 19–23 · HMBAJ4K352 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMBAJ4K352" target="_blank">🏠 Airbnb</a>', q:'Pantheon Rome Italy'},
-    {em:'🌺', name:'Florence -- Solo Experience Hotel', addr:'Jun 23–24 · <a href="https://www.soloexperiencehotel.com" target="_blank">🏨 Hotel</a>', q:'Solo Experience Hotel Florence Italy'},
-    {em:'🧀', name:'Parma -- Borgo Sant\'Antonio, 8', addr:'Jun 24–28 · HMPS9NTX85 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMPS9NTX85" target="_blank">🏠 Airbnb</a>', q:'Borgo SantAntonio 8 Parma Italy'},
-    {em:'🏔️', name:'Lake Garda -- Torri del Benaco', addr:'Jun 28–Jul 3 · HMKHFXXT8F · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMKHFXXT8F" target="_blank">🏠 Airbnb</a>', q:'Torri del Benaco Lake Garda Italy'},
-    {em:'🏨', name:"Chicago -- SpringHill Suites O'Hare", addr:'8101 W Higgins Rd · Jul 3 · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank">📍 Map</a>', q:'SpringHill Suites 8101 West Higgins Chicago'},
+    {em:'🏛️', name:'Rome — Airbnb next to Pantheon', addr:'Jun 19–23 · HMBAJ4K352 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMBAJ4K352" target="_blank">🏠 Airbnb</a>', q:'Pantheon Rome Italy'},
+    {em:'🌺', name:'Florence — Solo Experience Hotel', addr:'Jun 23–24 · <a href="https://www.soloexperiencehotel.com" target="_blank">🏨 Hotel</a>', q:'Solo Experience Hotel Florence Italy'},
+    {em:'🧀', name:'Parma — Borgo Sant\'Antonio, 8', addr:'Jun 24–28 · HMPS9NTX85 · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMPS9NTX85" target="_blank">🏠 Airbnb</a>', q:'Borgo SantAntonio 8 Parma Italy'},
+    {em:'🏔️', name:'Lake Garda — Torri del Benaco', addr:'Jun 28–Jul 3 · HMKHFXXT8F · <a href="https://www.airbnb.com/trips/v1/reservation-details/ro/RESERVATION2_CHECKIN/HMKHFXXT8F" target="_blank">🏠 Airbnb</a>', q:'Torri del Benaco Lake Garda Italy'},
+    {em:'🏨', name:"Chicago — SpringHill Suites O'Hare", addr:'8101 W Higgins Rd · Jul 3 · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank">📍 Map</a>', q:'SpringHill Suites 8101 West Higgins Chicago'},
   ];
   stays.forEach(s => h += '<div class="pin-row"><div class="pin-em">' + s.em + '</div><div class="pin-info"><div class="pin-name">' + s.name + '</div><div class="pin-addr">' + s.addr + '</div></div><button class="pin-btn" onclick="window.open(\'https://maps.google.com/?q=' + encodeURIComponent(s.q) + '\',\'_blank\')">Map</button></div>');
   h += '</div></div>';
@@ -622,7 +622,7 @@ function buildFamilyPanel() {
   members.forEach(m => h += '<div class="fam-card"><div class="fam-av">' + m.av + '</div><div class="fam-name">' + m.name + '</div><div class="fam-role">' + m.role + '</div></div>');
   h += '</div>';
   h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-s">✈️</div><div><div class="card-title">Nannie & Big Daddy</div><div class="card-sub">Join Jun 20 · Split Jun 24 · Depart Jun 27</div></div></div><div style="padding:10px 14px;font-size:13px;color:var(--stone);line-height:1.6">AA720 from CLT · arrives Rome 10:30am Jun 20.<br>Splits from group Jun 24 → Venice (Italo TBHQMV).<br>Departs Venice Jun 27 · Aer Lingus EI8074 at 11pm.</div></div>';
-  h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-t">🆘</div><div><div class="card-title">Meeting Points</div><div class="card-sub">If separated -- no signal needed</div></div></div><div style="padding:10px 14px;font-size:13px;line-height:1.8;color:var(--stone)"><b style="color:var(--ink)">Rome:</b> Trevi Fountain top steps · every hour<br><b style="color:var(--ink)">Florence:</b> Piazza della Signoria · David replica<br><b style="color:var(--ink)">Parma:</b> Piazza Garibaldi central fountain<br><b style="color:var(--ink)">Venice:</b> St. Mark\'s Basilica main entrance</div></div>';
+  h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-t">🆘</div><div><div class="card-title">Meeting Points</div><div class="card-sub">If separated — no signal needed</div></div></div><div style="padding:10px 14px;font-size:13px;line-height:1.8;color:var(--stone)"><b style="color:var(--ink)">Rome:</b> Trevi Fountain top steps · every hour<br><b style="color:var(--ink)">Florence:</b> Piazza della Signoria · David replica<br><b style="color:var(--ink)">Parma:</b> Piazza Garibaldi central fountain<br><b style="color:var(--ink)">Venice:</b> St. Mark\'s Basilica main entrance</div></div>';
   return h;
 }
 
@@ -642,14 +642,14 @@ function buildToolsPanel() {
   ];
   utils.forEach(u => h += '<a href="' + u.url + '" target="_blank" class="util-card"><div class="util-icon">' + u.icon + '</div><div class="util-name">' + u.name + '</div><div class="util-desc">' + u.desc + '</div></a>');
   h += '</div>';
-  h += '<div class="emerg-card"><div class="emerg-title">🚨 Emergency Numbers -- Italy</div>';
+  h += '<div class="emerg-card"><div class="emerg-title">🚨 Emergency Numbers — Italy</div>';
   [['General Emergency','112'],['Ambulance','118'],['Police','113'],['Fire','115'],['US Embassy Rome','+39 06 46741'],['Sixt Rental','#9730023172']].forEach(r => h += '<div class="emerg-row"><span>' + r[0] + '</span><span class="emerg-num">' + r[1] + '</span></div>');
   h += '</div>';
 
   h += '<div class="card"><div class="card-hdr"><div class="card-ico ico-o">🧳</div><div><div class="card-title">Packing Checklist</div><div class="card-sub">Tap to check off</div></div></div><div style="padding:0 14px 14px">';
   const packs = {
     'Documents':['Passports (valid 6+ months)','Flight confirmations printed','Airbnb reservation codes','Driver\'s license (Sixt rental)','Travel insurance cards','Notify bank of travel dates'],
-    'Tech':['EU plug adapter (Type F/L)','Portable power bank','eSIM for Italy (try Airalo app)','Google Maps offline -- download all cities','Download Too Good To Go app'],
+    'Tech':['EU plug adapter (Type F/L)','Portable power bank','eSIM for Italy (try Airalo app)','Google Maps offline — download all cities','Download Too Good To Go app'],
     'Clothing':['Modest clothing for Vatican & churches','Comfortable walking shoes (cobblestones!)','Light jacket / layer (evenings cool)','Swimsuit (Lake Garda)'],
     'Health':['Prescription medications','Sunscreen SPF 50+','Motion sickness tabs (curvy Parma roads)'],
   };
@@ -665,12 +665,12 @@ function buildInfoPanel() {
   let h = '';
 
   const tips = [
-    {icon:'🏛️',title:'Near Your Rome Airbnb',text:"You're right next to the Pantheon! Santa Maria Sopra Minerva is steps away -- Michelangelo's Christ Carrying the Cross. Free entry."},
-    {icon:'🚗',title:'ZTL Zones',text:'Rome and Florence historic centers restrict traffic. Never drive in -- fines come by mail months later.'},
-    {icon:'⛪',title:"Campo de' Fiori",text:'Walk through on the way to Trastevere. Site of public executions -- the statue is Giordano Bruno, burned alive as a heretic.'},
-    {icon:'💧',title:'Free Water -- Rome',text:'Nasoni fountains give free clean drinking water throughout Rome. Refill your bottles -- cold and delicious.'},
+    {icon:'🏛️',title:'Near Your Rome Airbnb',text:"You're right next to the Pantheon! Santa Maria Sopra Minerva is steps away — Michelangelo's Christ Carrying the Cross. Free entry."},
+    {icon:'🚗',title:'ZTL Zones',text:'Rome and Florence historic centers restrict traffic. Never drive in — fines come by mail months later.'},
+    {icon:'⛪',title:"Campo de' Fiori",text:'Walk through on the way to Trastevere. Site of public executions — the statue is Giordano Bruno, burned alive as a heretic.'},
+    {icon:'💧',title:'Free Water — Rome',text:'Nasoni fountains give free clean drinking water throughout Rome. Refill your bottles — cold and delicious.'},
     {icon:'🏰',title:'Valmozzola',text:"The ancestral Chiesa village! Visit Giuseppe's home (Strada San Siro 10) and Maria Ferretti's (San Martino 6)."},
-    {icon:'🛒',title:'Fidenza Village',text:'On the drive from Parma to Lake Garda -- designer outlet shopping. Good stop if the group wants it.'},
+    {icon:'🛒',title:'Fidenza Village',text:'On the drive from Parma to Lake Garda — designer outlet shopping. Good stop if the group wants it.'},
     {icon:'🎟️',title:'Buy Tickets Online',text:'Largo Argentina, Vicus Caprarius, and Colosseum are much cheaper online. Walk-up prices can double in June.'},
     {icon:'🍝',title:'Meal Times',text:'Italians eat dinner 8–10pm. Restaurants before 7pm are mostly for tourists. Afternoon gelato tides you over.'},
   ];
