@@ -115,9 +115,9 @@ const DAYS = [
   { day:0, date:'Jun 18', city:'Charlottesville → Chicago → Munich', label:'Departure Day 🇺🇸', cityCode:'ROME', events:[
     {time:'All day', title:'🧳 Final packing & prep', desc:'Check passports, print confirmations, charge all devices, download offline Google Maps for all cities.', dot:'gold', tag:'Prep'},
     {time:'2:00 PM', title:'🚗 Drive to CHO Airport', desc:'Charlottesville Albemarle Airport · Allow extra time -- small airport, but confirm parking in advance.', dot:'olive', tag:'Depart'},
-    {time:'3:00 PM', title:'✈️ Flight 1: CHO → IAD', desc:'UA4328 operated by CommutAir/United Express · 45 min flight · Arrives Washington Dulles 3:45pm', dot:'sky', tag:'UA4328', tagClass:'flight'},
+    {time:'3:00 PM', title:'✈️ Flight 1: CHO → IAD', desc:"UA4328 operated by CommutAir/United Express · 45 min flight · Arrives Washington Dulles 3:45pm · <a href='https://flightaware.com/live/flight/UAL4328' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'UA4328', tagClass:'flight'},
     {time:'3:45 PM', title:'🛬 Arrive Washington Dulles (IAD)', desc:'Layover ~6.5 hours · Time to eat, relax, charge everything. United Club or explore terminals.', dot:'', tag:'Layover'},
-    {time:'10:20 PM', title:'✈️ Flight 2: IAD → Munich (MUC)', desc:'UA8784 operated by Lufthansa · Check in at LUFTHANSA counter · Overnight transatlantic flight · Arrives Munich 12:30pm next day', dot:'sky', tag:'UA8784', tagClass:'flight'},
+    {time:'10:20 PM', title:'✈️ Flight 2: IAD → Munich (MUC)', desc:"UA8784 operated by Lufthansa · Check in at LUFTHANSA counter · Overnight transatlantic flight · Arrives Munich 12:30pm next day · <a href='https://flightaware.com/live/flight/UAL8784' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'UA8784', tagClass:'flight'},
     {time:'Night', title:'😴 Try to sleep on the plane', desc:'Munich arrives at noon -- rest helps you skip jet lag. Neck pillow, eye mask, set watch to Rome time now.', dot:'gold', tag:'Tip'},
   ]},
   { day:1, date:'Jun 19', city:'Rome', label:'Arrival Day', cityCode:'ROME', events:[
@@ -127,7 +127,7 @@ const DAYS = [
     {time:'7:00 PM', title:'🍷 Dinner in Trastevere', desc:'Trendy neighborhood across the river. Note: may be far for Nannie & Big Daddy. Uber back.', dot:'gold', tag:'Suggestion'},
   ]},
   { day:2, date:'Jun 20', city:'Rome', label:'Monuments & Parks', cityCode:'ROME', events:[
-    {time:'10:30 AM', title:'👴👵 Nannie & Big Daddy Arrive', desc:'AA flight 720 from CLT arrives Rome 10:30am', dot:'sky', tag:'AA720', tagClass:'flight'},
+    {time:'10:30 AM', title:'👴👵 Nannie & Big Daddy Arrive', desc:"AA flight 720 from CLT arrives Rome 10:30am · <a href='https://flightaware.com/live/flight/AAL720' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'AA720', tagClass:'flight'},
     {time:'Morning', title:'☕ Breakfast near Pantheon', desc:"Tazza d'Oro or Sant'Eustachio Caffè -- two of Rome's best espresso bars, both steps away", dot:'gold', tag:'Coffee'},
     {time:'11:00 AM', title:'🏛️ Pantheon Tour', desc:'Book tickets online -- cheaper than walk-up. Steps from your Airbnb! <a href="https://maps.google.com/?q=Pantheon,Rome,Italy" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://parcocolosseo.it" target="_blank" style="color:var(--gold)">🎟️ Tickets</a>', dot:'', tag:'Book online'},
     {time:'1:00 PM', title:'🍕 Lunch', desc:'All\'Antico Vinaio (sandwiches) or Brucio (pizza) -- both Brandon picks', dot:'gold', tag:'Food'},
@@ -188,12 +188,12 @@ const DAYS = [
     {time:'11:30 AM', title:'⛪ Visit Giuseppe Chiesa\'s birthplace', desc:'Strada San Siro 10, 43050 Valmozzola PR · Your family\'s ancestral home · <a href="https://maps.google.com/?q=Strada+San+Siro+10,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'', tag:'Ancestral', tagClass:'booked'},
     {time:'12:00 PM', title:'⛪ Visit Maria Ferretti\'s birthplace', desc:'San Martino 6, 43050 Valmozzola PR · Explore the village, photograph everything · <a href="https://maps.google.com/?q=San+Martino+6,+Valmozzola,+PR,+Italy" target="_blank" style="color:var(--gold)">📍 Map</a>', dot:'gold', tag:'Ancestral'},
     {time:'2:00 PM', title:'🛒 Optional: Fidenza Village Outlet', desc:"Open daily 10:00am-8:00pm · Via San Michele Campagna 1, Fidenza · ~25 mins north of Parma on A15 · 100+ brands (Gucci, Prada, Armani) · <a href='https://maps.google.com/?q=Fidenza+Village+Outlet+Via+San+Michele+Campagna+1+Fidenza' target='_blank' style='color:var(--terracotta);font-weight:700'>📍 Map</a> · <a href='https://www.fidenzavillage.com' target='_blank' style='color:var(--gold)'>🛍️ Website</a>", dot:'olive', tag:'Optional'},
-    {time:'Late PM', title:'👴👵 Nannie & Big Daddy depart Venice', desc:'Aer Lingus EI8074 at 11pm from VCE -- safe travels!', dot:'sky', tag:'EI8074', tagClass:'flight'},
+    {time:'Late PM', title:'👴👵 Nannie & Big Daddy depart Venice', desc:"Aer Lingus EI8074 at 11pm from VCE -- safe travels! · <a href='https://flightaware.com/live/flight/EIN8074' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'EI8074', tagClass:'flight'},
   ]},
   { day:10, date:'Jun 28', city:'Lake Garda', label:'Parma → Lake Garda', cityCode:'GARDA', events:[
     {time:'🌙 Overnight', title:'🏨 Nannie & Big Daddy: Clayton Hotel Dublin', desc:"Dublin Airport layover · Corballis, Dublin K67H5H9 · Conf. #302496773 · <a href='https://maps.google.com/?q=Clayton+Hotel+Dublin+Airport+Central+Corballis+Dublin' target='_blank' style='color:var(--terracotta);font-weight:700'>📍 Map</a> · <a href='https://www.claytonhotels.com/dublin-airport' target='_blank' style='color:var(--gold)'>🏨 Hotel</a>", dot:'sky', tag:'Alfred & Ginger'},
-    {time:'11:45 AM', title:'✈️ AA725: Dublin → Charlotte', desc:'American Airlines 725 · Dublin (DUB) 11:45am → Charlotte (CLT) 3:05pm', dot:'sky', tag:'AA725', tagClass:'flight'},
-    {time:'10:35 PM', title:'✈️ AA5931: Charlotte → Charlottesville', desc:'Piedmont as American Eagle 5931 · CLT 10:35pm → Charlottesville (CHO) 11:59pm', dot:'sky', tag:'AA5931', tagClass:'flight'},
+    {time:'11:45 AM', title:'✈️ AA725: Dublin → Charlotte', desc:"American Airlines 725 · Dublin (DUB) 11:45am → Charlotte (CLT) 3:05pm · <a href='https://flightaware.com/live/flight/AAL725' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'AA725', tagClass:'flight'},
+    {time:'10:35 PM', title:'✈️ AA5931: Charlotte → Charlottesville', desc:"Piedmont as American Eagle 5931 · CLT 10:35pm → Charlottesville (CHO) 11:59pm · <a href='https://flightaware.com/live/flight/AAL5931' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'AA5931', tagClass:'flight'},
     {time:'Morning', title:'🚗 Drive Parma → Lake Garda', desc:'~1.5 hrs via A22. Optional stop at Fidenza Village outlet if not done yesterday.', dot:'sky', tag:'Drive'},
     {time:'~12:00 PM', title:'🏠 Check in -- Torri del Benaco Airbnb', desc:'Beautiful medieval village on eastern shore of Lake Garda · Reservation HMKHFXXT8F', dot:'', tag:'Booked', tagClass:'booked'},
     {time:'Afternoon', title:'🏖️ Afternoon at the lake', desc:'Swimming, kayaking, just sitting and looking at the Alps reflecting in the water', dot:'olive', tag:'Relax'},
@@ -230,14 +230,14 @@ const DAYS = [
     {time:'10:00 AM', title:'🚗 Drop Sixt rental car', desc:'Verona Porta Nuova, level -1, in front of train station. Park in SIXT-marked bays, return key to SIXT branch.', dot:'', tag:'Car return', tagClass:'alert'},
     {time:'9:12 AM', title:'🚄 Italo XKDEGK -- Verona P.N. → Milano Centrale', desc:'Train 8974 · Prima Business · Arrives 10:25 · Coach 3 · Brandon 7, Holly 9, Virginia 10, Adelle 11, Pearl 12 · <a href="https://cdn.jsdelivr.net/gh/bkchiesa/Chiesa-italy-2026@main/tickets/verona-to-milan.pdf" target="_blank" style="color:var(--terracotta);font-weight:700">📄 View Ticket</a>', dot:'', tag:'✓ XKDEGK', tagClass:'booked'},
     {time:'~11:00 AM', title:'🚄 Milano Centrale → Malpensa Airport', desc:"Malpensa Express from Milano Centrale · ~50 mins · Allow 2+ hrs before 3:20pm flight · <a href='https://www.lefrecce.it/Channels.Website.WEB/#/self-check-in?id=a4OPSJMvnqCsFiEkuVDkLYaSvoylSyr3y1gSypCoMFc=' target='_blank' style='color:var(--gold);font-weight:700'>📄 View Ticket</a>", dot:'sky', tag:'Train'},
-    {time:'3:20 PM', title:'✈️ Depart Milan MXP → Chicago ORD', desc:'UA415 · United Economy · Arrives Chicago 6:10pm same day', dot:'sky', tag:'UA415', tagClass:'flight'},
+    {time:'3:20 PM', title:'✈️ Depart Milan MXP → Chicago ORD', desc:"UA415 · United Economy · Arrives Chicago 6:10pm same day · <a href='https://flightaware.com/live/flight/UAL415' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'UA415', tagClass:'flight'},
     {time:'6:10 PM', title:'🛬 Arrive Chicago O\'Hare', desc:'Clear customs & immigration.', dot:'', tag:'Chicago'},
     {time:'Evening', title:'🏨 SpringHill Suites Chicago O\'Hare', desc:'8101 West Higgins Rd, Chicago, IL · <a href="https://maps.google.com/?q=SpringHill+Suites+8101+West+Higgins+Rd+Chicago+IL" target="_blank" style="color:var(--terracotta);font-weight:600">📍 Map</a> · <a href="https://www.marriott.com/hotels/travel/ordsh-springhill-suites-chicago-ohare" target="_blank" style="color:var(--gold)">🏨 Hotel site</a>', dot:'gold', tag:'Hotel'},
   ]},
   { day:16, date:'Jul 4', city:'Home!', label:'Chicago → Charlottesville', cityCode:'GARDA', events:[
-    {time:'7:15 AM', title:'✈️ Depart Chicago ORD → Charlottesville CHO', desc:'UA5532 · United Economy · Independence Day flight home! 🎆', dot:'sky', tag:'UA5532', tagClass:'flight'},
+    {time:'7:15 AM', title:'✈️ Depart Chicago ORD → Charlottesville CHO', desc:"UA5532 · United Economy · Independence Day flight home! 🎆 · <a href='https://flightaware.com/live/flight/UAL5532' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'sky', tag:'UA5532', tagClass:'flight'},
     {time:'10:11 AM', title:'🛬 Arrive Charlottesville', desc:'Home by noon. Welcome back, Chiesa family!', dot:'gold', tag:'Home!'},
-    {time:'~12:00 PM', title:'🏠 Home sweet home', desc:'Unpack, share photos, relive every moment. Benvenuti a casa! 🇮🇹', dot:'olive', tag:'🇮🇹'},
+    {time:'~12:00 PM', title:'🏠 Home sweet home', desc:"Unpack, share photos, relive every moment. Benvenuti a casa! 🇮🇹 · <a href='https://flightaware.com/live/flight/UAL9212' target='_blank' style='color:var(--sky);font-weight:700'>🛫 Flight Status</a>", dot:'olive', tag:'🇮🇹'},
   ]},
 ];
 
@@ -313,7 +313,28 @@ function buildWheel() {
       '<div class="w-day-num">' + shortDate + '</div>' +
       '<div class="w-city">' + shortCity + '</div>' +
       (special ? '<div class="w-special">' + special + '</div>' : '');
-    item.addEventListener('click', () => scrollToIdx(i));
+    item.addEventListener('click', () => {
+      scrollToIdx(i, true);
+      updateHero(DAYS[i]);
+      renderDayContent(i);
+      setActive(i, false);
+    });
+    // Touch tap support (prevents scroll-then-tap confusion)
+    let touchStartX = 0, touchStartY = 0;
+    item.addEventListener('touchstart', e => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+    item.addEventListener('touchend', e => {
+      const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+      const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+      if (dx < 10 && dy < 10) { // It was a tap, not a scroll
+        scrollToIdx(i, true);
+        updateHero(DAYS[i]);
+        renderDayContent(i);
+        setActive(i, false);
+      }
+    }, { passive: true });
     track.appendChild(item);
   });
 
@@ -342,6 +363,7 @@ function onWheelScroll() {
       if (dist < closestDist) { closestDist = dist; closest = i; }
     });
     if (closest !== activeIdx) {
+      activeIdx = closest;
       updateHero(DAYS[closest]);
       renderDayContent(closest);
       setActive(closest, false);
@@ -373,10 +395,8 @@ function scrollToIdx(idx, animate) {
     var item = items[idx];
     var itemCenter = item.offsetLeft + item.offsetWidth / 2;
     var targetScroll = itemCenter - track.clientWidth / 2;
-    if (targetScroll > 0) {
-      track.scrollTo({ left: targetScroll, behavior: animate ? 'smooth' : 'auto' });
-    }
-    setActive(idx, false);
+    // Always scroll regardless of position
+    track.scrollTo({ left: Math.max(0, targetScroll), behavior: animate ? 'smooth' : 'auto' });
   } catch(e) { console.log('scrollToIdx err:', e.message); }
 }
 
